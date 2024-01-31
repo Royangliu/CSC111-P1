@@ -26,6 +26,7 @@ class Location:
 
     Instance Attributes:
         - location_num: The designated integer number for the location in the locations.txt file
+        - score: The score the player gets upon entering the location for the first time
         - brief_description: A short description of the location provided every time a player vists
         - long_description: A longer description of the location (stated only on the first visit to the location)
         - has_visited: A boolean value that indicates whether the player has visited this location before
@@ -35,6 +36,7 @@ class Location:
         - # TODO
     """
     location_num: int
+    score: int
     brief_description: str
     long_description: str
     has_visited: bool
@@ -78,6 +80,12 @@ class Location:
         # TODO: Complete this method, if you'd like or remove/replace it if you're not using it
 
 
+class SpecialLocation(Location):
+    """A location subclass that contains puzzles
+
+    """
+
+
 class Item:
     """An item in our text adventure game world.
 
@@ -118,6 +126,10 @@ class Player:
     A Player in the text advanture game.
 
     Instance Attributes:
+        - x: The x coordinate of the player
+        - y: The y coordinate of the player
+        - inventory: The list of items the player has
+        - score: The score of the player
         - # TODO
 
     Representation Invariants:
@@ -128,7 +140,7 @@ class Player:
     x: int
     y: int
     inventory: list[Item]
-    victory: bool
+    score: int
 
     def __init__(self, x: int, y: int) -> None:
         """
@@ -151,7 +163,7 @@ class World:
     Instance Attributes:
         - map: a nested list representation of this world's map
         - current_location: the location that the player is currently at
-        - locations_list: list of all locations
+        - locations_dictionary: dictionary of all locations
         - # TODO add more instance attributes as needed; do NOT remove the map attribute
         -
 
@@ -211,8 +223,7 @@ class World:
          return None.)
         """
 
-        if x < 0 or y < 0 or x > len(self.map) - 1 or y > len(
-                self.map[x]) - 1 or self.map[x][y] == -1:
+        if x < 0 or y < 0 or x > len(self.map) - 1 or y > len(self.map[x]) - 1 or self.map[x][y] == - 1:
             return None
         else:
             for location in self.locations_list:
