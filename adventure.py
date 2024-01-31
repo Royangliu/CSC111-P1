@@ -28,10 +28,11 @@ if __name__ == "__main__":
     w = World(open("map.txt"), open("locations.txt"), open("items.txt"))
     p = Player(0, 0)  # set starting location of player; you may change the x, y coordinates here as appropriate
 
-    menu = ["look", "inventory", "score", "quit", "back"]
+    menu = ["look", "inventory", "score", "map", "quit"]
 
     while not p.victory:
         location = w.get_location(p.x, p.y)
+
 
         # TODO: ENTER CODE HERE TO PRINT LOCATION DESCRIPTION
         if location.has_visited:
@@ -43,7 +44,7 @@ if __name__ == "__main__":
 
         print("What to do? \n")
         print("[menu]")
-        for action in location.available_actions():
+        for action in movement_options(P.x, P.y, w.map):
             print(action)
         choice = input("\nEnter action: ")
 
@@ -52,8 +53,11 @@ if __name__ == "__main__":
             for option in menu:
                 print(option)
             choice = input("\nChoose action: ")
-        
 
+        while choice not in menu or choice not in location.available_actions():
+            choice = input("\nInvalid action. Try again: ")
+            
+        
         # TODO: CALL A FUNCTION HERE TO HANDLE WHAT HAPPENS UPON THE PLAYER'S CHOICE
         #  REMEMBER: the location = w.get_location(p.x, p.y) at the top of this loop will update the location if
         #  the choice the player made was just a movement, so only updating player's position is enough to change the
@@ -64,3 +68,17 @@ if __name__ == "__main__":
         #  OR Check what type of action it is, then modify only player or location accordingly
         #  OR Method in Player class for move or updating inventory
         #  OR Method in Location class for updating location item info, or other location data etc....
+def movement_options(x, y, map) -> list[str]:
+    """
+    Return the directions the player can move. This depends on the player's location relative to the map.
+    """
+    actions = []
+    if y != 0 or map[y - 1][x] != -1:
+        actions.append("north")
+    if y != len(map) - 1 or map[y + 1][x] != -1:
+        actions.append("south")
+    if x != 0 or map[y][x-1] != -1:
+        actions.append("west")
+    if x != len(map[y]) - 1 or map[y][x+1] != -1:
+        actions.append("east")
+    return actions

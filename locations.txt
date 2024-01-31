@@ -33,6 +33,5 @@ num_location
 name
 points received
 short description
----
 long description
 END

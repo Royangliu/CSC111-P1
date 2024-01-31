@@ -1,1 +1,11 @@
 1 10 5 Cheat Sheet
+
+
+
+
+format:
+
+location_num
+...
+...
+name

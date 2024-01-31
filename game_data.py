@@ -48,7 +48,7 @@ class Location:
     x: int
     y: int
 
-    def __init__(self, location_num, score, brief_desc, long_desc, x, y, map) -> None:
+    def __init__(self, location_num, name: str, score, brief_desc, long_desc, x = 0, y = 0, map = []) -> None:
         """Initialize a new location.
 
         # TODO Add more details here about the initialization if needed
@@ -58,9 +58,9 @@ class Location:
         self.brief_description = brief_desc
         self.long_description = long_desc
         self.has_visited = False
-        self.x = x
-        self.y = y
-        self.map = map
+        # self.x = x
+        # self.y = y
+        # self.map = map
 
 
         
@@ -89,18 +89,14 @@ class Location:
         and the x,y position of this location on the world map.
         """
         actions = []
-        if self.y != 0:
-            if self.map[self.y - 1][self.x] != -1:
-                actions.append("north")
-        if self.y != len(self.map) - 1:
-            if self.map[self.y + 1][self.x] != -1:
-                actions.append("south")
-        if self.x != 0:
-            if self.map[self.y][self.x-1] != -1:
-                actions.append("west")
-        if self.x != len(self.map[self.y]) - 1:
-            if self.map[self.y][self.x+1] != -1:
-                actions.append("east")
+        if self.y != 0 or self.map[self.y - 1][self.x] != -1:
+            actions.append("north")
+        if self.y != len(self.map) - 1 or self.map[self.y + 1][self.x] != -1:
+            actions.append("south")
+        if self.x != 0 or self.map[self.y][self.x-1] != -1:
+            actions.append("west")
+        if self.x != len(self.map[self.y]) - 1 or self.map[self.y][self.x+1] != -1:
+            actions.append("east")
         return actions
     
                 
@@ -198,6 +194,7 @@ class World:
         - map: a nested list representation of this world's map
         - current_location: the location that the player is currently at
         - locations_dictionary: dictionary of all locations
+        - items_dictionary: 
         - # TODO add more instance attributes as needed; do NOT remove the map attribute
         -
 
@@ -206,7 +203,7 @@ class World:
     """
     map: list[list[int]]
     current_location: Location
-    locations_list: dict[int, Location]
+    locations_dict: dict[int, Location]
 
     def __init__(self, map_data: TextIO, location_data: TextIO, items_data: TextIO) -> None:
         """
@@ -282,7 +279,13 @@ class World:
             location_data.readline().strip()
 
         return curr_dict
-            
+
+    def load_items(self, items_data: TextIO) -> dict[int, Item]:
+        """
+        Returns a dictionary of items from the given open file items_data. A key in the dictionary is a location's
+        number, and the key's item are the corresponding item objects found at the location.
+        """
+        
 
     # NOTE: The method below is REQUIRED. Complete it exactly as specified.
     def get_location(self, x: int, y: int) -> Optional[Location]:
@@ -291,7 +294,7 @@ class World:
          return None.)
         """
 
-        if x < 0 or y < 0 or x > len(self.map) - 1 or y > len(self.map[x]) - 1 or self.map[x][y] == - 1:
+        if x < 0 or y < 0 or x > len(self.map) - 1 or y > len(self.map[x]) - 1 or self.map[x][y] == -1:
             return None
         else:
             return self.locations_dict[self.map[x][y]]
