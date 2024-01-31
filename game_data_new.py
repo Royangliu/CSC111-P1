@@ -212,6 +212,15 @@ class World:
         Return this list representation of the map.
         """
 
+        map = []
+        for line in map_data:
+            row = line.split()
+            for i in range(len(row)):
+                row[i] = int(row[i])  # TODO
+            map.append(row)
+
+        return map
+
         # TODO: Complete this method as specified. Do not modify any of this function's specifications.
 
     # TODO: Add methods for loading location data and item data (see note above).
