@@ -24,3 +24,15 @@ LOCATION 3
 You are outside the Robarts library.
 You are outside the Robarts library on a crowded street. There is a smell of coffee in the air.
 END
+
+
+
+format:
+
+num_location
+name
+points received
+short description
+---
+long description
+END

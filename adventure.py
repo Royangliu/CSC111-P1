@@ -34,6 +34,10 @@ if __name__ == "__main__":
         location = w.get_location(p.x, p.y)
 
         # TODO: ENTER CODE HERE TO PRINT LOCATION DESCRIPTION
+        if location.has_visited:
+            print(location.long_desc)
+        else:
+            print(location.brief_desc)
         # Depending on whether or not it's been visited before,
         # print either full description (first time visit) or brief description (every subsequent visit)
 
