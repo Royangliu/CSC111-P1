@@ -26,16 +26,20 @@ class Location:
 
     Instance Attributes:
         - location_num: The designated integer number for the location in the locations.txt file
+        - location_name: The name of the location
         - score: The score the player gets upon entering the location for the first time
         - brief_description: A short description of the location provided every time a player vists
         - long_description: A longer description of the location (stated only on the first visit to the location)
         - has_visited: A boolean value that indicates whether the player has visited this location before
         - actions_list: A list of actions that can be taken from this location, including commands and directions
+        - x: The x-coordinate of the location
+        - y: The y-coordinate of the location
 
     Representation Invariants:
         - # TODO
     """
     location_num: int
+    location_name: str
     score: int
     brief_desc: str
     long_desc: str
@@ -88,13 +92,13 @@ class Location:
         if self.y != 0:
             if self.map[self.y - 1][self.x] != -1:
                 actions.append("north")
-        if self.y != len(self.map):
+        if self.y != len(self.map) - 1:
             if self.map[self.y + 1][self.x] != -1:
                 actions.append("south")
         if self.x != 0:
             if self.map[self.y][self.x-1] != -1:
                 actions.append("west")
-        if self.x != len(self.map[self.y]):
+        if self.x != len(self.map[self.y]) - 1:
             if self.map[self.y][self.x+1] != -1:
                 actions.append("east")
         return actions
@@ -253,15 +257,31 @@ class World:
 
     # TODO: Add methods for loading location data and item data (see note above).
     def load_locations(self, location_data: TextIO) -> dict[int, Location]:
-
+        """
+        Returns a dictionary of locations from the given open file location_data. A key in the dictionary is 
+        the location's number, and the key's item is the corresponding location object.
+        """
+        curr_dict = {}
+        
         line = location_data.readline.strip()
         
         while line != '':
-            location
-
+            num = int(line[0])
+            name = location_data.readline.strip()
+            score = int(location_data.readline.strip())
+            brief_desc = location_data.readline.strip()
             
-            if line == 'END':
-                
+            line = location_data.readline.strip()
+            long_desc = ''
+            while line != 'END':
+                long_desc += line
+                line = location_data.readline.strip()
+
+            curr_dict[num] = Location(num, name, score, brief_desc, long_desc)
+            location_data.readline()
+            location_data.readline().strip()
+
+        return curr_dict
             
 
     # NOTE: The method below is REQUIRED. Complete it exactly as specified.
