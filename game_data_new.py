@@ -25,11 +25,20 @@ class Location:
     """A location in our text adventure game world.
 
     Instance Attributes:
-        - # TODO
+        - location_num: The designated integer number for the location in the locations.txt file
+        - brief_description: A short description of the location provided every time a player vists
+        - long_description: A longer description of the location (stated only on the first visit to the location)
+        - has_visited: A boolean value that indicates whether the player has visited this location before
+        - actions_list: A list of actions that can be taken from this location, including commands and directions
 
     Representation Invariants:
         - # TODO
     """
+    location_num: int
+    brief_description: str
+    long_description: str
+    has_visited: bool
+    actions_list: list[str]
 
     def __init__(self) -> None:
         """Initialize a new location.
@@ -73,11 +82,17 @@ class Item:
     """An item in our text adventure game world.
 
     Instance Attributes:
+        - name: a string name of the item
+        - start_location:
         - # TODO
 
     Representation Invariants:
         - # TODO
     """
+    name: str
+    start_postion: int
+    start_target: int
+    target_points: int
 
     def __init__(self, name: str, start: int, target: int, target_points: int) -> None:
         """Initialize a new item.
@@ -106,8 +121,14 @@ class Player:
         - # TODO
 
     Representation Invariants:
+        - x >= 0
+        - y >= 0
         - # TODO
     """
+    x: int
+    y: int
+    inventory: list[Item]
+    victory: bool
 
     def __init__(self, x: int, y: int) -> None:
         """
@@ -129,11 +150,17 @@ class World:
 
     Instance Attributes:
         - map: a nested list representation of this world's map
+        - current_location: the location that the player is currently at
+        - locations_list: list of all locations
         - # TODO add more instance attributes as needed; do NOT remove the map attribute
+        -
 
     Representation Invariants:
         - # TODO
     """
+    map: list[list[int]]
+    current_location: Location
+    locations_list: list[Location]
 
     def __init__(self, map_data: TextIO, location_data: TextIO, items_data: TextIO) -> None:
         """
@@ -183,5 +210,13 @@ class World:
          that position. Otherwise, return None. (Remember, locations represented by the number -1 on the map should
          return None.)
         """
+
+        if x < 0 or y < 0 or x > len(self.map) - 1 or y > len(
+                self.map[x]) - 1 or self.map[x][y] == -1:
+            return None
+        else:
+            for location in self.locations_list:
+                if location.location_num == self.map[x][y]:
+                    return location
 
         # TODO: Complete this method as specified. Do not modify any of this function's specifications.
