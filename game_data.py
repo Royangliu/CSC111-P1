@@ -63,7 +63,7 @@ class Location:
         # self.map = map
 
 
-        
+
         # NOTES:
         # Data that could be associated with each Location object:
         # a position in the world map,
@@ -98,9 +98,9 @@ class Location:
         if self.x != len(self.map[self.y]) - 1 or self.map[self.y][self.x+1] != -1:
             actions.append("east")
         return actions
-    
-                
-            
+
+
+
         # NOTE: This is just a suggested method
         # i.e. You may remove/modify/rename this as you like, and complete the
         # function header (e.g. add in parameters, complete the type contract) as needed
@@ -193,8 +193,8 @@ class World:
     Instance Attributes:
         - map: a nested list representation of this world's map
         - current_location: the location that the player is currently at
-        - locations_dictionary: dictionary of all locations
-        - items_dictionary: 
+        - locations_dict: dictionary of all locations
+        - items_dict: dictionary of all items currently in the game world
         - # TODO add more instance attributes as needed; do NOT remove the map attribute
         -
 
@@ -204,6 +204,7 @@ class World:
     map: list[list[int]]
     current_location: Location
     locations_dict: dict[int, Location]
+    items_dict = dict[int, list[Item]]
 
     def __init__(self, map_data: TextIO, location_data: TextIO, items_data: TextIO) -> None:
         """
@@ -225,6 +226,7 @@ class World:
         # The map MUST be stored in a nested list as described in the load_map() function's docstring below
         self.map = self.load_map(map_data)
         self.locations_dict = self.load_locations(location_data)
+        self.items_dict = self.load_items(items_data)
         # NOTE: You may choose how to store location and item data; create your own World methods to handle these
         # accordingly. The only requirements:
         # 1. Make sure the Location class is used to represent each location.
@@ -242,8 +244,8 @@ class World:
 
         Return this list representation of the map.
         """
-
         curr_map = []
+
         for line in map_data:
             row = line.split()
             curr_map.append([int(x) for x in row])
@@ -255,24 +257,24 @@ class World:
     # TODO: Add methods for loading location data and item data (see note above).
     def load_locations(self, location_data: TextIO) -> dict[int, Location]:
         """
-        Returns a dictionary of locations from the given open file location_data. A key in the dictionary is 
+        Returns a dictionary of locations from the given open file location_data. A key in the dictionary is
         the location's number, and the key's item is the corresponding location object.
         """
         curr_dict = {}
-        
-        line = location_data.readline.strip()
-        
+
+        line = location_data.readline().strip()
+
         while line != '':
-            num = int(line[0])
-            name = location_data.readline.strip()
-            score = int(location_data.readline.strip())
-            brief_desc = location_data.readline.strip()
-            
-            line = location_data.readline.strip()
+            num = int(line)
+            name = location_data.readline().strip()
+            score = int(location_data.readline().strip())
+            brief_desc = location_data.readline().strip()
+
+            line = location_data.readline().strip()
             long_desc = ''
-            while line != 'END':
+            while line != '':
                 long_desc += line
-                line = location_data.readline.strip()
+                line = location_data.readline().strip()
 
             curr_dict[num] = Location(num, name, score, brief_desc, long_desc)
             location_data.readline()
@@ -285,7 +287,20 @@ class World:
         Returns a dictionary of items from the given open file items_data. A key in the dictionary is a location's
         number, and the key's item are the corresponding item objects found at the location.
         """
-        
+        curr_dict = {}
+
+        line = items_data.readline().strip()
+        while line != '':
+            start_location = int(line)
+            drop_location = int(items_data.readline().strip())
+            drop_score = int(items_data.readline().strip())
+            name = items_data.readline().strip()
+
+            curr_dict[start_location] = Item(name, start_location, drop_location, drop_score)
+            items_data.readline()
+            items_data.readline().strip()
+
+        return curr_dict
 
     # NOTE: The method below is REQUIRED. Complete it exactly as specified.
     def get_location(self, x: int, y: int) -> Optional[Location]:

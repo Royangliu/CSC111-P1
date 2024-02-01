@@ -6,6 +6,6 @@
 format:
 
 location_num
-...
-...
+drop location
+score drop
 name
