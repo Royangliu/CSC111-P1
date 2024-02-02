@@ -226,7 +226,6 @@ class World:
         self.locations_dict = self.load_locations(location_data)
         self.items_dict = self.load_items(items_data)
 
-        map_data.close
         # NOTE: You may choose how to store location and item data; create your own World methods to handle these
         # accordingly. The only requirements:
         # 1. Make sure the Location class is used to represent each location.
@@ -266,15 +265,15 @@ class World:
 
         while line != '':
             num = int(line[0])
-            name = location_data.readline.strip()
-            score = int(location_data.readline.strip())
-            brief_desc = location_data.readline.strip()
+            name = location_data.readline().strip()
+            score = int(location_data.readline().strip())
+            brief_desc = location_data.readline().strip()
 
-            line = location_data.readline.strip()
+            line = location_data.readline().strip()
             long_desc = ''
             while line != 'END':
                 long_desc += line
-                line = location_data.readline.strip()
+                line = location_data.readline().strip()
 
             curr_dict[num] = Location(num, name, score, brief_desc, long_desc)
             location_data.readline()
