@@ -264,7 +264,7 @@ class World:
         line = location_data.readline().strip()
 
         while line != '':
-            num = int(line[0])
+            num = int(line)
             name = location_data.readline().strip()
             score = int(location_data.readline().strip())
             brief_desc = location_data.readline().strip()
