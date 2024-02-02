@@ -63,8 +63,8 @@ class Location:
         """
         self.location_num = location_num
         self.score = score
-        self.brief_description = brief_desc
-        self.long_description = long_desc
+        self.brief_desc = brief_desc
+        self.long_desc = long_desc
         self.has_visited = False
         # self.x = x
         # self.y = y
