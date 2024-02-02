@@ -277,7 +277,7 @@ class World:
 
             curr_dict[num] = Location(num, name, score, brief_desc, long_desc)
             location_data.readline()
-            location_data.readline().strip()
+            line = location_data.readline().strip()
 
         return curr_dict
 
@@ -298,7 +298,7 @@ class World:
             curr_dict[start_location] = Item(name, start_location,
                                              drop_location, drop_score)
             items_data.readline()
-            items_data.readline().strip()
+            line = items_data.readline().strip()
 
         return curr_dict
 
