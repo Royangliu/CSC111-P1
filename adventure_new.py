@@ -42,7 +42,7 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
     elif action == "inventory":
         print(player.inventory)
     elif action == "score":
-        print(" \n the score is " + str(score))
+        print("\n Your score is " + str(score))
     elif action == "map":
         for row in world.map:
             print("\n" + str(row))
