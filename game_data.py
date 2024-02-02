@@ -225,6 +225,8 @@ class World:
         self.map = self.load_map(map_data)
         self.locations_dict = self.load_locations(location_data)
         self.items_dict = self.load_items(items_data)
+
+        map_data.close
         # NOTE: You may choose how to store location and item data; create your own World methods to handle these
         # accordingly. The only requirements:
         # 1. Make sure the Location class is used to represent each location.
