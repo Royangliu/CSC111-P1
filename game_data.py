@@ -44,7 +44,7 @@ class Location:
     brief_desc: str
     long_desc: str
     has_visited: bool
-    actions_list: list[str]
+    actions_list: list[str] = []
     x: int
     y: int
 

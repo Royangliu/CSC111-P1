@@ -83,7 +83,7 @@ if __name__ == "__main__":
         
             loc_change = False
             while not loc_change:
-                print("What to do? \n")
+                print("\nWhat to do?")
                 choice = input("\nEnter action: ").lower()
                 
                 if choice == "[menu]":
