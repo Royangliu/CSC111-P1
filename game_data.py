@@ -261,7 +261,7 @@ class World:
         """
         curr_dict = {}
 
-        line = location_data.readline.strip()
+        line = location_data.readline().strip()
 
         while line != '':
             num = int(line[0])
@@ -309,7 +309,8 @@ class World:
          return None.)
         """
 
-        if x < 0 or y < 0 or x > len(self.map) - 1 or y > len(self.map[x]) - 1 or self.map[x][y] == -1:
+        if x < 0 or y < 0 or x > len(self.map) - 1 or y > len(
+                self.map[x]) - 1 or self.map[x][y] == -1:
             return None
         else:
             return self.locations_dict[self.map[x][y]]
