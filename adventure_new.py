@@ -86,10 +86,10 @@ if __name__ == "__main__":
             loc_change = False
             while not loc_change:
                 print("\nWhat to do?")
-                choice = input("\nEnter action: ").lower()
+                choice = input("Enter action: ").lower()
 
                 if choice == "[menu]":
-                    print("Menu Options: \n")
+                    print("Menu Options: ")
                     for option in menu + location.actions_list:
                         print(option)
                 elif choice in menu:
@@ -103,21 +103,13 @@ if __name__ == "__main__":
                     loc_change = True
                     p.steps -= 1
                 else:
-                    print("Invalid action. Try again.\n")
-
-
-
-
-
+                    print("Invalid action. Try again.")
 
 
         # TODO: ENTER CODE HERE TO PRINT LOCATION DESCRIPTION
 
         # Depending on whether or not it's been visited before,
         # print either full description (first time visit) or brief description (every subsequent visit)
-
-
-
 
 
         # TODO: CALL A FUNCTION HERE TO HANDLE WHAT HAPPENS UPON THE PLAYER'S CHOICE
