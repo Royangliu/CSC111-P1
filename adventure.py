@@ -29,10 +29,10 @@ if __name__ == "__main__":
     p = Player(0, 0)  # set starting location of player; you may change the x, y coordinates here as appropriate
 
     menu = ["look", "inventory", "score", "map", "quit"]
+    time = 50
 
-    while not p.victory:
+    while not p.victory and time > 0:
         location = w.get_location(p.x, p.y)
-
 
         # TODO: ENTER CODE HERE TO PRINT LOCATION DESCRIPTION
         if location.has_visited:
@@ -56,8 +56,8 @@ if __name__ == "__main__":
 
         while choice not in menu or choice not in location.available_actions():
             choice = input("\nInvalid action. Try again: ")
-            
-        
+
+
         # TODO: CALL A FUNCTION HERE TO HANDLE WHAT HAPPENS UPON THE PLAYER'S CHOICE
         #  REMEMBER: the location = w.get_location(p.x, p.y) at the top of this loop will update the location if
         #  the choice the player made was just a movement, so only updating player's position is enough to change the
