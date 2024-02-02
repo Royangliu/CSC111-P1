@@ -39,13 +39,10 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
     """
     if action == "look":
         print(location.long_desc)
-        action = input("\nChoose action: ")
     elif action == "inventory":
         print(player.inventory)
-        action = input("\nChoose action: ")
     elif action == "score":
         print(" \n the score is " + str(score))
-        action = input("\nChoose action: ")
     elif action == "map":
         for row in world.map:
             print("\n" + str(row))
