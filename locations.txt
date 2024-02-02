@@ -1,4 +1,5 @@
-LOCATION -1
+-1
+Block
 0
 That way is blocked.
 That way is blocked.
