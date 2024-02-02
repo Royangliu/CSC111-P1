@@ -56,7 +56,7 @@ if __name__ == "__main__":
     with open('map.txt') as map_file, open('locations.txt') as location_file, open('items.txt') as item_file:
         w = World(map_file, location_file, item_file)
 
-    p = Player(100000000, 0)  # set starting location of player; you may change the x, y coordinates here as appropriate
+    p = Player(0, 0)  # set starting location of player; you may change the x, y coordinates here as appropriate
     steps = 30
     score = 0
     menu = ["look", "inventory", "score", "map", "quit"]
@@ -84,14 +84,16 @@ if __name__ == "__main__":
             loc_change = False
             while not loc_change:
                 print("What to do? \n")
-
                 choice = input("\nEnter action: ").lower()
+                
                 if choice == "[menu]":
                     print("Menu Options: \n")
-                    for option in menu:
+                    for option in menu + location.actions_list:
                         print(option)
                 elif choice in menu:
                     do_menu_action(choice, p, location, w)
+                elif choice in location.actions_list:
+                    pass # TODO
                 elif choice in directions:
                     previous_x = p.x
                     previous_y = p.y
@@ -102,7 +104,6 @@ if __name__ == "__main__":
                     print("Invalid action. Try again.\n")
             
     
-    w.
 
 
 

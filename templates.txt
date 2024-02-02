@@ -1,0 +1,33 @@
+item format:
+
+location_num
+drop location
+score drop
+name
+
+
+
+
+location format:
+
+num_location
+name
+points received
+short description
+long description
+END
+
+# this next part is subject to change:
+after long description( for special locations):
+SPECIAL
+puzzle description
+code
+hint
+END
+
+
+
+
+PUZZLES OPTIONS:
+PUZZLE 1:
+There are 5 sisters alone in the house. Anne is reading a book, margaret is cooking, kate is playing chess, and marie is doing laundry. What is the 5th sister doing
