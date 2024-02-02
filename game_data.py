@@ -36,7 +36,7 @@ class Location:
         - y: The y-coordinate of the location
 
     Representation Invariants:
-        - # TODO
+        -
     """
     location_num: int
     location_name: str
@@ -48,7 +48,15 @@ class Location:
     x: int
     y: int
 
-    def __init__(self, location_num, name: str, score, brief_desc, long_desc, x = 0, y = 0, map = []) -> None:
+    def __init__(self,
+                 location_num,
+                 name: str,
+                 score,
+                 brief_desc,
+                 long_desc,
+                 x=0,
+                 y=0,
+                 map=[]) -> None:
         """Initialize a new location.
 
         # TODO Add more details here about the initialization if needed
@@ -61,8 +69,6 @@ class Location:
         # self.x = x
         # self.y = y
         # self.map = map
-
-
 
         # NOTES:
         # Data that could be associated with each Location object:
@@ -89,17 +95,7 @@ class Location:
         and the x,y position of this location on the world map.
         """
         actions = []
-        if self.y != 0 or self.map[self.y - 1][self.x] != -1:
-            actions.append("north")
-        if self.y != len(self.map) - 1 or self.map[self.y + 1][self.x] != -1:
-            actions.append("south")
-        if self.x != 0 or self.map[self.y][self.x-1] != -1:
-            actions.append("west")
-        if self.x != len(self.map[self.y]) - 1 or self.map[self.y][self.x+1] != -1:
-            actions.append("east")
         return actions
-
-
 
         # NOTE: This is just a suggested method
         # i.e. You may remove/modify/rename this as you like, and complete the
@@ -123,14 +119,15 @@ class Item:
         - # TODO
 
     Representation Invariants:
-        - # TODO
+        - start_postion is a valid position in the world map(turn this into code)
     """
     name: str
     start_postion: int
     start_target: int
     target_points: int
 
-    def __init__(self, name: str, start: int, target: int, target_points: int) -> None:
+    def __init__(self, name: str, start: int, target: int,
+                 target_points: int) -> None:
         """Initialize a new item.
         """
 
@@ -194,7 +191,7 @@ class World:
         - map: a nested list representation of this world's map
         - current_location: the location that the player is currently at
         - locations_dict: dictionary of all locations
-        - items_dict: dictionary of all items currently in the game world
+        - items_dict: dictionary of all items
         - # TODO add more instance attributes as needed; do NOT remove the map attribute
         -
 
@@ -204,9 +201,10 @@ class World:
     map: list[list[int]]
     current_location: Location
     locations_dict: dict[int, Location]
-    items_dict = dict[int, list[Item]]
+    items_dict: dict[int, Item]
 
-    def __init__(self, map_data: TextIO, location_data: TextIO, items_data: TextIO) -> None:
+    def __init__(self, map_data: TextIO, location_data: TextIO,
+                 items_data: TextIO) -> None:
         """
         Initialize a new World for a text adventure game, based on the data in the given open files.
 
@@ -244,8 +242,8 @@ class World:
 
         Return this list representation of the map.
         """
-        curr_map = []
 
+        curr_map = []
         for line in map_data:
             row = line.split()
             curr_map.append([int(x) for x in row])
@@ -262,19 +260,19 @@ class World:
         """
         curr_dict = {}
 
-        line = location_data.readline().strip()
+        line = location_data.readline.strip()
 
         while line != '':
-            num = int(line)
-            name = location_data.readline().strip()
-            score = int(location_data.readline().strip())
-            brief_desc = location_data.readline().strip()
+            num = int(line[0])
+            name = location_data.readline.strip()
+            score = int(location_data.readline.strip())
+            brief_desc = location_data.readline.strip()
 
-            line = location_data.readline().strip()
+            line = location_data.readline.strip()
             long_desc = ''
-            while line != '':
+            while line != 'END':
                 long_desc += line
-                line = location_data.readline().strip()
+                line = location_data.readline.strip()
 
             curr_dict[num] = Location(num, name, score, brief_desc, long_desc)
             location_data.readline()
@@ -296,7 +294,8 @@ class World:
             drop_score = int(items_data.readline().strip())
             name = items_data.readline().strip()
 
-            curr_dict[start_location] = Item(name, start_location, drop_location, drop_score)
+            curr_dict[start_location] = Item(name, start_location,
+                                             drop_location, drop_score)
             items_data.readline()
             items_data.readline().strip()
 

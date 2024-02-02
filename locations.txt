@@ -6,26 +6,70 @@ END
 
 LOCATION 1
 0
-You are on the first floor of the Robarts Library. There is an empty study room to the South, an exit from the library to the East.
+You are on the first floor of the Robarts Library. There is Sidney smith to the south and trinity college to the east.
 You are on the first floor of the Robarts Library. It's usually crowded at this time of the day, but today it's eerily quiet.
 Only a few students are studying inside one of the study rooms. You better not disturb them. A librarian stands near the
-service desk, looking bored and sleepy. There is an empty study room to the South, an exit from the library to the East.
+service desk, somehow looking bored and alert at the same time. There is Sidney smith to the south and trinity college to the east.
 END
 
 LOCATION 2
 0
-This study room is completely empty.
-You are in an empty study room. And by empty, we mean, absolutely empty. All the tables and chairs have been taken out,
-the whiteboards taken off the wall, not even the carpeting is left. Are they planning to do something else with this space?
+You are inside Trinity College
 END
 
 LOCATION 3
 0
-You are outside the Robarts library.
-You are outside the Robarts library on a crowded street. There is a smell of coffee in the air.
+You are at Victoria College
 END
 
+LOCATION 4
+0
+You are inside Sidney Smith... contiue short line
+You are inside of Sidney Smith. You look around and see the sidney smith commons looking rather empty, and wonder why. Your question is answered promptly once you notice the record breaking line at second cup. It seems as though every single available student in the building has lined up to get coffee at the same time.
+*insert directions*
+END
 
+LOCATION 5
+0
+You are inside Heart House, the iconic UofT location dedicated to non-academic activities and facilities. You see a few students in one room having a passionate debate about the future of cryptocurrency in the global economy. Seeing the gym in this place reminds you that it's been a while since you last worked out.
+END
+
+LOCATION 6
+0
+You are at Queens Park
+END
+
+LOCATION 7
+0
+You are at University College, the original college of UofT. While the place can feel like a maze to the unaware....
+END
+
+LOCATION 8
+0
+You are at front campus. Remembering the under construction pit of dirt the place used to be, you feel a sense of happiness looking at how much nicer it is today. There are students eating on the grass, some throwing frizbees, and
+END
+
+LOCATION 9
+0
+You are at the bahen building
+END
+
+LOCATION 10
+0
+You are at Sanford Flemings
+END
+
+LOCATION 11
+0
+You are at the bookstore
+END
+
+robarts      | trinity        |   old vic |
+sidney smith  | heart house    |Queens park|
+     -1       |UC college      |  -1       |
+     -1       |front campus    |  -1       |
+bahen building|sanford flemings|   -1      |
+bookstore     | -1             | -1        |
 
 format:
 
@@ -35,3 +79,28 @@ points received
 short description
 long description
 END
+
+# this next part is subject to change:
+after long description( for special locations):
+SPECIAL
+puzzle description
+code
+hint
+END
+
+
+locations:
+- bookstore
+- bahen
+- robarts
+- queens park
+- ss
+- uc
+- myhal?
+-
+
+
+
+PUZZLES OPTIONS:
+PUZZLE 1:
+There are 5 sisters alone in the house. Anne is reading a book, margaret is cooking, kate is playing chess, and marie is doing laundry. What is the 5th sister doing

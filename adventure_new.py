@@ -39,7 +39,6 @@ if __name__ == "__main__":
 
         if location is None:
             raise ValueError("Invalid location")
-
         else:
 
         # TODO: ENTER CODE HERE TO PRINT LOCATION DESCRIPTION
@@ -53,9 +52,7 @@ if __name__ == "__main__":
 
         print("What to do? \n")
         print("[menu]")
-        directions = movement_options(p.x, p.y, w.map)
-        for action in directions:
-            print(action)
+
         choice = input("\nEnter action: ")
 
         loc_change = False
@@ -84,18 +81,6 @@ if __name__ == "__main__":
             elif choice == "map":
                 for row in w.map:
                     print("\n" + str(row))
-            elif choice == "east":
-                p.x += 1
-                loc_change = True
-            elif choice == "south":
-                p.y += 1
-                loc_change = True
-            elif choice == "north":
-                p.y -= 1
-                loc_change = True
-            elif choice == "west":
-                p.x -= 1
-                loc_change = True
             # TODO: CREATE MORE POTENTIAL ACTIONS
 
 
@@ -111,20 +96,14 @@ if __name__ == "__main__":
         #  OR Check what type of action it is, then modify only player or location accordingly
         #  OR Method in Player class for move or updating inventory
         #  OR Method in Location class for updating location item info, or other location data etc....
-def movement_options(x, y, map) -> list[str]:
-    """
-    Return the directions the player can move. This depends on the player's location relative to the map.
-    """
+def move_player(direction: str, p: Player) -> None:
+    if direction == "east":
+        p.x += 1
+    elif direction == "south":
+        p.y += 1
+    elif direction == "north":
+        p.y -= 1
+    elif direction == "west":
+        p.x -= 1
 
-    actions = []
-    if y != 0 and map[y - 1][x] != -1:
-        actions.append("north")
-    if y != len(map) - 1 and map[y + 1][x] != -1:
-        actions.append("south")
-    if x != 0 and map[y][x - 1] != -1:
-        actions.append("west")
-    if x != len(map[y]) - 1 and map[y][x + 1] != -1:
-        actions.append("east")
-    return actions
-
-def move_player()
+def
