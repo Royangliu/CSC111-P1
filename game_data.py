@@ -62,6 +62,7 @@ class Location:
         # TODO Add more details here about the initialization if needed
         """
         self.location_num = location_num
+        self.location_name = name
         self.score = score
         self.brief_desc = brief_desc
         self.long_desc = long_desc
@@ -154,6 +155,7 @@ class Player:
         - x: The x coordinate of the player
         - y: The y coordinate of the player
         - inventory: The list of items the player has
+        - steps: The remaining location movements the player has left
         - score: The score of the player
         - victory: A bool indicating if the player has won
         - # TODO
@@ -166,6 +168,7 @@ class Player:
     x: int
     y: int
     inventory: list[Item]
+    steps: int
     score: int
     victory: bool
 
@@ -309,10 +312,9 @@ class World:
          return None.)
         """
 
-        if x < 0 or y < 0 or x > len(self.map) - 1 or y > len(
-                self.map[x]) - 1 or self.map[x][y] == -1:
+        if x < 0 or y < 0 or x > len(self.map[y]) - 1 or y > len(self.map) - 1 or self.map[y][x] == -1:
             return None
         else:
-            return self.locations_dict[self.map[x][y]]
+            return self.locations_dict[self.map[y][x]]
 
         # TODO: Complete this method as specified. Do not modify any of this function's specifications.

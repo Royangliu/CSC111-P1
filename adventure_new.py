@@ -22,6 +22,8 @@ This file is Copyright (c) 2024 CSC111 Teaching Team
 from game_data import World, Item, Location, Player
 
 # Note: You may add helper functions, classes, etc. here as needed
+
+
 def move_player(direction: str, p: Player) -> None:
     """moves the player by changing the player's x and y coordinates
     """
@@ -34,6 +36,7 @@ def move_player(direction: str, p: Player) -> None:
     elif direction == "west":
         p.x -= 1
 
+
 def do_menu_action(action: str, player: Player, location: Location, world: World):
     """executes actions found within the menu
     """
@@ -42,47 +45,49 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
     elif action == "inventory":
         print(player.inventory)
     elif action == "score":
-        print("\n Your score is " + str(score))
+        print(f"\nCurrent score: {p.score}")
+    elif action == "clock":
+        print(f"\nRemaining movements: {p.steps}")
     elif action == "map":
         for row in world.map:
             print("\n" + str(row))
-        
-        
+
+
 # Note: You may modify the code below as needed; the following starter template are just suggestions
 if __name__ == "__main__":
     with open('map.txt') as map_file, open('locations.txt') as location_file, open('items.txt') as item_file:
         w = World(map_file, location_file, item_file)
 
     p = Player(0, 0)  # set starting location of player; you may change the x, y coordinates here as appropriate
-    steps = 30
-    score = 0
-    menu = ["look", "inventory", "score", "map", "quit"]
+    p.steps = 30
+    p.score = 0
+    menu = ["look", "inventory", "score", "map", "clock", "quit"]
     directions = ["north", "east", "south", "west"]
 
     previous_x = p.x
     previous_y = p.y
 
-    while not p.victory and steps > 0:
+    while not p.victory and p.steps > 0:
         location = w.get_location(p.x, p.y)
-        
+
         if location is None:
             p.x = previous_x
             p.y = previous_y
-            steps += 1
+            p.steps += 1
             print("Invalid movement input. Try again.\n")
         else:
+            print(location.location_name)
             if location.has_visited:
                 print(location.brief_desc)
             else:
                 print(location.long_desc)
                 location.has_visited = True
 
-        
             loc_change = False
             while not loc_change:
                 print("\nWhat to do?")
                 choice = input("\nEnter action: ").lower()
-                
+
                 if choice == "[menu]":
                     print("Menu Options: \n")
                     for option in menu + location.actions_list:
@@ -96,16 +101,16 @@ if __name__ == "__main__":
                     previous_y = p.y
                     move_player(choice, p)
                     loc_change = True
-                    steps -= 1
+                    p.steps -= 1
                 else:
                     print("Invalid action. Try again.\n")
-            
-    
 
 
 
 
-            
+
+
+
         # TODO: ENTER CODE HERE TO PRINT LOCATION DESCRIPTION
 
         # Depending on whether or not it's been visited before,
