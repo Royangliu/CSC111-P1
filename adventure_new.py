@@ -45,9 +45,9 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
     elif action == "inventory":
         print(player.inventory)
     elif action == "score":
-        print(f"\nCurrent score: {p.score}")
+        print(f"\nCurrent score: {player.score}")
     elif action == "clock":
-        print(f"\nRemaining movements: {p.steps}")
+        print(f"\nRemaining movements: {player.steps}")
     elif action == "map":
         for row in world.map:
             print("\n" + str(row))
@@ -76,7 +76,7 @@ if __name__ == "__main__":
             p.steps += 1
             print("Invalid movement input. Try again.\n")
         else:
-            print(location.location_name)
+            print(location.location_name) #delete after testing
             if location.has_visited:
                 print(location.brief_desc)
             else:
@@ -88,7 +88,7 @@ if __name__ == "__main__":
                 print("\nWhat to do?")
                 choice = input("Enter action: ").lower()
 
-                if choice == "[menu]":
+                if choice == "[menu]": #remove square?
                     print("Menu Options: ")
                     for option in menu + location.actions_list:
                         print(option)
