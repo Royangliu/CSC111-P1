@@ -36,7 +36,6 @@ def move_player(direction: str, p: Player) -> None:
     elif direction == "west":
         p.x -= 1
 
-
 def do_menu_action(action: str, player: Player, location: Location, world: World):
     """executes actions found within the menu
     """
@@ -52,6 +51,9 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
         for row in world.map:
             print("\n" + str(row))
 
+def search_location(player: Player, location: Location, world: World):
+    """search the current location for any puzzles and items
+    """
 
 # Note: You may modify the code below as needed; the following starter template are just suggestions
 if __name__ == "__main__":
@@ -88,22 +90,41 @@ if __name__ == "__main__":
                 print("\nWhat to do?")
                 choice = input("Enter action: ").lower()
 
-                if choice == "[menu]": #remove square?
+                if choice == "[menu]": #remove square brackets?
                     print("Menu Options: ")
-                    for option in menu + location.actions_list:
+                    for option in menu:
                         print(option)
+                    print("\nMovement Options: ")
+                    for option in directions:
+                        print(option)
+                    print("\nLocation Actions: ")
+                    for option in location.actions_list:
+                        print(option)
+                        
                 elif choice in menu:
                     do_menu_action(choice, p, location, w)
+                    
                 elif choice in location.actions_list:
                     pass # TODO
+                    
                 elif choice in directions:
                     previous_x = p.x
                     previous_y = p.y
                     move_player(choice, p)
                     loc_change = True
                     p.steps -= 1
+                    
                 else:
                     print("Invalid action. Try again.")
+
+    if p.victory:
+        p.score += p.steps
+        print("Congratulations! You have won the game!")
+        print("Your final score is: " + str(p.score))
+    else:
+        print("You have run out of steps. Game over.")
+        print(f"Score: {p.score}")
+
 
 
         # TODO: ENTER CODE HERE TO PRINT LOCATION DESCRIPTION

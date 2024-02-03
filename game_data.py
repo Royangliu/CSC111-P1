@@ -274,7 +274,8 @@ class World:
 
             line = location_data.readline().strip()
             long_desc = ''
-            while line != 'END':
+            while line != 'END' or 'SPECIAL':
+                if line == 'END':
                 long_desc += line
                 line = location_data.readline().strip()
 
