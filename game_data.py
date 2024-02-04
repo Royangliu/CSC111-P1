@@ -157,9 +157,10 @@ class Item:
     start_postion: int
     start_target: int
     target_points: int
+    item_desc: str
 
     def __init__(self, name: str, start: int, target: int,
-                 target_points: int) -> None:
+                 target_points: int, description: str) -> None:
         """Initialize a new item.
         """
 
@@ -176,6 +177,7 @@ class Item:
         self.start_position = start
         self.target_position = target
         self.target_points = target_points
+        self.item_desc = description
 
 
 class Player:
@@ -297,7 +299,6 @@ class World:
 
         line = location_data.readline().strip()
 
-        is_special = False
         while line != '':
             num = int(line)
             name = location_data.readline().strip()
@@ -335,16 +336,23 @@ class World:
         curr_dict = {}
 
         line = items_data.readline().strip()
+        
         while line != '':
             start_location = int(line)
             drop_location = int(items_data.readline().strip())
             drop_score = int(items_data.readline().strip())
             name = items_data.readline().strip()
+            
+            line = items_data.readline().strip()
+            item_desc = ''
+            while line != '':
+                item_desc += line
+                line = items_data.readline().strip()
+            curr_dict[start_location] = Item(name, start_location, drop_location, drop_score, item_description)
 
-            curr_dict[start_location] = Item(name, start_location, drop_location, drop_score)
             items_data.readline()
             line = items_data.readline().strip()
-
+            
         return curr_dict
 
     # NOTE: The method below is REQUIRED. Complete it exactly as specified.

@@ -17,10 +17,3 @@ for the snack. You picked up 1 $1 coin
 1
 $1 coin
 Upon the sun bleached grass, a sparkle catches your eyes. You found 1 $1 coin.
-
-
-location_num
-drop location
-score drop
-name
-pick up desc
