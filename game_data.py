@@ -301,7 +301,7 @@ class World:
             line = location_data.readline().strip()
             long_desc = ''
             while line != 'END' and line != 'SPECIAL':
-                long_desc += line
+                long_desc += line + '\n'
                 line = location_data.readline().strip()
                     
             if line == 'SPECIAL':
@@ -311,7 +311,7 @@ class World:
                 line = location_data.readline().strip()
                 puzzle_desc = ''
                 while line != 'END':
-                    puzzle_desc += line
+                    puzzle_desc += line + '\n'
                     line = location_data.readline().strip()
                 curr_dict[num] = SpecialLocation(num, name, score, brief_desc, long_desc, code, hint, success, puzzle_desc)
             else:
@@ -340,7 +340,7 @@ class World:
             line = items_data.readline().strip()
             item_desc = ''
             while line != '':
-                item_desc += line
+                item_desc += line + '\n'
                 line = items_data.readline().strip()
             curr_dict[start_location] = Item(name, start_location, drop_location, drop_score, item_description)
 
