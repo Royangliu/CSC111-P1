@@ -116,10 +116,16 @@ class SpecialLocation(Location):
         self.success = success
         
     def available_actions(self) -> list[str]:
+        """
+        Return the available actions in this location.
+        """
         actions = ['puzzle', 'hint']
         return actions
         
     def do_puzzle(self):
+        """
+        
+        """
         print(self.puzzle)
         print("If you want to leave this puzzle,enter \'leave\'")
         print("If you want a hint, enter \'hint\'")
