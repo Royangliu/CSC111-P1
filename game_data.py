@@ -303,7 +303,9 @@ class World:
             while line != 'END' and line != 'SPECIAL':
                 long_desc += line + '\n'
                 line = location_data.readline().strip()
-                    
+
+            long_desc = long_desc[:-1] # removes last '\n' character.
+            
             if line == 'SPECIAL':
                 code = location_data.readline().strip()
                 hint = location_data.readline().strip()
@@ -313,6 +315,7 @@ class World:
                 while line != 'END':
                     puzzle_desc += line + '\n'
                     line = location_data.readline().strip()
+                puzzle_desc = puzzle_desc[:-1] # removes last '\n' character.
                 curr_dict[num] = SpecialLocation(num, name, score, brief_desc, long_desc, code, hint, success, puzzle_desc)
             else:
                 curr_dict[num] = Location(num, name, score, brief_desc, long_desc)
@@ -342,6 +345,7 @@ class World:
             while line != '':
                 item_desc += line + '\n'
                 line = items_data.readline().strip()
+            item_desc = item_desc[:-1] # removes last '\n' character.
             curr_dict[start_location] = Item(name, start_location, drop_location, drop_score, item_desc)
 
             line = items_data.readline().strip()
