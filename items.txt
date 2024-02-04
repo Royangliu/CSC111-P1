@@ -1,6 +1,7 @@
 6
 11
 1
+# be careful idk why but the dollar sign seems to be doing some... interesting stuff(turning the code blue)
 $1 coin
 Befitting of the location's stature, the old stone walls you touched gave way to a secret 
 compartment; though, you do not question the reason for its existence as you found 1 $1 coin within the dustied box. 
@@ -22,3 +23,4 @@ location_num
 drop location
 score drop
 name
+pick up desc
