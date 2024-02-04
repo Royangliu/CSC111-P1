@@ -349,7 +349,6 @@ class World:
                 line = items_data.readline().strip()
             curr_dict[start_location] = Item(name, start_location, drop_location, drop_score, item_description)
 
-            items_data.readline()
             line = items_data.readline().strip()
             
         return curr_dict
