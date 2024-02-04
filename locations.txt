@@ -17,7 +17,7 @@ END
 2
 Trinity College
 0
-You are inside Trinity College
+You are inside Trinity College, one of the fancier colleges with with their fancy architecture, and even fancier cults. 
 END
 
 3
@@ -55,19 +55,19 @@ END
 8
 Front Campus
 0
-You are at front campus. Remembering the under construction pit of dirt the place used to be, you feel a sense of happiness looking at how much nicer it is today. There are students eating on the grass, some throwing frizbees, and
+You are at front campus. Remembering the under construction pit of dirt the place used to be, you feel a sense of happiness looking at how much nicer it is today. There are students eating on the grass, some throwing frizbees, and...
 END
 
 9
 Bahen
 0
-You are at the bahen building
+You are at the bahen building, a hub for engineering, computer science, and math students. Towards the entrance, you see a poster promoting an AI conference taking part at 2:41 AM tomorrow. It certainly seems like a rather odd time for any kind of conference. You look ahead and see some student ambassadors for Fatuan holding one of their stalls for promotion. 
 END
 
 10
 Sandford Flemings
 0
-You are at Sanford Flemings
+You are inside the Sandford Flemings building - more specifically in the engineering pit. You look around to see the usual Skule™ asthetic, and general eng student department vibe. There is a mural of Godiva on one wall, and various other engineering mascots. You see hardhat cafe, and consider buying some snacks at a later time.
 END
 
 11
