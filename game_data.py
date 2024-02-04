@@ -87,7 +87,7 @@ class Location:
     items_list: list[Item] = []
     actions_list: list[str] = []
 
-    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str) -> None:
+    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str, items_list: list[Item]) -> None:
         """Initialize a new location.
 
         # TODO Add more details here about the initialization if needed
@@ -98,6 +98,7 @@ class Location:
         self.brief_desc = brief_desc
         self.long_desc = long_desc
         self.has_visited = False
+        self.items_list = items_list
         # self.x = x
         # self.y = y
         # self.map = map
@@ -127,6 +128,9 @@ class Location:
         and the x,y position of this location on the world map.
         """
         actions = []
+        if self.items_list != []:
+            actions.append("search")
+            
         return actions
 
         # NOTE: This is just a suggested method
@@ -145,23 +149,26 @@ class SpecialLocation(Location):
     answer: str
     hint: str
     success: str
-    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str,
-                 puzzle: str, answer: str, hint: str, success: str):
+    puzzle_complete: bool
+    
+    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str, items_list: list[Item] puzzle: str, answer: str, hint: str, success: str):
         # TODO FINISH ADDING INITIALIZATION AND INHERITANCE CODE
-        Location.__init__(self, location_num, name, score, brief_desc, long_desc)
+        Location.__init__(self, location_num, name, score, brief_desc, long_desc, items_list)
         self.puzzle = puzzle
         self.answer = answer
         self.hint = hint
         self.success = success
+        self.puzzle_complete = False
         
     def available_actions(self) -> list[str]:
         """
         Return the available actions in this location.
         """
-        actions = ['puzzle']
-        return actions
+        if not puzzle_complete:
+            actions = ['puzzle']
+            return actions
         
-    def do_puzzle(self):
+    def do_puzzle(self) -> list :
         """
         A function allowing user to attempt a puzzle.
         If they succeed, give them the appropriate item. 
@@ -174,12 +181,15 @@ class SpecialLocation(Location):
         if response == self.answer:
             #TODO: add code to give item to player and change if puzzle is available
             print(self.success)
+            return items_list
         elif response == 'hint':
             print(self.hint)
+            return []
         elif response == 'leave':
-            return
+            return []
         else:
             print("Incorrect answer")
+            return []
 
 
 class ShopLocation(Location):
@@ -189,6 +199,20 @@ class ShopLocation(Location):
         - 
     """
 
+    def deliver_item(self, dropped_item: Item) -> int:
+        """drops the items that has the correct position and returns the score.
+        """
+
+    def buy_item(self, target_item: Item, currency: str, inventory: dict[Item, int]):
+        """Gives the inventory the target_item if the inventory has enough currency.
+        """
+        currency_num = 0
+        for item in inventory:
+            if item.name == currency:
+                currency_num += 1
+
+        if currency_num >= target_item.price:
+                inventory[] # TODO switch to dictionary
 
 class Player:
     """
@@ -197,7 +221,7 @@ class Player:
     Instance Attributes:
         - x: The x coordinate of the player
         - y: The y coordinate of the player
-        - inventory: The list of items the player has
+        - inventory: A list of all items in the player's possession
         - steps: The remaining location movements the player has left
         - score: The score of the player
         - victory: A bool indicating if the player has won

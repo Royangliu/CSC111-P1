@@ -42,6 +42,7 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
     if action == "look":
         print(location.long_desc)
     elif action == "inventory":
+        print("\nInventory:")
         print(player.inventory)
     elif action == "score":
         print(f"\nCurrent score: {player.score}")
@@ -50,6 +51,14 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
     elif action == "map":
         for row in world.map:
             print("\n" + str(row))
+
+def do_location_action(action: str, player: Player, location: Location, world: World):
+    """executes actions found within the menu
+    """
+    if action == 'puzzle':
+        addition = Location.do_puzzle()
+        p.inventory  += addition
+    #TODO: add anything else that needs adding, including other functions
 
 def search_location(player: Player, location: Location, world: World):
     """search the current location for any puzzles and items
@@ -63,8 +72,9 @@ if __name__ == "__main__":
     p = Player(0, 0)  # set starting location of player; you may change the x, y coordinates here as appropriate
     p.steps = 30
     p.score = 0
-    menu = ["look", "inventory", "score", "map", "clock", "quit"]
+    menu = ["look", "inventory", "score", "map", "clock", "quit", "go [direction]"]
     directions = ["north", "east", "south", "west"]
+    move_commands = ['go ' + d for d in directions]
 
     previous_x = p.x
     previous_y = p.y
@@ -94,7 +104,7 @@ if __name__ == "__main__":
                     print("Menu Options: ")
                     for option in menu:
                         print(option)
-                    print("\nMovement Options: ")
+                    print("\nMovement Directions: ")
                     for option in directions:
                         print(option)
                     print("\nLocation Actions: ")
@@ -104,13 +114,13 @@ if __name__ == "__main__":
                 elif choice in menu:
                     do_menu_action(choice, p, location, w)
                     
-                elif choice in location.actions_list:
+                elif choice in location.available_actions:
                     pass # TODO
                     
-                elif choice in directions:
+                elif choice in move_commands:
                     previous_x = p.x
                     previous_y = p.y
-                    move_player(choice, p)
+                    move_player(choice[3:], p)
                     loc_change = True
                     p.steps -= 1
                     
@@ -119,11 +129,32 @@ if __name__ == "__main__":
 
     if p.victory:
         p.score += p.steps
+
+        
         print("Congratulations! You have won the game!")
         print("Your final score is: " + str(p.score))
     else:
         print("You have run out of steps. Game over.")
         print(f"Score: {p.score}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
