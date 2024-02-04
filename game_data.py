@@ -48,15 +48,7 @@ class Location:
     x: int
     y: int
 
-    def __init__(self,
-                 location_num,
-                 name: str,
-                 score,
-                 brief_desc,
-                 long_desc,
-                 x=0,
-                 y=0,
-                 map=[]) -> None:
+    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str) -> None:
         """Initialize a new location.
 
         # TODO Add more details here about the initialization if needed
@@ -114,8 +106,10 @@ class SpecialLocation(Location):
     answer: str
     hint: str
     success: str
-    def __init__(self, puzzle: str, answer: str, hint: str, success: str):
+    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str,
+                 puzzle: str, answer: str, hint: str, success: str):
         # TODO FINISH ADDING INITIALIZATION AND INHERITANCE CODE
+        Location.__init__(self, location_num, name, score, brief_desc, long_desc)
         self.puzzle = puzzle
         self.answer = answer
         self.hint = hint
