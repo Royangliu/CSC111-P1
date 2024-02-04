@@ -307,12 +307,13 @@ class World:
             if line == 'SPECIAL':
                 code = location_data.readline().strip()
                 hint = location_data.readline().strip()
+                success = location_data.readline().strip()
                 line = location_data.readline().strip()
                 puzzle_desc = ''
                 while line != 'END':
                     puzzle_desc += line
                     line = location_data.readline().strip()
-                curr_dict[num] = SpecialLocation(num, name, score, brief_desc, long_desc, code, hint, puzzle_desc)
+                curr_dict[num] = SpecialLocation(num, name, score, brief_desc, long_desc, code, hint, success, puzzle_desc)
             else:
                 curr_dict[num] = Location(num, name, score, brief_desc, long_desc)
                 

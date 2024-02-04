@@ -23,6 +23,7 @@ after long description( for special locations):
 SPECIAL
 code
 hint
+success
 puzzle description
 END
 
