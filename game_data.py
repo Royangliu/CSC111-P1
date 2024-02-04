@@ -18,7 +18,6 @@ please consult our Course Syllabus.
 
 This file is Copyright (c) 2024 CSC111 Teaching Team
 """
-from _typeshed import StrPath
 from typing import Optional, TextIO
 
 
