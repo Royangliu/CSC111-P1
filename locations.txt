@@ -79,6 +79,7 @@ SPECIAL
 puzzle description
 answer
 hint
+correct answer response
 
 END
 

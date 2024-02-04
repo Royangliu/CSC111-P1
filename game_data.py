@@ -18,6 +18,7 @@ please consult our Course Syllabus.
 
 This file is Copyright (c) 2024 CSC111 Teaching Team
 """
+from _typeshed import StrPath
 from typing import Optional, TextIO
 
 
@@ -106,9 +107,39 @@ class Location:
 
 
 class SpecialLocation(Location):
-    """A location subclass that contains
+    """A location subclass that contains a riddle puzzle.
 
     """
+    #TODO THERE IS STUFF THAT NEEDS TO BE FINISHED HERE
+    puzzle: str
+    answer: str
+    hint: str
+    success: str
+    def __init__(self, puzzle: str, answer: str, hint: str, success: str):
+        # TODO FINISH ADDING INITIALIZATION AND INHERITANCE CODE
+        self.puzzle = puzzle
+        self.answer = answer
+        self.hint = hint
+        self.success = success
+        
+    def available_actions(self) -> list[str]:
+        actions = ['puzzle', 'hint']
+        return actions
+        
+    def do_puzzle(self):
+        print(self.puzzle)
+        print("If you want to leave this puzzle,enter \'leave\'")
+        print("If you want a hint, enter \'hint\'")
+        response = input("Enter your answer: ")
+        if response == self.answer:
+            #TODO: add code to give item to player and change if puzzle is availabl
+            print(self.success)
+        elif response == self.hint:
+            print(self.hint)
+        else:
+            print("Incorrect answer")
+            
+
 
 
 class Item:
@@ -312,7 +343,6 @@ class World:
          that position. Otherwise, return None. (Remember, locations represented by the number -1 on the map should
          return None.)
         """
-
         if x < 0 or y < 0 or x > len(self.map[y]) - 1 or y > len(self.map) - 1 or self.map[y][x] == -1:
             return None
         else:
