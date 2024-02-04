@@ -21,9 +21,9 @@ END
 # this next part is subject to change:
 after long description( for special locations):
 SPECIAL
-puzzle description
 code
 hint
+puzzle description
 END
 
 

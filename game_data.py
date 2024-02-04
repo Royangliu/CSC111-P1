@@ -132,7 +132,7 @@ class SpecialLocation(Location):
         print("If you want a hint, enter \'hint\'")
         response = input("Enter your answer: ")
         if response == self.answer:
-            #TODO: add code to give item to player and change if puzzle is availabl
+            #TODO: add code to give item to player and change if puzzle is available
             print(self.success)
         elif response == self.hint:
             print(self.hint)
@@ -297,6 +297,7 @@ class World:
 
         line = location_data.readline().strip()
 
+        is_special = False
         while line != '':
             num = int(line)
             name = location_data.readline().strip()
@@ -305,12 +306,22 @@ class World:
 
             line = location_data.readline().strip()
             long_desc = ''
-            while line != 'END' or 'SPECIAL':
-                if line == 'END':
+            while line != 'END' or line !='SPECIAL':
                 long_desc += line
                 line = location_data.readline().strip()
-
-            curr_dict[num] = Location(num, name, score, brief_desc, long_desc)
+                    
+            if line == 'SPECIAL':
+                code = location_data.readline().strip()
+                hint = location_data.readline().strip()
+                line = location_data.readline().strip()
+                puzzle_desc = ''
+                while line != 'END':
+                    puzzle_desc += line
+                    line = location_data.readline().strip()
+                curr_dict[num] = SpecialLocation(num, name, score, brief_desc, long_desc, code, hint, puzzle_desc)
+            else:
+                curr_dict[num] = Location(num, name, score, brief_desc, long_desc)
+                
             location_data.readline()
             line = location_data.readline().strip()
 
@@ -330,8 +341,7 @@ class World:
             drop_score = int(items_data.readline().strip())
             name = items_data.readline().strip()
 
-            curr_dict[start_location] = Item(name, start_location,
-                                             drop_location, drop_score)
+            curr_dict[start_location] = Item(name, start_location, drop_location, drop_score)
             items_data.readline()
             line = items_data.readline().strip()
 
