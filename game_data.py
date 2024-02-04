@@ -342,7 +342,7 @@ class World:
             while line != '':
                 item_desc += line + '\n'
                 line = items_data.readline().strip()
-            curr_dict[start_location] = Item(name, start_location, drop_location, drop_score, item_description)
+            curr_dict[start_location] = Item(name, start_location, drop_location, drop_score, item_desc)
 
             line = items_data.readline().strip()
             
