@@ -93,8 +93,5 @@ UofT Bookstore
 0
 You are at the bookstore
 ewjkhdiewhdxkehdx
-SPECIAL
-answer
-hint
-puzzle description
+SHOP
 END
