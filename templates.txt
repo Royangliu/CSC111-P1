@@ -1,7 +1,7 @@
 item format:
 
 location_num
-drop location
+price (default = 0)
 score drop
 name
 pick description

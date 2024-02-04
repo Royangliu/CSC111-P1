@@ -1,19 +1,19 @@
 6
-11
+0
 1
-# be careful idk why but the dollar sign seems to be doing some... interesting stuff(turning the code blue)
 $1 coin
 Befitting of the location's stature, the old stone walls you touched gave way to a secret 
 compartment; though, you do not question the reason for its existence as you found 1 $1 coin within the dustied box. 
 
 8
-11
+0
 1
+$1 coin
 You spot a squirrel holding a sparkling item. Throughing an acorn to its side, the squirrel drops the item to snatch
 for the snack. You picked up 1 $1 coin
 
 2
-11
+0
 1
 $1 coin
 Upon the sun bleached grass, a sparkle catches your eyes. You found 1 $1 coin.

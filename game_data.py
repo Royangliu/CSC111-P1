@@ -21,6 +21,47 @@ This file is Copyright (c) 2024 CSC111 Teaching Team
 from typing import Optional, TextIO
 
 
+class Item:
+    """An item in our text adventure game world.
+
+    Instance Attributes:
+        - name: a string name of the item
+        - start_position: starting position of the item
+        - price: the price of the item at a store location
+        - target_points: the number of points the player gets for dropping the item at the correct location
+        - item_desc: the string description of the item
+        - # TODO
+
+    Representation Invariants:
+        - start_postion is a valid position in the world map(turn this into code)
+    """
+    name: str
+    start_target: int
+    price: int
+    target_points: int
+    item_desc: str
+
+    def __init__(self, name: str, start: int, price: int,
+                 target_points: int, description: str) -> None:
+        """Initialize a new item.
+        """
+
+        # NOTES:
+        # This is just a suggested starter class for Item.
+        # You may change these parameters and the data available for each Item object as you see fit.
+        # (The current parameters correspond to the example in the handout).
+        # Consider every method in this Item class as a "suggested method".
+        #
+        # The only thing you must NOT change is the name of this class: Item.
+        # All item objects in your game MUST be represented as an instance of this class.
+
+        self.name = name
+        self.start_position = start
+        self.price = price
+        self.target_points = target_points
+        self.item_desc = description
+
+
 class Location:
     """A location in our text adventure game world.
 
@@ -31,12 +72,11 @@ class Location:
         - brief_description: A short description of the location provided every time a player vists
         - long_description: A longer description of the location (stated only on the first visit to the location)
         - has_visited: A boolean value that indicates whether the player has visited this location before
+        - items_list: A list of all items located at this location
         - actions_list: A list of actions that can be taken from this location, including commands and directions
-        - x: The x-coordinate of the location
-        - y: The y-coordinate of the location
 
     Representation Invariants:
-        -
+        - # TODO
     """
     location_num: int
     location_name: str
@@ -44,9 +84,8 @@ class Location:
     brief_desc: str
     long_desc: str
     has_visited: bool
+    items_list: list[Item] = []
     actions_list: list[str] = []
-    x: int
-    y: int
 
     def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str) -> None:
         """Initialize a new location.
@@ -119,12 +158,14 @@ class SpecialLocation(Location):
         """
         Return the available actions in this location.
         """
-        actions = ['puzzle', 'hint']
+        actions = ['puzzle']
         return actions
         
     def do_puzzle(self):
         """
-        
+        A function allowing user to attempt a puzzle.
+        If they succeed, give them the appropriate item. 
+        It also allows for hints to be given, or the appropriate reponse to be given if they fail.
         """
         print(self.puzzle)
         print("If you want to leave this puzzle,enter \'leave\'")
@@ -133,50 +174,20 @@ class SpecialLocation(Location):
         if response == self.answer:
             #TODO: add code to give item to player and change if puzzle is available
             print(self.success)
-        elif response == self.hint:
+        elif response == 'hint':
             print(self.hint)
+        elif response == 'leave':
+            return
         else:
             print("Incorrect answer")
-            
 
 
-
-class Item:
-    """An item in our text adventure game world.
+class ShopLocation(Location):
+    """A location subclass that contains a shop. Items stored in this class indicates the items that can be bought.
 
     Instance Attributes:
-        - name: a string name of the item
-        - start_position: starting position of the item
-        - # TODO
-
-    Representation Invariants:
-        - start_postion is a valid position in the world map(turn this into code)
+        - 
     """
-    name: str
-    start_postion: int
-    start_target: int
-    target_points: int
-    item_desc: str
-
-    def __init__(self, name: str, start: int, target: int,
-                 target_points: int, description: str) -> None:
-        """Initialize a new item.
-        """
-
-        # NOTES:
-        # This is just a suggested starter class for Item.
-        # You may change these parameters and the data available for each Item object as you see fit.
-        # (The current parameters correspond to the example in the handout).
-        # Consider every method in this Item class as a "suggested method".
-        #
-        # The only thing you must NOT change is the name of this class: Item.
-        # All item objects in your game MUST be represented as an instance of this class.
-
-        self.name = name
-        self.start_position = start
-        self.target_position = target
-        self.target_points = target_points
-        self.item_desc = description
 
 
 class Player:
@@ -226,7 +237,6 @@ class World:
         - map: a nested list representation of this world's map
         - current_location: the location that the player is currently at
         - locations_dict: dictionary of all locations
-        - items_dict: dictionary of all items
         - # TODO add more instance attributes as needed; do NOT remove the map attribute
         -
 
@@ -236,7 +246,6 @@ class World:
     map: list[list[int]]
     current_location: Location
     locations_dict: dict[int, Location]
-    items_dict: dict[int, Item]
 
     def __init__(self, map_data: TextIO, location_data: TextIO,
                  items_data: TextIO) -> None:
@@ -259,7 +268,7 @@ class World:
         # The map MUST be stored in a nested list as described in the load_map() function's docstring below
         self.map = self.load_map(map_data)
         self.locations_dict = self.load_locations(location_data)
-        self.items_dict = self.load_items(items_data)
+        self.load_items(items_data)
 
         # NOTE: You may choose how to store location and item data; create your own World methods to handle these
         # accordingly. The only requirements:
@@ -298,12 +307,15 @@ class World:
 
         line = location_data.readline().strip()
 
+        # stops upon reaching the end of the file
         while line != '':
+            # initiailizes attributes of the location
             num = int(line)
             name = location_data.readline().strip()
             score = int(location_data.readline().strip())
             brief_desc = location_data.readline().strip()
 
+            # initializes the long description of the location
             line = location_data.readline().strip()
             long_desc = ''
             while line != 'END' and line != 'SPECIAL':
@@ -311,17 +323,22 @@ class World:
                 line = location_data.readline().strip()
 
             long_desc = long_desc[:-1] # removes last '\n' character.
-            
+
+            # instanciates the location object depending on if it is a special location or not
             if line == 'SPECIAL':
+                # initializes puzzle attributes in the location
                 code = location_data.readline().strip()
                 hint = location_data.readline().strip()
                 success = location_data.readline().strip()
+
+                # initializes the puzzle description of the location
                 line = location_data.readline().strip()
                 puzzle_desc = ''
                 while line != 'END':
                     puzzle_desc += line + '\n'
                     line = location_data.readline().strip()
                 puzzle_desc = puzzle_desc[:-1] # removes last '\n' character.
+
                 curr_dict[num] = SpecialLocation(num, name, score, brief_desc, long_desc, code, hint, success, puzzle_desc)
             else:
                 curr_dict[num] = Location(num, name, score, brief_desc, long_desc)
@@ -339,20 +356,25 @@ class World:
         curr_dict = {}
 
         line = items_data.readline().strip()
-        
+
+        # stops upon reaching the end of the file
         while line != '':
+            # initiailizes attributes of the item
             start_location = int(line)
-            drop_location = int(items_data.readline().strip())
+            price = int(items_data.readline().strip())
             drop_score = int(items_data.readline().strip())
             name = items_data.readline().strip()
-            
+
+            # initializes the description of the item
             line = items_data.readline().strip()
             item_desc = ''
             while line != '':
                 item_desc += line + '\n'
                 line = items_data.readline().strip()
             item_desc = item_desc[:-1] # removes last '\n' character.
-            curr_dict[start_location] = Item(name, start_location, drop_location, drop_score, item_desc)
+
+            # instanciates the item object and adds it to the starting location's items list
+            self.locations_dict[start_location].items_list.append(Item(name, start_location, price, drop_score, item_desc))
 
             line = items_data.readline().strip()
             

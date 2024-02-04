@@ -9,11 +9,14 @@ END
 Robarts Library
 0
 You are on the first floor of the Robarts Library. There is Sidney smith to the south and trinity college to the east.
-You are on the first floor of the Robarts Library. There is Sidney smith to the south and trinity college to the east. It's usually crowded at this time of the day, but today it's eerily quiet.
-Only a few students are studying inside one of the study rooms. You better not disturb them. A librarian stands near the service desk, somehow looking bored and alert at the same time. There is Sidney smith to the south and trinity college to the east
+It's usually crowded at this time of the day, but today it's eerily quiet.
+Only a few students are studying inside one of the study rooms. You better not disturb them. 
+A librarian stands near the service desk, somehow looking bored and alert at the same time. 
+You are on the first floor of the Robarts Library. There is Sidney smith to the south and trinity college to the east.
 SPECIAL
 playing chess
 HINT: Is she doing a solo, or social activity?
+Success
 There are 5 sisters. Anne is reading a book, margaret is cooking, kate is playing chess, and marie is doing laundry. What is the 5th sister doing?
 END
 
@@ -21,14 +24,19 @@ END
 Trinity College
 0
 You are inside Trinity College, and there is Robarts to the west, Victoria College to the east, and Heart House to the south.
-You are inside Trinity College, one of the fancier colleges with with their iconic architecture, and even more iconic cults. It really does look very nice though. You see a poster written in what appears to be latin, and you arent quite sure who exactly such a poster would be meant for. There is Robarts to the west, Victoria College to the east, and Heart House to the south.
+You are inside Trinity College, one of the fancier colleges with with their iconic architecture, and even more iconic cults. 
+It really does look very nice though. You see a poster written in what appears to be latin, and you arent quite sure who exactly such a poster would be meant for. 
+There is Robarts to the west, Victoria College to the east, and Heart House to the south.
 END
 
 3
 Victoria College
 0
 You are at Victoria College, more specifically, Old Vic. There is Trinity College to the west, and Queen's park to the south.
-The architechture and design is beautiful and historic. You look around and see some students setting up some poster for an event coming up, and some other students heading to a class. You glance over at caffiends, and see that they are having a \'2 for 1\' sale, offering 2 drinks for the price of 1, and decide that you will buy yourself some nice drinks aftefr your exam. There is Trinity College to the west, and Queen's park to the south.
+The architechture and design is beautiful and historic. You look around and see some students setting up some poster for an event 
+coming up, and some other students heading to a class. You glance over at caffiends, and see that they are having a \'2 for 1\' sale, 
+offering 2 drinks for the price of 1, and decide that you will buy yourself some nice drinks aftefr your exam. 
+There is Trinity College to the west, and Queen's park to the south.
 END
 
 4
