@@ -19,7 +19,7 @@ This file is Copyright (c) 2024 CSC111 Teaching Team
 """
 
 # Note: You may add in other import statements here as needed
-from game_data import World, Item, Location, Player
+from game_data import SpecialLocation, World, Item, Location, Player
 
 # Note: You may add helper functions, classes, etc. here as needed
 
@@ -41,13 +41,21 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
     """
     if action == "look":
         print(location.long_desc)
+        
     elif action == "inventory":
         print("\nInventory:")
         print(player.inventory)
+        
+    elif action == 'money':
+        print("\nMoney:")
+        print(player.money)
+        
     elif action == "score":
         print(f"\nCurrent score: {player.score}")
+        
     elif action == "clock":
         print(f"\nRemaining movements: {player.steps}")
+        
     elif action == "map":
         for row in world.map:
             print("\n" + str(row))
@@ -55,9 +63,35 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
 def do_location_action(action: str, player: Player, location: Location, world: World):
     """executes actions found within the menu
     """
-    if action == 'puzzle':
-        addition = Location.do_puzzle()
+    if action == 'puzzle' and type(location) == SpecialLocation:
+        addition = location.do_puzzle()
         p.inventory  += addition
+        
+    elif action == 'search':
+        for item in location.items_list:
+            if item.currency > 0:
+                player.money += item.currency
+            else:
+                player.inventory.append(item)
+
+    elif action == "shop list":
+        print("\nShop List:")
+        for item in location.items_list:
+            print(f"{item.name}: ${item.price}")
+            
+    elif action[:5] == "shop ":
+        bought_item = False
+        for i in range(len(location.items_list)):
+            if action == "shop " + location.items_list[i].name and player.money >= location.items_list[i].price:
+                player.money -= location.items_list[i].price
+                player.inventory.append(location.items_list.pop(i))
+                bought_item = True
+            elif action == "shop " + location.items_list[i].name and player.money < location.items_list[i].price:
+                print("Insufficient money; you are broke.")
+        if bought_item == False:
+            print("Item not found.")
+        
+    
     #TODO: add anything else that needs adding, including other functions
 
 def search_location(player: Player, location: Location, world: World):
@@ -69,10 +103,8 @@ if __name__ == "__main__":
     with open('map.txt') as map_file, open('locations.txt') as location_file, open('items.txt') as item_file:
         w = World(map_file, location_file, item_file)
 
-    p = Player(0, 0)  # set starting location of player; you may change the x, y coordinates here as appropriate
-    p.steps = 30
-    p.score = 0
-    menu = ["look", "inventory", "score", "map", "clock", "quit", "go [direction]"]
+    p = Player(0, 0, 30)  # set starting location of player and steps amount; you may change the x, y coordinates here as appropriate
+    menu = ["look", "inventory", "money", "score", "map", "clock", "quit", "go [direction]"]
     directions = ["north", "east", "south", "west"]
     move_commands = ['go ' + d for d in directions]
 

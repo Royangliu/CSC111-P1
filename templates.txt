@@ -2,7 +2,7 @@ item format:
 
 location_num
 price (default = 0)
-score drop
+currency ammount
 name
 pick description
 

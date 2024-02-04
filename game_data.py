@@ -28,7 +28,7 @@ class Item:
         - name: a string name of the item
         - start_position: starting position of the item
         - price: the price of the item at a store location
-        - target_points: the number of points the player gets for dropping the item at the correct location
+        - currency_amount: the number of money the player gets for picking the item up
         - item_desc: the string description of the item
         - # TODO
 
@@ -38,7 +38,7 @@ class Item:
     name: str
     start_target: int
     price: int
-    target_points: int
+    currency_amount: int
     item_desc: str
 
     def __init__(self, name: str, start: int, price: int,
@@ -87,7 +87,7 @@ class Location:
     items_list: list[Item] = []
     actions_list: list[str] = []
 
-    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str, items_list: list[Item]) -> None:
+    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str) -> None:
         """Initialize a new location.
 
         # TODO Add more details here about the initialization if needed
@@ -98,7 +98,6 @@ class Location:
         self.brief_desc = brief_desc
         self.long_desc = long_desc
         self.has_visited = False
-        self.items_list = items_list
         # self.x = x
         # self.y = y
         # self.map = map
@@ -149,24 +148,25 @@ class SpecialLocation(Location):
     answer: str
     hint: str
     success: str
-    puzzle_complete: bool
+    puzzle_complete: bool = False
     
-    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str, items_list: list[Item] puzzle: str, answer: str, hint: str, success: str):
+    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str, puzzle: str, answer: str, hint: str, success: str):
         # TODO FINISH ADDING INITIALIZATION AND INHERITANCE CODE
-        Location.__init__(self, location_num, name, score, brief_desc, long_desc, items_list)
+        Location.__init__(self, location_num, name, score, brief_desc, long_desc)
         self.puzzle = puzzle
         self.answer = answer
         self.hint = hint
         self.success = success
-        self.puzzle_complete = False
         
     def available_actions(self) -> list[str]:
         """
         Return the available actions in this location.
         """
-        if not puzzle_complete:
+        if not self.puzzle_complete:
             actions = ['puzzle']
             return actions
+        else:
+            return []
         
     def do_puzzle(self) -> list :
         """
@@ -181,7 +181,7 @@ class SpecialLocation(Location):
         if response == self.answer:
             #TODO: add code to give item to player and change if puzzle is available
             print(self.success)
-            return items_list
+            return self.items_list
         elif response == 'hint':
             print(self.hint)
             return []
@@ -198,21 +198,27 @@ class ShopLocation(Location):
     Instance Attributes:
         - 
     """
+    def available_actions(self) -> list[str]:
+        """
+        Return the available actions in this location.
+        """
+        actions = []
+        if self.items_list != []:
+            actions.append("buy [item]")
+            actions.append("shop list")
 
-    def deliver_item(self, dropped_item: Item) -> int:
-        """drops the items that has the correct position and returns the score.
+        return actions
+
+    def shop_list(self) -> :
+        """Returns a 
         """
 
-    def buy_item(self, target_item: Item, currency: str, inventory: dict[Item, int]):
+    def buy_item(self, target_item: Item, currency: str, player: Player):
         """Gives the inventory the target_item if the inventory has enough currency.
         """
-        currency_num = 0
-        for item in inventory:
-            if item.name == currency:
-                currency_num += 1
 
-        if currency_num >= target_item.price:
-                inventory[] # TODO switch to dictionary
+        if player.money >= target_item.price:
+                inventory[] 
 
 class Player:
     """
@@ -221,9 +227,10 @@ class Player:
     Instance Attributes:
         - x: The x coordinate of the player
         - y: The y coordinate of the player
-        - inventory: A list of all items in the player's possession
         - steps: The remaining location movements the player has left
+        - inventory: A list of all items in the player's possession
         - score: The score of the player
+        - money: The player's money in dollars
         - victory: A bool indicating if the player has won
         - # TODO
 
@@ -234,12 +241,13 @@ class Player:
     """
     x: int
     y: int
-    inventory: list[Item]
     steps: int
-    score: int
-    victory: bool
+    inventory: list[Item] = []
+    score: int = 0
+    money: int = 0
+    victory: bool = False
 
-    def __init__(self, x: int, y: int) -> None:
+    def __init__(self, x: int, y: int, steps: int) -> None:
         """
         Initializes a new Player at position (x, y).
         """
@@ -250,8 +258,7 @@ class Player:
 
         self.x = x
         self.y = y
-        self.inventory = []
-        self.victory = False
+        self.steps = steps
 
 
 class World:

@@ -44,7 +44,6 @@ Sidney Smith
 0
 You are inside Sidney Smith. There is Robarts to the north, and heart house to the east. 
 You are inside of Sidney Smith. You look around and see the sidney smith commons looking rather empty, and wonder why. Your question is answered promptly once you notice the record breaking line at second cup. It seems as though every single available student in the building has lined up to get coffee at the same time. There is Robarts to the north, and heart house to the east. 
-*insert directions*
 END
 
 5
