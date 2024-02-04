@@ -9,10 +9,11 @@ bookstore     | -1             | -1        |
 Yes, I know, its not fully accurate(regarding the spacings between buildings and areas), but its fair enough for the purpose of this game
 special locations(with puzzles):
 Robarts has T-card
-The puzzle is:
-______ has cheat sheet
 There are 5 sisters. Anne is reading a book, margaret is cooking, kate is playing chess, and marie is doing laundry. What is the 5th sister doing?
 Answer: playing chess
+the puzzle is:
+we have a very interesting Challenge for you. All you Need to do is give the Answer. Do so by figuring out the one-word answer And entering it below.
+______ has cheat sheet
 the puzzle is:
 we have a very interesting Challenge for you. All you Need to do is give the Answer. Do so by figuring out the one-word answer And entering it below.
 
