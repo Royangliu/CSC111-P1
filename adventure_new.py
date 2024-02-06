@@ -81,18 +81,8 @@ def do_location_action(action: str, player: Player, location: Location, world: W
         for item in location.items_list:
             print(f"{item.name}: ${item.price}")
             
-    elif action[:5] == "shop ":
-        bought_item = False
-        for i in range(len(location.items_list)):
-            if action == "shop " + location.items_list[i].name and player.money >= location.items_list[i].price:
-                player.money -= location.items_list[i].price
-                player.inventory.append(location.items_list.pop(i))
-                bought_item = True
-                print("Thank you for your purchase!")
-            elif action == "shop " + location.items_list[i].name and player.money < location.items_list[i].price:
-                print("Insufficient money; you are broke.")
-        if bought_item == False:
-            print("Item not found.")
+    elif action[:4] == "buy ":
+        
 
 def secret_item_endings(player: Player, items: list[Item]):
     """checks if the player has the items required for secret endings

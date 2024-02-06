@@ -3,17 +3,17 @@
     "adventure_new.py": [
       {
         "id": "743e0c19-1f2e-4740-bc52-6e7320a5bab8",
-        "line": 97,
-        "version": 3231,
-        "index": 3330
+        "line": 95,
+        "version": 3673,
+        "index": 2964
       }
     ],
     "game_data.py": [
       {
         "id": "68dfc459-d201-4f9e-8256-69c1f1225d10",
-        "line": 372,
-        "version": 5045,
-        "index": 14063
+        "line": 409,
+        "version": 5953,
+        "index": 16045
       }
     ]
   }

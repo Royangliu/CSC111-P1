@@ -62,6 +62,47 @@ class Item:
         self.item_desc = description
 
 
+class Player:
+    """
+    A Player in the text advanture game.
+
+    Instance Attributes:
+        - x: The x coordinate of the player
+        - y: The y coordinate of the player
+        - steps: The remaining location movements the player has left
+        - inventory: A list of all items in the player's possession
+        - score: The score of the player
+        - money: The player's money in dollars
+        - victory: A bool indicating if the player has won
+        - # TODO
+
+    Representation Invariants:
+        - x >= 0
+        - y >= 0
+        - # TODO
+    """
+    x: int
+    y: int
+    steps: int
+    inventory: list[Item] = []
+    score: int = 0
+    money: int = 0
+    victory: bool = False
+
+    def __init__(self, x: int, y: int, steps: int) -> None:
+        """
+        Initializes a new Player at position (x, y).
+        """
+
+        # NOTES:
+        # This is a suggested starter class for Player.
+        # You may change these parameters and the data available for the Player object as you see fit.
+
+        self.x = x
+        self.y = y
+        self.steps = steps
+
+
 class Location:
     """A location in our text adventure game world.
 
@@ -141,6 +182,21 @@ class Location:
 
 class SpecialLocation(Location):
     """A location subclass that contains a riddle puzzle.
+    Instance Attributes:
+        - location_num: The designated integer number for the location in the locations.txt file
+        - location_name: The name of the location
+        - score: The score the player gets upon entering the location for the first time
+        - brief_description: A short description of the location provided every time a player vists
+        - long_description: A longer description of the location (stated only on the first visit to the location)
+        - has_visited: A boolean value that indicates whether the player has visited this location 
+ before
+        - items_list: A list of all items located at this location
+        - actions_list: A list of actions that can be taken from this location, including commands and directions
+        - answer: The string representing the answer to the puzzle
+        - hint: A string representing a hint to the puzzle
+        - success: A string representing the message to be displayed when the player solves the puzzle
+        - puzzle: A string representing the actual puzzle
+        - puzzle_complete: A boolean value indicating 
 
     """
     #TODO THERE IS STUFF THAT NEEDS TO BE FINISHED HERE
@@ -174,10 +230,9 @@ class SpecialLocation(Location):
         If they succeed, give them the appropriate item. 
         It also allows for hints to be given, or the appropriate reponse to be given if they fail.
         """
-        print('Puzzle/Riddle:')
+        print('Puzzle/Riddle:\n')
         print(self.puzzle)
-        print("If you want to leave this puzzle,enter \'leave\'")
-        print("If you want a hint, enter \'hint\'")
+        print("Other Actions: \'leave\', \'hint\'")
         response = input("\nEnter your answer: ")
         while response != 'leave':
             if response == self.answer:
@@ -189,8 +244,8 @@ class SpecialLocation(Location):
             else:
                 print("Incorrect answer")
             response = input("Enter your answer: ")
-            
         return []
+
 
 class ShopLocation(Location):
     """A location subclass that contains a shop. Items stored in this class indicates the items that can be bought.
@@ -209,45 +264,23 @@ class ShopLocation(Location):
 
         return actions
 
-class Player:
-    """
-    A Player in the text advanture game.
+    def do_buy(self, item_name: str, player: Player) -> Optional[Item]:
+        """Handels the buying of an item.
 
-    Instance Attributes:
-        - x: The x coordinate of the player
-        - y: The y coordinate of the player
-        - steps: The remaining location movements the player has left
-        - inventory: A list of all items in the player's possession
-        - score: The score of the player
-        - money: The player's money in dollars
-        - victory: A bool indicating if the player has won
-        - # TODO
-
-    Representation Invariants:
-        - x >= 0
-        - y >= 0
-        - # TODO
-    """
-    x: int
-    y: int
-    steps: int
-    inventory: list[Item] = []
-    score: int = 0
-    money: int = 0
-    victory: bool = False
-
-    def __init__(self, x: int, y: int, steps: int) -> None:
+        Returns the item if successfully bought.
+        Returns None if not bought.
         """
-        Initializes a new Player at position (x, y).
-        """
-
-        # NOTES:
-        # This is a suggested starter class for Player.
-        # You may change these parameters and the data available for the Player object as you see fit.
-
-        self.x = x
-        self.y = y
-        self.steps = steps
+        bought_item = False
+        for i in range(len(self.items_list)):
+            if item_name == self.items_list[i].name and player.money >= self.items_list[i].price:
+                player.money -= self.items_list[i].price
+                player.inventory.append(self.items_list.pop(i))
+                bought_item = True
+                print("Thank you for your purchase!")
+            elif item_name == "buy " + self.items_list[i].name and player.money < self.items_list[i].price:
+                print("Insufficient money; you are broke.")
+        if not bought_item:
+            print("Item not found.")
 
 
 class World:
