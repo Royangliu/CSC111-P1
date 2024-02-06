@@ -84,7 +84,7 @@ class Player:
     x: int
     y: int
     steps: int
-    inventory: list[Item] = []
+    inventory: list[Item]
     score: int = 0
     money: int = 0
     victory: bool = False
@@ -101,6 +101,7 @@ class Player:
         self.x = x
         self.y = y
         self.steps = steps
+        self.inventory = []
 
 
 class Location:
@@ -114,7 +115,6 @@ class Location:
         - long_description: A longer description of the location (stated only on the first visit to the location)
         - has_visited: A boolean value that indicates whether the player has visited this location before
         - items_list: A list of all items located at this location
-        - actions_list: A list of actions that can be taken from this location, including commands and directions
 
     Representation Invariants:
         - # TODO
@@ -125,8 +125,7 @@ class Location:
     brief_desc: str
     long_desc: str
     has_visited: bool
-    items_list: list[Item] = []
-    actions_list: list[str] = []
+    items_list: list[Item]
 
     def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str) -> None:
         """Initialize a new location.
@@ -139,6 +138,7 @@ class Location:
         self.brief_desc = brief_desc
         self.long_desc = long_desc
         self.has_visited = False
+        self.items_list = []
         # self.x = x
         # self.y = y
         # self.map = map
@@ -204,7 +204,7 @@ class SpecialLocation(Location):
     hint: str
     success: str
     puzzle: str
-    puzzle_complete: bool = False
+    puzzle_complete: bool
     
     def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str, answer: str, hint: str, success: str,  puzzle: str):
         # TODO FINISH ADDING INITIALIZATION AND INHERITANCE CODE
@@ -213,6 +213,7 @@ class SpecialLocation(Location):
         self.hint = hint
         self.success = success
         self.puzzle = puzzle
+        self.puzzle_complete = False
         
     def available_actions(self) -> list[str]:
         """
@@ -369,7 +370,7 @@ class World:
             # initializes the long description of the location
             line = location_data.readline().strip()
             long_desc = ''
-            while line != 'END' and line != 'SPECIAL':
+            while line != 'END' and line != 'SPECIAL' and line != 'SHOP':
                 long_desc += line + '\n'
                 line = location_data.readline().strip()
 
@@ -391,6 +392,8 @@ class World:
                 puzzle_desc = puzzle_desc[:-1] # removes last '\n' character.
 
                 curr_dict[num] = SpecialLocation(num, name, score, brief_desc, long_desc, code, hint, success, puzzle_desc)
+            elif line == 'SHOP':
+                curr_dict[num] = ShopLocation(num, name, score, brief_desc, long_desc)
             else:
                 curr_dict[num] = Location(num, name, score, brief_desc, long_desc)
                 
