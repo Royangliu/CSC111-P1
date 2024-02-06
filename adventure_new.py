@@ -19,7 +19,7 @@ This file is Copyright (c) 2024 CSC111 Teaching Team
 """
 
 # Note: You may add in other import statements here as needed
-from game_data import SpecialLocation, World, Item, Location, Player
+from game_data import SpecialLocation, ShopLocation, World, Item, Location, Player
 
 # Note: You may add helper functions, classes, etc. here as needed
 
@@ -81,8 +81,8 @@ def do_location_action(action: str, player: Player, location: Location, world: W
         for item in location.items_list:
             print(f"{item.name}: ${item.price}")
             
-    elif action[:4] == "buy ":
-        
+    elif action[:4] == "buy " and isinstance(location, ShopLocation):
+        location.do_buy(action[4:], player)
 
 def secret_item_endings(player: Player, items: list[Item]):
     """checks if the player has the items required for secret endings

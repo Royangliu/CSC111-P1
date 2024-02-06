@@ -218,11 +218,11 @@ class SpecialLocation(Location):
         """
         Return the available actions in this location.
         """
+        actions = []
         if not self.puzzle_complete:
-            actions = ['puzzle']
-            return actions
-        else:
-            return []
+            actions.append('puzzle')
+
+        return actions
         
     def do_puzzle(self) -> list[Item]:
         """
@@ -264,11 +264,8 @@ class ShopLocation(Location):
 
         return actions
 
-    def do_buy(self, item_name: str, player: Player) -> Optional[Item]:
+    def do_buy(self, item_name: str, player: Player):
         """Handels the buying of an item.
-
-        Returns the item if successfully bought.
-        Returns None if not bought.
         """
         bought_item = False
         for i in range(len(self.items_list)):
