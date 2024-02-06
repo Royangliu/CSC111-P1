@@ -58,7 +58,7 @@ class Item:
         self.name = name
         self.start_position = start
         self.price = price
-        self.target_points = target_points
+        self.currency_amount = target_points
         self.item_desc = description
 
 
