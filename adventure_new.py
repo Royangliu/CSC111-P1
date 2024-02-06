@@ -141,13 +141,17 @@ if __name__ == "__main__":
                 if choice == "[menu]": #remove square brackets?
                     print("Menu Options: ")
                     for option in menu:
-                        print(option)
+                        print('\t' + option)
                     print("\nMovement Directions: ")
                     for option in directions:
-                        print(option)
+                        print('\t' + option)
                     print("\nLocation Actions: ")
-                    for option in location.actions_list:
-                        print(option)
+                    location_actions = location.available_actions()
+                    if location_actions != []: 
+                        for option in location_actions:
+                            print('\t' + option)
+                    else:
+                        print("\tNone")
                         
                 elif choice in menu:
                     do_menu_action(choice, p, location, w)
