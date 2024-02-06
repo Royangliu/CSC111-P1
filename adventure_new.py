@@ -58,7 +58,7 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
         
     elif action == "map":
         for row in world.map:
-            print("\n" + str(row))
+            print(row)
 
 def do_location_action(action: str, player: Player, location: Location, world: World):
     """executes actions found within the menu
@@ -127,15 +127,16 @@ if __name__ == "__main__":
             while not loc_change:
                 print("\nWhat to do? Type \'[menu]\' for the list of actions.")
                 choice = input("Enter action: ").lower()
+                print()
 
                 if choice == "[menu]": #remove square brackets?
                     print("\nMenu Options: ")
                     for option in menu:
                         print('\t' + option)
-                    print("\nMovement Directions: ")
+                    print("Movement Directions: ")
                     for option in directions:
                         print('\t' + option)
-                    print("\nLocation Actions: ")
+                    print("Location Actions: ")
                     location_actions = location.available_actions()
                     if location_actions != []: 
                         for option in location_actions:
