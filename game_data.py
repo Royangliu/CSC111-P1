@@ -144,19 +144,19 @@ class SpecialLocation(Location):
 
     """
     #TODO THERE IS STUFF THAT NEEDS TO BE FINISHED HERE
-    puzzle: str
     answer: str
     hint: str
     success: str
+    puzzle: str
     puzzle_complete: bool = False
     
-    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str, puzzle: str, answer: str, hint: str, success: str):
+    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str, answer: str, hint: str, success: str,  puzzle: str):
         # TODO FINISH ADDING INITIALIZATION AND INHERITANCE CODE
         Location.__init__(self, location_num, name, score, brief_desc, long_desc)
-        self.puzzle = puzzle
         self.answer = answer
         self.hint = hint
         self.success = success
+        self.puzzle = puzzle
         
     def available_actions(self) -> list[str]:
         """
