@@ -233,7 +233,8 @@ class SpecialLocation(Location):
         print('Puzzle/Riddle:\n')
         print(self.puzzle)
         print("Other Actions: \'leave\', \'hint\'")
-        response = input("\nEnter your answer: ")
+        response = input("Enter your answer: ")
+        print()
         while response != 'leave':
             if response == self.answer:
                 #TODO: add code to give item to player and change if puzzle is available

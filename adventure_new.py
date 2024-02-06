@@ -43,18 +43,18 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
         print(location.long_desc)
         
     elif action == "inventory":
-        print("\nInventory:")
+        print("Inventory:")
         print(player.inventory)
         
     elif action == 'money':
-        print("\nMoney:")
+        print("Money:")
         print(player.money)
         
     elif action == "score":
-        print(f"\nCurrent score: {player.score}")
+        print(f"Current score: {player.score}")
         
     elif action == "clock":
-        print(f"\nRemaining movements: {player.steps}")
+        print(f"Remaining movements: {player.steps}")
         
     elif action == "map":
         for row in world.map:
@@ -77,7 +77,7 @@ def do_location_action(action: str, player: Player, location: Location, world: W
             print(item.item_desc)
 
     elif action == "shop list":
-        print("\nShop List:")
+        print("Shop List:")
         for item in location.items_list:
             print(f"{item.name}: ${item.price}")
             
@@ -130,7 +130,7 @@ if __name__ == "__main__":
                 print()
 
                 if choice == "[menu]": #remove square brackets?
-                    print("\nMenu Options: ")
+                    print("Menu Options: ")
                     for option in menu:
                         print('\t' + option)
                     print("Movement Directions: ")
