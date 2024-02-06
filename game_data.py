@@ -255,6 +255,10 @@ class ShopLocation(Location):
     Instance Attributes:
         - 
     """
+    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str):
+        # TODO 
+        Location.__init__(self, location_num, name, score, brief_desc, long_desc)
+        
     def available_actions(self) -> list[str]:
         """
         Return the available actions in this location.
