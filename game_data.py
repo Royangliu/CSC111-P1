@@ -168,7 +168,7 @@ class SpecialLocation(Location):
         else:
             return []
         
-    def do_puzzle(self) -> list :
+    def do_puzzle(self) -> list[Item]:
         """
         A function allowing user to attempt a puzzle.
         If they succeed, give them the appropriate item. 
@@ -178,19 +178,18 @@ class SpecialLocation(Location):
         print("If you want to leave this puzzle,enter \'leave\'")
         print("If you want a hint, enter \'hint\'")
         response = input("Enter your answer: ")
-        if response == self.answer:
-            #TODO: add code to give item to player and change if puzzle is available
-            print(self.success)
-            return self.items_list
-        elif response == 'hint':
-            print(self.hint)
-            return []
-        elif response == 'leave':
-            return []
-        else:
-            print("Incorrect answer")
-            return []
-
+        while response != 'leave':
+            if response == self.answer:
+                #TODO: add code to give item to player and change if puzzle is available
+                print(self.success)
+                return self.items_list
+            elif response == 'hint':
+                print(self.hint)
+            else:
+                print("Incorrect answer")
+            response = input("Enter your answer: ")
+            
+        return []
 
 class ShopLocation(Location):
     """A location subclass that contains a shop. Items stored in this class indicates the items that can be bought.
@@ -208,17 +207,6 @@ class ShopLocation(Location):
             actions.append("shop list")
 
         return actions
-
-    def shop_list(self) -> :
-        """Returns a 
-        """
-
-    def buy_item(self, target_item: Item, currency: str, player: Player):
-        """Gives the inventory the target_item if the inventory has enough currency.
-        """
-
-        if player.money >= target_item.price:
-                inventory[] 
 
 class Player:
     """

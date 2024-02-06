@@ -63,16 +63,18 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
 def do_location_action(action: str, player: Player, location: Location, world: World):
     """executes actions found within the menu
     """
-    if action == 'puzzle' and type(location) == SpecialLocation:
+    if action == 'puzzle' and isinstance(location, SpecialLocation):
         addition = location.do_puzzle()
-        p.inventory  += addition
+        p.inventory += addition
         
     elif action == 'search':
         for item in location.items_list:
-            if item.currency > 0:
-                player.money += item.currency
+            if item.currency_amount > 0:
+                player.money += item.currency_amount
             else:
                 player.inventory.append(item)
+                
+            print(item.item_desc)
 
     elif action == "shop list":
         print("\nShop List:")
@@ -86,17 +88,21 @@ def do_location_action(action: str, player: Player, location: Location, world: W
                 player.money -= location.items_list[i].price
                 player.inventory.append(location.items_list.pop(i))
                 bought_item = True
+                print("Thank you for your purchase!")
             elif action == "shop " + location.items_list[i].name and player.money < location.items_list[i].price:
                 print("Insufficient money; you are broke.")
         if bought_item == False:
             print("Item not found.")
+
+def secret_item_endings(player: Player, items: list[Item]):
+    """checks if the player has the items required for secret endings
+    """
+    for item in player.inventory:
+        if item.name == "Phone":
+            pass # TODO
         
     
     #TODO: add anything else that needs adding, including other functions
-
-def search_location(player: Player, location: Location, world: World):
-    """search the current location for any puzzles and items
-    """
 
 # Note: You may modify the code below as needed; the following starter template are just suggestions
 if __name__ == "__main__":
@@ -106,7 +112,7 @@ if __name__ == "__main__":
     p = Player(0, 0, 30)  # set starting location of player and steps amount; you may change the x, y coordinates here as appropriate
     menu = ["look", "inventory", "money", "score", "map", "clock", "quit", "go [direction]"]
     directions = ["north", "east", "south", "west"]
-    move_commands = ['go ' + d for d in directions]
+    move_commands = {'go ' + d for d in directions}
 
     previous_x = p.x
     previous_y = p.y
@@ -146,20 +152,22 @@ if __name__ == "__main__":
                 elif choice in menu:
                     do_menu_action(choice, p, location, w)
                     
-                elif choice in location.available_actions:
-                    pass # TODO
+                elif choice in location.available_actions():
+                    do_location_action(choice, p, location, w)
                     
                 elif choice in move_commands:
                     previous_x = p.x
                     previous_y = p.y
                     move_player(choice[3:], p)
-                    loc_change = True
                     p.steps -= 1
+                    loc_change = True
                     
                 else:
                     print("Invalid action. Try again.")
 
     if p.victory:
+        
+        
         p.score += p.steps
 
         
