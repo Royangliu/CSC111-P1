@@ -124,7 +124,7 @@ if __name__ == "__main__":
             p.x = previous_x
             p.y = previous_y
             p.steps += 1
-            print("Invalid movement input. Try again.\n")
+            print("Invalid movement input. Try again.")
         else:
             print(location.location_name) #delete after testing
             if location.has_visited:
@@ -135,11 +135,11 @@ if __name__ == "__main__":
 
             loc_change = False
             while not loc_change:
-                print("\nWhat to do?")
+                print("\nWhat to do? Type \'[menu]\' for the list of actions.")
                 choice = input("Enter action: ").lower()
 
                 if choice == "[menu]": #remove square brackets?
-                    print("Menu Options: ")
+                    print("\nMenu Options: ")
                     for option in menu:
                         print('\t' + option)
                     print("\nMovement Directions: ")

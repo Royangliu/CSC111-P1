@@ -174,10 +174,11 @@ class SpecialLocation(Location):
         If they succeed, give them the appropriate item. 
         It also allows for hints to be given, or the appropriate reponse to be given if they fail.
         """
+        print('Puzzle/Riddle:')
         print(self.puzzle)
         print("If you want to leave this puzzle,enter \'leave\'")
         print("If you want a hint, enter \'hint\'")
-        response = input("Enter your answer: ")
+        response = input("\nEnter your answer: ")
         while response != 'leave':
             if response == self.answer:
                 #TODO: add code to give item to player and change if puzzle is available
