@@ -399,13 +399,9 @@ class World:
 
         return curr_dict
 
-    def load_items(self, items_data: TextIO) -> dict[int, Item]:
+    def load_items(self, items_data: TextIO):
+        """Loads the items found within items.txt to their respective locations
         """
-        Returns a dictionary of items from the given open file items_data. A key in the dictionary is a location's
-        number, and the key's item are the corresponding item objects found at the location.
-        """
-        curr_dict = {}
-
         line = items_data.readline().strip()
 
         # stops upon reaching the end of the file
@@ -429,7 +425,6 @@ class World:
 
             line = items_data.readline().strip()
             
-        return curr_dict
 
     # NOTE: The method below is REQUIRED. Complete it exactly as specified.
     def get_location(self, x: int, y: int) -> Optional[Location]:
