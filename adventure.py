@@ -19,86 +19,185 @@ This file is Copyright (c) 2024 CSC111 Teaching Team
 """
 
 # Note: You may add in other import statements here as needed
-from game_data import World, Item, Location, Player
+from game_data import SpecialLocation, ShopLocation, World, Item, Location, Player
 
 # Note: You may add helper functions, classes, etc. here as needed
 
+
+def move_player(direction: str, player: Player) -> None:
+    """moves the player by changing the player's x and y coordinates
+    """
+    if direction == "east":
+        player.x += 1
+    elif direction == "south":
+        player.y += 1
+    elif direction == "north":
+        player.y -= 1
+    elif direction == "west":
+        player.x -= 1
+
+def do_menu_action(action: str, player: Player, curr_loc: Location, world: World):
+    """executes menu actions found within the menu
+    """
+    if action == "look":
+        print(curr_loc.long_desc)
+
+    elif action == "inventory":
+        print("Inventory:")
+        print(player.inventory)
+
+    elif action == 'money':
+        print("Money:")
+        print(player.money)
+
+    elif action == "score":
+        print(f"Current score: {player.score}")
+
+    elif action == "clock":
+        print(f"Remaining movements: {player.steps}")
+
+    elif action == "map":
+        for row in world.map:
+            print(row)
+
+def do_location_action(action: str, player: Player, curr_loc: Location, world: World):
+    """executes location actions found within the menu
+    """
+    if action == 'puzzle' and isinstance(curr_loc, SpecialLocation):
+        addition = curr_loc.do_puzzle()
+        player.inventory += addition
+
+    elif action == 'search':
+        for item in curr_loc.items_list:
+            if item.currency_amount > 0:
+                player.money += item.currency_amount
+            else:
+                player.inventory.append(item)
+            curr_loc.items_list.remove(item)
+
+            print(item.item_desc)
+
+    elif action == "shop list":
+        print("Shop List:")
+        for item in curr_loc.items_list:
+            print(f"{item.name}: ${item.price}")
+
+    elif action[:4] == "buy " and isinstance(curr_loc, ShopLocation):
+        curr_loc.do_buy(action[4:], player)
+
+def secret_item_endings(player: Player, items: list[Item]):
+    """checks if the player has the items required for secret endings
+    """
+    for item in player.inventory:
+        if item.name == "Phone":
+            pass # TODO
+
+
+    #TODO: add anything else that needs adding, including other functions
+
 # Note: You may modify the code below as needed; the following starter template are just suggestions
 if __name__ == "__main__":
-    w = World(open("map.txt"), open("locations.txt"), open("items.txt"))
-    p = Player(100000000, 0)  # set starting location of player; you may change the x, y coordinates here as appropriate
-    steps = 30
-    score = 0
-    menu = ["look", "inventory", "score", "map", "quit"]
+    with open('map.txt') as map_file, open('locations.txt') as location_file, open('items.txt') as item_file:
+        w = World(map_file, location_file, item_file)
+
+    p = Player(0, 0, 30)  # set starting location of player and steps amount; you may change the x, y coordinates here as appropriate
+    menu = ["look", "inventory", "money", "score", "map", "clock", "quit", "go [direction]"]
+    directions = ["north", "east", "south", "west"]
+    move_commands = {'go ' + d for d in directions}
 
     previous_x = p.x
     previous_y = p.y
 
-    while not p.victory and steps > 0:
+    while not p.victory and p.steps > 0:
         location = w.get_location(p.x, p.y)
 
         if location is None:
-            raise ValueError("Invalid location")
-
+            p.x = previous_x
+            p.y = previous_y
+            p.steps += 1
+            print("Invalid movement input. Try again.")
         else:
+            print(location.location_name) #delete after testing
+            if location.has_visited:
+                print(location.brief_desc)
+            else:
+                print(location.long_desc)
+                location.has_visited = True
+
+            loc_change = False
+            while not loc_change:
+                print("\nWhat to do? Type \'[menu]\' for the list of actions.")
+                choice = input("Enter action: ").lower()
+                print()
+
+                if choice == "[menu]": #remove square brackets?
+                    print("Menu Options: ")
+                    for option in menu:
+                        print('\t' + option)
+                    print("Movement Directions: ")
+                    for option in directions:
+                        print('\t' + option)
+                    print("Location Actions: ")
+                    location_actions = location.available_actions()
+                    if location_actions != []:
+                        for option in location_actions:
+                            print('\t' + option)
+                    else:
+                        print("\tNone")
+
+                elif choice in menu:
+                    do_menu_action(choice, p, location, w)
+
+                elif choice in location.available_actions():
+                    do_location_action(choice, p, location, w)
+
+                elif choice in move_commands:
+                    previous_x = p.x
+                    previous_y = p.y
+                    move_player(choice[3:], p)
+                    p.steps -= 1
+                    loc_change = True
+
+                else:
+                    print("Invalid action. Try again.")
+
+    if p.victory:
+
+
+        p.score += p.steps
+
+
+        print("Congratulations! You have won the game!")
+        print("Your final score is: " + str(p.score))
+    else:
+        print("You have run out of steps. Game over.")
+        print(f"Score: {p.score}")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         # TODO: ENTER CODE HERE TO PRINT LOCATION DESCRIPTION
-        if location.has_visited:
-            print(location.brief_desc)
-        else:
-            print(location.long_desc)
-            location.has_visited = True
+
         # Depending on whether or not it's been visited before,
         # print either full description (first time visit) or brief description (every subsequent visit)
-
-        print("What to do? \n")
-        print("[menu]")
-        directions = movement_options(p.x, p.y, w.map)
-        for action in directions:
-            print(action)
-        choice = input("\nEnter action: ")
-
-        loc_change = False
-        while not loc_change:
-
-
-
-            if choice not in menu and choice not in location.available_actions():
-                choice = input("\nInvalid action. Try again: ")
-            elif choice not in movement_options(p.x, p.y, w.map):
-                choice = input("\nInvalid movement. Try again: ")
-            elif choice == "[menu]":
-                print("Menu Options: \n")
-                for option in menu:
-                    print(option)
-                choice = input("\nChoose action: ")
-            elif choice == "look":
-                print(location.long_desc)
-                choice = input("\nChoose action: ")
-            elif choice == "inventory":
-                print(p.inventory)
-                choice = input("\nChoose action: ")
-            elif choice == "score":
-                print(" \n the score is " + str(score))
-                choice = input("\nChoose action: ")
-            elif choice == "map":
-                for row in w.map:
-                    print("\n" + str(row))
-            elif choice == "east":
-                p.x += 1
-                loc_change = True
-            elif choice == "south":
-                p.y += 1
-                loc_change = True
-            elif choice == "north":
-                p.y -= 1
-                loc_change = True
-            elif choice == "west":
-                p.x -= 1
-                loc_change = True
-            # TODO: CREATE MORE POTENTIAL ACTIONS
-
-
 
 
         # TODO: CALL A FUNCTION HERE TO HANDLE WHAT HAPPENS UPON THE PLAYER'S CHOICE
@@ -111,20 +210,3 @@ if __name__ == "__main__":
         #  OR Check what type of action it is, then modify only player or location accordingly
         #  OR Method in Player class for move or updating inventory
         #  OR Method in Location class for updating location item info, or other location data etc....
-def movement_options(x, y, map) -> list[str]:
-    """
-    Return the directions the player can move. This depends on the player's location relative to the map.
-    """
-
-    actions = []
-    if y != 0 and map[y - 1][x] != -1:
-        actions.append("north")
-    if y != len(map) - 1 and map[y + 1][x] != -1:
-        actions.append("south")
-    if x != 0 and map[y][x - 1] != -1:
-        actions.append("west")
-    if x != len(map[y]) - 1 and map[y][x + 1] != -1:
-        actions.append("east")
-    return actions
-
-def move_player()
