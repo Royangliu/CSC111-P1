@@ -170,7 +170,7 @@ class Location:
         actions = []
         if self.items_list != []:
             actions.append("search")
-            
+
         return actions
 
         # NOTE: This is just a suggested method
@@ -188,15 +188,14 @@ class SpecialLocation(Location):
         - score: The score the player gets upon entering the location for the first time
         - brief_description: A short description of the location provided every time a player vists
         - long_description: A longer description of the location (stated only on the first visit to the location)
-        - has_visited: A boolean value that indicates whether the player has visited this location 
+        - has_visited: A boolean value that indicates whether the player has visited this location
  before
         - items_list: A list of all items located at this location
-        - actions_list: A list of actions that can be taken from this location, including commands and directions
         - answer: The string representing the answer to the puzzle
         - hint: A string representing a hint to the puzzle
         - success: A string representing the message to be displayed when the player solves the puzzle
         - puzzle: A string representing the actual puzzle
-        - puzzle_complete: A boolean value indicating 
+        - puzzle_complete: A boolean value indicating
 
     """
     #TODO THERE IS STUFF THAT NEEDS TO BE FINISHED HERE
@@ -205,7 +204,7 @@ class SpecialLocation(Location):
     success: str
     puzzle: str
     puzzle_complete: bool
-    
+
     def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str, answer: str, hint: str, success: str,  puzzle: str):
         # TODO FINISH ADDING INITIALIZATION AND INHERITANCE CODE
         Location.__init__(self, location_num, name, score, brief_desc, long_desc)
@@ -214,7 +213,7 @@ class SpecialLocation(Location):
         self.success = success
         self.puzzle = puzzle
         self.puzzle_complete = False
-        
+
     def available_actions(self) -> list[str]:
         """
         Return the available actions in this location.
@@ -224,11 +223,11 @@ class SpecialLocation(Location):
             actions.append('puzzle')
 
         return actions
-        
+
     def do_puzzle(self) -> list[Item]:
         """
         A function allowing user to attempt a puzzle.
-        If they succeed, give them the appropriate item. 
+        If they succeed, give them the appropriate item.
         It also allows for hints to be given, or the appropriate reponse to be given if they fail.
         """
         print('Puzzle/Riddle:\n')
@@ -253,18 +252,18 @@ class ShopLocation(Location):
     """A location subclass that contains a shop. Items stored in this class indicates the items that can be bought.
 
     Instance Attributes:
-        - 
+        -
     """
     def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str):
-        # TODO 
+        # TODO
         Location.__init__(self, location_num, name, score, brief_desc, long_desc)
-        
+
     def available_actions(self) -> list[str]:
         """
         Return the available actions in this location.
         """
         actions = []
-        if self.items_list != []:
+        if self.items_list:
             actions.append("buy [item]")
             actions.append("shop list")
 
@@ -400,7 +399,7 @@ class World:
                 curr_dict[num] = ShopLocation(num, name, score, brief_desc, long_desc)
             else:
                 curr_dict[num] = Location(num, name, score, brief_desc, long_desc)
-                
+
             location_data.readline()
             line = location_data.readline().strip()
 
@@ -431,7 +430,6 @@ class World:
             self.locations_dict[start_location].items_list.append(Item(name, start_location, price, drop_score, item_desc))
 
             line = items_data.readline().strip()
-            
 
     # NOTE: The method below is REQUIRED. Complete it exactly as specified.
     def get_location(self, x: int, y: int) -> Optional[Location]:

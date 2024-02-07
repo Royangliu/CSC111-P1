@@ -41,21 +41,21 @@ def do_menu_action(action: str, player: Player, curr_loc: Location, world: World
     """
     if action == "look":
         print(curr_loc.long_desc)
-        
+
     elif action == "inventory":
         print("Inventory:")
         print(player.inventory)
-        
+
     elif action == 'money':
         print("Money:")
         print(player.money)
-        
+
     elif action == "score":
         print(f"Current score: {player.score}")
-        
+
     elif action == "clock":
         print(f"Remaining movements: {player.steps}")
-        
+
     elif action == "map":
         for row in world.map:
             print(row)
@@ -63,10 +63,10 @@ def do_menu_action(action: str, player: Player, curr_loc: Location, world: World
 def do_location_action(action: str, player: Player, curr_loc: Location, world: World):
     """executes location actions found within the menu
     """
-    if action == 'puzzle' and isinstance(location, SpecialLocation):
+    if action == 'puzzle' and isinstance(curr_loc, SpecialLocation):
         addition = curr_loc.do_puzzle()
         player.inventory += addition
-        
+
     elif action == 'search':
         for item in curr_loc.items_list:
             if item.currency_amount > 0:
@@ -74,15 +74,15 @@ def do_location_action(action: str, player: Player, curr_loc: Location, world: W
             else:
                 player.inventory.append(item)
             curr_loc.items_list.remove(item)
-                
+
             print(item.item_desc)
 
     elif action == "shop list":
         print("Shop List:")
         for item in curr_loc.items_list:
             print(f"{item.name}: ${item.price}")
-            
-    elif action[:4] == "buy " and isinstance(location, ShopLocation):
+
+    elif action[:4] == "buy " and isinstance(curr_loc, ShopLocation):
         curr_loc.do_buy(action[4:], player)
 
 def secret_item_endings(player: Player, items: list[Item]):
@@ -91,8 +91,8 @@ def secret_item_endings(player: Player, items: list[Item]):
     for item in player.inventory:
         if item.name == "Phone":
             pass # TODO
-        
-    
+
+
     #TODO: add anything else that needs adding, including other functions
 
 # Note: You may modify the code below as needed; the following starter template are just suggestions
@@ -139,34 +139,34 @@ if __name__ == "__main__":
                         print('\t' + option)
                     print("Location Actions: ")
                     location_actions = location.available_actions()
-                    if location_actions != []: 
+                    if location_actions != []:
                         for option in location_actions:
                             print('\t' + option)
                     else:
                         print("\tNone")
-                        
+
                 elif choice in menu:
                     do_menu_action(choice, p, location, w)
-                    
+
                 elif choice in location.available_actions():
                     do_location_action(choice, p, location, w)
-                    
+
                 elif choice in move_commands:
                     previous_x = p.x
                     previous_y = p.y
                     move_player(choice[3:], p)
                     p.steps -= 1
                     loc_change = True
-                    
+
                 else:
                     print("Invalid action. Try again.")
 
     if p.victory:
-        
-        
+
+
         p.score += p.steps
 
-        
+
         print("Congratulations! You have won the game!")
         print("Your final score is: " + str(p.score))
     else:
