@@ -24,23 +24,23 @@ from game_data import SpecialLocation, ShopLocation, World, Item, Location, Play
 # Note: You may add helper functions, classes, etc. here as needed
 
 
-def move_player(direction: str, p: Player) -> None:
+def move_player(direction: str, player: Player) -> None:
     """moves the player by changing the player's x and y coordinates
     """
     if direction == "east":
-        p.x += 1
+        player.x += 1
     elif direction == "south":
-        p.y += 1
+        player.y += 1
     elif direction == "north":
-        p.y -= 1
+        player.y -= 1
     elif direction == "west":
-        p.x -= 1
+        player.x -= 1
 
-def do_menu_action(action: str, player: Player, location: Location, world: World):
+def do_menu_action(action: str, player: Player, curr_loc: Location, world: World):
     """executes menu actions found within the menu
     """
     if action == "look":
-        print(location.long_desc)
+        print(curr_loc.long_desc)
         
     elif action == "inventory":
         print("Inventory:")
@@ -60,30 +60,30 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
         for row in world.map:
             print(row)
 
-def do_location_action(action: str, player: Player, location: Location, world: World):
+def do_location_action(action: str, player: Player, curr_loc: Location, world: World):
     """executes location actions found within the menu
     """
     if action == 'puzzle' and isinstance(location, SpecialLocation):
-        addition = location.do_puzzle()
-        p.inventory += addition
+        addition = curr_loc.do_puzzle()
+        player.inventory += addition
         
     elif action == 'search':
-        for item in location.items_list:
+        for item in curr_loc.items_list:
             if item.currency_amount > 0:
                 player.money += item.currency_amount
             else:
                 player.inventory.append(item)
-            location.items_list.remove(item)
+            curr_loc.items_list.remove(item)
                 
             print(item.item_desc)
 
     elif action == "shop list":
         print("Shop List:")
-        for item in location.items_list:
+        for item in curr_loc.items_list:
             print(f"{item.name}: ${item.price}")
             
     elif action[:4] == "buy " and isinstance(location, ShopLocation):
-        location.do_buy(action[4:], player)
+        curr_loc.do_buy(action[4:], player)
 
 def secret_item_endings(player: Player, items: list[Item]):
     """checks if the player has the items required for secret endings
