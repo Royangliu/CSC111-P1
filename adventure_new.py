@@ -37,7 +37,7 @@ def move_player(direction: str, p: Player) -> None:
         p.x -= 1
 
 def do_menu_action(action: str, player: Player, location: Location, world: World):
-    """executes actions found within the menu
+    """executes menu actions found within the menu
     """
     if action == "look":
         print(location.long_desc)
@@ -61,7 +61,7 @@ def do_menu_action(action: str, player: Player, location: Location, world: World
             print(row)
 
 def do_location_action(action: str, player: Player, location: Location, world: World):
-    """executes actions found within the menu
+    """executes location actions found within the menu
     """
     if action == 'puzzle' and isinstance(location, SpecialLocation):
         addition = location.do_puzzle()
