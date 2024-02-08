@@ -36,7 +36,7 @@ def move_player(direction: str, player: Player) -> None:
     elif direction == "west":
         player.x -= 1
 
-def do_menu_action(action: str, player: Player, curr_loc: Location, world: World):
+def do_menu_action(action: str, player: Player, curr_loc: Location, world: World) -> None:
     """executes menu actions found within the menu
     """
     if action == "look":
@@ -60,7 +60,7 @@ def do_menu_action(action: str, player: Player, curr_loc: Location, world: World
         for row in world.map:
             print(row)
 
-def do_location_action(action: str, player: Player, curr_loc: Location, world: World):
+def do_location_action(action: str, player: Player, curr_loc: Location, world: World) -> None:
     """executes location actions found within the menu
     """
     if action == 'puzzle' and isinstance(curr_loc, SpecialLocation):

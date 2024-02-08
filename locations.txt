@@ -1,12 +1,12 @@
 -1
-Block
+Block -1
 0
 That way is blocked.
 That way is blocked.
 END
 
 1
-Robarts Library
+Robarts Library 1
 0
 You are on the first floor of the Robarts Library. There is Sidney smith to the south and trinity college to the east.
 It's usually crowded at this time of the day, but today it's eerily quiet.
@@ -21,7 +21,7 @@ There are 5 sisters. Anne is reading a book, margaret is cooking, kate is playin
 END
 
 2
-Trinity College
+Trinity College 2
 0
 You are inside Trinity College, and there is Robarts to the west, Victoria College to the east, and Heart House to the south.
 You are inside Trinity College, one of the fancier colleges with with their iconic architecture, and even more iconic cults. 
@@ -30,7 +30,7 @@ There is Robarts to the west, Victoria College to the east, and Heart House to t
 END
 
 3
-Victoria College
+Victoria College 3
 0
 You are at Victoria College, more specifically, Old Vic. There is Trinity College to the west, and Queen's park to the south.
 The architechture and design is beautiful and historic. You look around and see some students setting up some poster for an event 
@@ -40,56 +40,56 @@ There is Trinity College to the west, and Queen's park to the south.
 END
 
 4
-Sidney Smith
+Sidney Smith 4
 0
 You are inside Sidney Smith. There is Robarts to the north, and heart house to the east. 
 You are inside of Sidney Smith. You look around and see the sidney smith commons looking rather empty, and wonder why. Your question is answered promptly once you notice the record breaking line at second cup. It seems as though every single available student in the building has lined up to get coffee at the same time. There is Robarts to the north, and heart house to the east. 
 END
 
 5
-Hart House
+Hart House 5
 0
 You are inside Hart House, the iconic UofT location dedicated to non-academic activities and facilities. There is Trinity College to your north, Queen's park to the east, University College to the south, and Sidney Smith to the west.
 You are inside Hart House, the iconic UofT location dedicated to non-academic activities and facilities. You see a few students in one room having a passionate debate about the future of cryptocurrency in the global economy. Seeing the gym in this place reminds you that it's been a while since you last worked out. There is Trinity College to your north, Queen's park to the east, University College to the south, and Sidney Smith to the west.
 END
 
 6
-Queen's Park
+Queen's Park 6
 0
 You are at Queens Park. There is Victoria College to the north, and heart house to the west.
 You are at Queens Park, a big park in Toronto, owned by the university, but leased to the city for a grand sum of 1 dollar per year. Not that it's negotiation time would be approaching any time soon with the lease term being 999 years. This park is a place many people relax at, pass through, and protest at. There is Victoria College to the north, and heart house to the west.
 END
 
 7
-University College
+University College 7
 0
 You are at University College, the original college of UofT. There is Heart House to the north, and University College to the south.
 You are at University College, the original college of UofT. The building, like many buildings at UofT, has an iconic and historic look. There are some students heading to and from classes, and some others heading to their residence. There is Heart House to the north, and University College to the south.
 END
 
 8
-Front Campus
+Front Campus 8
 0
 You are at front campus. There is University College to the noth, and Sandford Flemings to the south.
 You are at front campus. Remembering the under construction pit of dirt the place used to be, you feel a sense of happiness looking at how much nicer it is today with the field of green grass. There are students eating on the grass, some throwing frizbees, and some sketching the scene in front of them. There is University College to the noth, and Sandford Flemings to the south.
 END
 
 9
-Bahen
+Bahen 9
 0
 You are at the bahen building. There is Sandford Flemings to the east, and the bookstore to the south.
 You are at the bahen building, a hub for engineering, computer science, and math students. Towards the entrance, you see a poster promoting an AI conference taking part at 2:41 AM tomorrow. It certainly seems like a rather odd time for any kind of conference. You look ahead and see some student ambassadors for Fatuan holding one of their stalls for promotion. There is Sandford Flemings to the east, and the bookstore to the south.
 END
 
 10
-Sandford Flemings
+Sandford Flemings 10
 0
 You are inside the Sandford Flemings building - more specifically in the engineering pit. There is front campus to the north, and the Bahen Building to the west.
 You are inside the Sandford Flemings building - more specifically in the engineering pit. You look around to see the usual Skule™ asthetic, and general eng student department vibe. There is a mural of Godiva on one wall, and various other engineering mascots. You see hardhat cafe, and consider buying some snacks at a later time. There is front campus to the north, and the Bahen Building to the west.
 END
 
 11
-UofT Bookstore
+UofT Bookstore 11
 0
 You are at the bookstore
 ewjkhdiewhdxkehdx

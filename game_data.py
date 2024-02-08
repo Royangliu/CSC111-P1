@@ -205,7 +205,7 @@ class SpecialLocation(Location):
     puzzle: str
     puzzle_complete: bool
 
-    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str, answer: str, hint: str, success: str,  puzzle: str):
+    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str, answer: str, hint: str, success: str,  puzzle: str) -> None:
         # TODO FINISH ADDING INITIALIZATION AND INHERITANCE CODE
         Location.__init__(self, location_num, name, score, brief_desc, long_desc)
         self.answer = answer
@@ -254,7 +254,7 @@ class ShopLocation(Location):
     Instance Attributes:
         -
     """
-    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str):
+    def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str) -> None:
         # TODO
         Location.__init__(self, location_num, name, score, brief_desc, long_desc)
 
@@ -302,8 +302,7 @@ class World:
     current_location: Location
     locations_dict: dict[int, Location]
 
-    def __init__(self, map_data: TextIO, location_data: TextIO,
-                 items_data: TextIO) -> None:
+    def __init__(self, map_data: TextIO, location_data: TextIO, items_data: TextIO) -> None:
         """
         Initialize a new World for a text adventure game, based on the data in the given open files.
 
