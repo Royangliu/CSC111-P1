@@ -273,9 +273,11 @@ class ShopLocation(Location):
         """
         bought_item = False
         while not bought_item:
-            print("To leave the shop menu, enter: \'leave\'")
+            print("\nTo leave the shop menu, enter: \'leave\'")
             print("To view the items available, enter: \'shop list\'")
-            choice = input("What would you like to buy?: ")
+            choice = input("What would you like to buy?: ").lower()
+            print()
+            
             if choice == 'leave':
                 bought_item = True
             elif choice == 'shop list':
@@ -287,7 +289,6 @@ class ShopLocation(Location):
                     if choice == self.items_list[i].name and player.money >= self.items_list[i].price:
                         player.money -= self.items_list[i].price
                         player.inventory.append(self.items_list.pop(i))
-                        bought_item = True
                         print("Thank you for your purchase!")
                     elif choice == self.items_list[i].name and player.money < self.items_list[i].price:
                         print("Insufficient money; you are broke.")  

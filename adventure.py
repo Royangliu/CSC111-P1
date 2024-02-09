@@ -77,12 +77,7 @@ def do_location_action(action: str, player: Player, curr_loc: Location, world: W
 
             print(item.item_desc)
 
-    elif action == "shop list":
-        print("Shop List:")
-        for item in curr_loc.items_list:
-            print(f"{item.name}: ${item.price}")
-
-    elif action == "buy" and isinstance(curr_loc, ShopLocation):
+    elif action == "shop" and isinstance(curr_loc, ShopLocation):
         curr_loc.do_buy(player)
 
 def secret_item_endings(player: Player, items: list[Item]):
