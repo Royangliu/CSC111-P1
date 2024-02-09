@@ -4,22 +4,25 @@ $1 coin
 1
 5
 Befitting of the location's stature, the old stone walls you touched gave way to a secret 
-compartment; though, you do not question the reason for its existence as you found 1 $1 coin within the dustied box. 
+compartment; though, you do not question the reason for its existence as you found a coin within the dustied box. 
+You picked up 1 $1 coin.
 
 $1 coin
 6
 0
 1
 5
-You spot a squirrel holding a sparkling item. Throughing an acorn to its side, the squirrel drops the item to snatch
-for the snack. You picked up 1 $1 coin
+You spot a squirrel holding a sparkling item. Throughing an acorn to its side, the squirrel drops the item 
+to pounce for the snack. 
+You picked up 1 $1 coin.
 
+$1 coin
 8
 0
 1
 5
-$1 coin
-Upon the sun bleached grass, a sparkle catches your eyes. You found 1 $1 coin.
+Upon the sun bleached grass, a sparkle catches your eyes. 
+You picked up 1 $1 coin.
 
 magical pen ink eraser
 11
