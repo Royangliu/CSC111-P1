@@ -1,18 +1,18 @@
-6
+2
 0
 1
 $1 coin
 Befitting of the location's stature, the old stone walls you touched gave way to a secret 
 compartment; though, you do not question the reason for its existence as you found 1 $1 coin within the dustied box. 
 
-8
+6
 0
 1
 $1 coin
 You spot a squirrel holding a sparkling item. Throughing an acorn to its side, the squirrel drops the item to snatch
 for the snack. You picked up 1 $1 coin
 
-2
+8
 0
 1
 $1 coin
