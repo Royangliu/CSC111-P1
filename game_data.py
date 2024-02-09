@@ -339,7 +339,7 @@ class World:
         - # TODO
     """
     map: list[list[int]]
-    locations_dict: dict[int, Location]
+    locations_dict: dict[int, Location | SpecialLocation | ShopLocation]
 
     def __init__(self, map_data: TextIO, location_data: TextIO, items_data: TextIO) -> None:
         """
