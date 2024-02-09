@@ -63,6 +63,11 @@ class Item:
         self.score = score
         self.item_desc = description
 
+    def __str__(self) -> str:
+        """Returns a string representation of this item.
+        """
+        return self.name
+        
 
 class Player:
     """
