@@ -247,6 +247,7 @@ class SpecialLocation(Location):
             else:
                 print("Incorrect answer")
             response = input("\nEnter your answer: ")
+            print()
         return []
 
 
