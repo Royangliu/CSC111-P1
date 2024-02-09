@@ -288,6 +288,8 @@ class ShopLocation(Location):
                 for item in self.items_list:
                     print(f"{item.name}: ${item.price}")
             else:
+                item_found = False
+                
                 for i in range(len(self.items_list)):
                     if choice == self.items_list[i].name and player.money >= self.items_list[i].price:
                         player.money -= self.items_list[i].price
@@ -297,7 +299,7 @@ class ShopLocation(Location):
                     elif choice == self.items_list[i].name and player.money < self.items_list[i].price:
                         print("Insufficient money; you are broke.")  
                         
-            if not bought_item:
+            if not item_found:
                 print("Item not found.")
 
 
