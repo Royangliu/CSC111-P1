@@ -36,13 +36,14 @@ class Item:
         - start_postion is a valid position in the world map(turn this into code)
     """
     name: str
-    start_target: int
+    start_position: int
     price: int
     currency_amount: int
+    score: int
     item_desc: str
 
     def __init__(self, name: str, start: int, price: int,
-                 target_points: int, description: str) -> None:
+                 currency_amount: int, score: int, description: str) -> None:
         """Initialize a new item.
         """
 
@@ -58,7 +59,8 @@ class Item:
         self.name = name
         self.start_position = start
         self.price = price
-        self.currency_amount = target_points
+        self.currency_amount = currency_amount
+        self.score = score
         self.item_desc = description
 
 
@@ -288,8 +290,9 @@ class ShopLocation(Location):
                 for i in range(len(self.items_list)):
                     if choice == self.items_list[i].name and player.money >= self.items_list[i].price:
                         player.money -= self.items_list[i].price
+                        player.score += self.items_list[i].score
+                        print(self.items_list[i].item_desc)
                         player.inventory.append(self.items_list.pop(i))
-                        print("Thank you for your purchase!")
                     elif choice == self.items_list[i].name and player.money < self.items_list[i].price:
                         print("Insufficient money; you are broke.")  
                         
@@ -424,10 +427,11 @@ class World:
         # stops upon reaching the end of the file
         while line != '':
             # initiailizes attributes of the item
+            name = items_data.readline().strip()
             start_location = int(line)
             price = int(items_data.readline().strip())
-            drop_score = int(items_data.readline().strip())
-            name = items_data.readline().strip()
+            currency_value = int(items_data.readline().strip())
+            score = int(items_data.readline().strip())
 
             # initializes the description of the item
             line = items_data.readline().strip()
@@ -438,7 +442,7 @@ class World:
             item_desc = item_desc[:-1] # removes last '\n' character.
 
             # instanciates the item object and adds it to the starting location's items list
-            self.locations_dict[start_location].items_list.append(Item(name, start_location, price, drop_score, item_desc))
+            self.locations_dict[start_location].items_list.append(Item(name, start_location, price, currency_value, score, item_desc))
 
             line = items_data.readline().strip()
 

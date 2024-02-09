@@ -73,6 +73,7 @@ def do_location_action(action: str, player: Player, curr_loc: Location, world: W
                 player.money += item.currency_amount
             else:
                 player.inventory.append(item)
+            player.score += item.score
             curr_loc.items_list.remove(item)
 
             print(item.item_desc)

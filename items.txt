@@ -1,37 +1,45 @@
+$1 coin
 2
 0
 1
-$1 coin
+5
 Befitting of the location's stature, the old stone walls you touched gave way to a secret 
 compartment; though, you do not question the reason for its existence as you found 1 $1 coin within the dustied box. 
 
+$1 coin
 6
 0
 1
-$1 coin
+5
 You spot a squirrel holding a sparkling item. Throughing an acorn to its side, the squirrel drops the item to snatch
 for the snack. You picked up 1 $1 coin
 
 8
 0
 1
+5
 $1 coin
 Upon the sun bleached grass, a sparkle catches your eyes. You found 1 $1 coin.
 
+magical pen ink eraser
 11
 3
 0
-magical pen ink eraser
-You bought 
+15
+Sparkling with , this little gadget will allow you do erase all problems in your life!
+You got a magical pen ink eraser.
 
 11
 1
 0
+1
 cheap answer giving airpods
 The dark orifices have an ominous aura... Like a goblin tempting you.
+You got cheap answer giving airpods.
 
+t-card
 1
 0
 0
-t-card
+20
 You picked up your t-card

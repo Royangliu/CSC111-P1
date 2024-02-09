@@ -1,9 +1,10 @@
 item format:
 
+name
 location_num
 price (default = 0)
 currency ammount
-name
+score amount
 pick description
 
 
