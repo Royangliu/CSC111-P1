@@ -298,9 +298,8 @@ class ShopLocation(Location):
                         player.inventory.append(self.items_list.pop(i))
                     elif choice == self.items_list[i].name and player.money < self.items_list[i].price:
                         print("Insufficient money; you are broke.")  
-                        
-            if not item_found:
-                print("Item not found.")
+                if not item_found:
+                    print("Item not found.")
 
 
 class World:
