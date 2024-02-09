@@ -427,8 +427,8 @@ class World:
         # stops upon reaching the end of the file
         while line != '':
             # initiailizes attributes of the item
-            name = items_data.readline().strip()
-            start_location = int(line)
+            name = line
+            start_location = int(items_data.readline().strip())
             price = int(items_data.readline().strip())
             currency_value = int(items_data.readline().strip())
             score = int(items_data.readline().strip())
