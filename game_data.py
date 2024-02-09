@@ -232,9 +232,9 @@ class SpecialLocation(Location):
         If they succeed, give them the appropriate item.
         It also allows for hints to be given, or the appropriate reponse to be given if they fail.
         """
-        print('Puzzle/Riddle:\n')
+        print('Puzzle/Riddle:')
         print(self.puzzle)
-        print("Other Actions: \'leave\', \'hint\'")
+        print("\nOther Actions: \'leave\', \'hint\'")
         response = input("Enter your answer: ")
         print()
         while response != 'leave':
@@ -246,7 +246,7 @@ class SpecialLocation(Location):
                 print(self.hint)
             else:
                 print("Incorrect answer")
-            response = input("Enter your answer: ")
+            response = input("\nEnter your answer: ")
         return []
 
 
@@ -274,10 +274,11 @@ class ShopLocation(Location):
         """Handels the buying of an item.
         """
         bought_item = False
+
+        print("To leave the shop menu, enter: \'leave\'")
+        print("To view the items available, enter: \'shop list\'")
         while not bought_item:
-            print("\nTo leave the shop menu, enter: \'leave\'")
-            print("To view the items available, enter: \'shop list\'")
-            choice = input("What would you like to buy?: ").lower()
+            choice = input("\nWhat would you like to buy?: ").lower()
             print()
             
             if choice == 'leave':
