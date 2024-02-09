@@ -190,14 +190,14 @@ class SpecialLocation(Location):
         - score: The score the player gets upon entering the location for the first time
         - brief_description: A short description of the location provided every time a player vists
         - long_description: A longer description of the location (stated only on the first visit to the location)
-        - has_visited: A boolean value that indicates whether the player has visited this location
- before
+        - has_visited: A boolean value that indicates whether the player has visited this location before
         - items_list: A list of all items located at this location
         - answer: The string representing the answer to the puzzle
         - hint: A string representing a hint to the puzzle
         - success: A string representing the message to be displayed when the player solves the puzzle
         - puzzle: A string representing the actual puzzle
         - puzzle_complete: A boolean value indicating
+        - puzzle_prize: A list of all items that the player gets when the puzzle is solved
 
     """
     #TODO THERE IS STUFF THAT NEEDS TO BE FINISHED HERE
@@ -206,8 +206,13 @@ class SpecialLocation(Location):
     success: str
     puzzle: str
     puzzle_complete: bool
+    puzzle_prize: list[Item]
 
     def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str, answer: str, hint: str, success: str,  puzzle: str) -> None:
+        """Initializes a special location. The SpecialLocation contains all the attributes in a normal location, as well as
+        attributes for a riddle puzzle.
+        """
+        
         # TODO FINISH ADDING INITIALIZATION AND INHERITANCE CODE
         Location.__init__(self, location_num, name, score, brief_desc, long_desc)
         self.answer = answer
@@ -215,6 +220,7 @@ class SpecialLocation(Location):
         self.success = success
         self.puzzle = puzzle
         self.puzzle_complete = False
+        puzzle_prize = []
 
     def available_actions(self) -> list[str]:
         """
@@ -232,41 +238,50 @@ class SpecialLocation(Location):
         If they succeed, give them the appropriate item.
         It also allows for hints to be given, or the appropriate reponse to be given if they fail.
         """
+        puzzle_items = []
+        
         print('Puzzle/Riddle:')
         print(self.puzzle)
         print("\nOther Actions: \'leave\', \'hint\'")
-        response = input("Enter your answer: ")
-        print()
-        while response != 'leave':
+
+        in_puzzle = True
+        while in_puzzle:
+            response = input("Enter your answer: ")
+            print()
             if response == self.answer:
-                #TODO: add code to give item to player and change if puzzle is available
                 print(self.success)
-                return self.items_list
+                puzzle_items = self.puzzle_prize
+                self.puzzle_complete = True
+                self.puzzle_prize = []
+                in_puzzle = False
             elif response == 'hint':
                 print(self.hint)
+            elif response == 'leave':
+                in_puzzle = False
             else:
                 print("Incorrect answer")
-            response = input("\nEnter your answer: ")
-            print()
-        return []
+
+        return puzzle_items
 
 
 class ShopLocation(Location):
-    """A location subclass that contains a shop. Items stored in this class indicates the items that can be bought.
+    """A Location subclass that contains a shop. Items stored in items_list of the superclass indicate the items that can be bought.
 
     Instance Attributes:
-        -
+        - shop_list: A list of all items that can be bought at the shop.
     """
+    shop_list: list[Item] = []
+    
     def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str) -> None:
-        # TODO
+        """Initializes a new shop location. 
+        """
         Location.__init__(self, location_num, name, score, brief_desc, long_desc)
 
     def available_actions(self) -> list[str]:
-        """
-        Return the available actions in this location.
+        """Return the available actions in this location.
         """
         actions = []
-        if self.items_list:
+        if self.shop_list:
             actions.append("shop")
 
         return actions
@@ -279,27 +294,28 @@ class ShopLocation(Location):
         print("To leave the shop menu, enter: \'leave\'")
         print("To view the items available, enter: \'shop list\'")
         while not bought_item:
-            choice = input("\nWhat would you like to buy?: ").lower()
+            choice = input("\nWhat would you like to buy?: ")
             print()
             
             if choice == 'leave':
                 bought_item = True
             elif choice == 'shop list':
                 print("Shop List:")
-                for item in self.items_list:
+                for item in self.shop_list:
                     print(f"{item.name}: ${item.price}")
             else:
                 item_found = False
                 
-                for i in range(len(self.items_list)):
-                    if choice == self.items_list[i].name and player.money >= self.items_list[i].price:
-                        print(self.items_list[i].item_desc)
-                        player.money -= self.items_list[i].price
-                        player.score += self.items_list[i].score
-                        player.inventory.append(self.items_list.pop(i))
+                for i in range(len(self.shop_list)):
+                    if choice == self.shop_list[i].name and player.money >= self.shop_list[i].price:
+                        print(self.shop_list[i].item_desc)
+                        player.money -= self.shop_list[i].price
+                        player.score += self.shop_list[i].score
+                        player.inventory.append(self.shop_list.pop(i))
                         item_found = True
-                    elif choice == self.items_list[i].name and player.money < self.items_list[i].price:
-                        print("Insufficient money; you are broke.")  
+                    elif choice == self.shop_list[i].name and player.money < self.shop_list[i].price:
+                        print("Insufficient money; you are broke.")
+                        item_found = True
                 if not item_found:
                     print("Item not found.")
 
@@ -309,8 +325,7 @@ class World:
 
     Instance Attributes:
         - map: a nested list representation of this world's map
-        - current_location: the location that the player is currently at
-        - locations_dict: dictionary of all locations
+        - locations_dict: dictionary of all locations. Each key is the location's number and its item is the corresponding location object
         - # TODO add more instance attributes as needed; do NOT remove the map attribute
         -
 
@@ -318,7 +333,6 @@ class World:
         - # TODO
     """
     map: list[list[int]]
-    current_location: Location
     locations_dict: dict[int, Location]
 
     def __init__(self, map_data: TextIO, location_data: TextIO, items_data: TextIO) -> None:
@@ -360,8 +374,8 @@ class World:
 
         Return this list representation of the map.
         """
-
         curr_map = []
+        
         for line in map_data:
             row = line.split()
             curr_map.append([int(x) for x in row])
@@ -372,9 +386,11 @@ class World:
 
     # TODO: Add methods for loading location data and item data (see note above).
     def load_locations(self, location_data: TextIO) -> dict[int, Location]:
-        """
-        Returns a dictionary of locations from the given open file location_data. A key in the dictionary is
+        """Returns a dictionary of locations from the given open file location_data. A key in the dictionary is
         the location's number, and the key's item is the corresponding location object.
+
+        Preconditions:
+            - 
         """
         curr_dict = {}
 
@@ -392,12 +408,12 @@ class World:
             line = location_data.readline().strip()
             long_desc = ''
             while line != 'END' and line != 'SPECIAL' and line != 'SHOP':
-                long_desc += line + '\n'
-                line = location_data.readline().strip()
+                long_desc += line
+                line = location_data.readline()
 
             long_desc = long_desc[:-1] # removes last '\n' character.
 
-            # instanciates the location object depending on if it is a special location or not
+            # instanciates the location object depending on the type specified in the locations data file
             if line == 'SPECIAL':
                 # initializes puzzle attributes in the location
                 code = location_data.readline().strip()
@@ -408,8 +424,8 @@ class World:
                 line = location_data.readline().strip()
                 puzzle_desc = ''
                 while line != 'END':
-                    puzzle_desc += line + '\n'
-                    line = location_data.readline().strip()
+                    puzzle_desc += line
+                    line = location_data.readline()
                 puzzle_desc = puzzle_desc[:-1] # removes last '\n' character.
 
                 curr_dict[num] = SpecialLocation(num, name, score, brief_desc, long_desc, code, hint, success, puzzle_desc)
@@ -436,7 +452,8 @@ class World:
             price = int(items_data.readline().strip())
             currency_value = int(items_data.readline().strip())
             score = int(items_data.readline().strip())
-
+            type = items_data.readline().strip()
+            
             # initializes the description of the item
             line = items_data.readline().strip()
             item_desc = ''
@@ -446,7 +463,12 @@ class World:
             item_desc = item_desc[:-1] # removes last '\n' character.
 
             # instanciates the item object and adds it to the starting location's items list
-            self.locations_dict[start_location].items_list.append(Item(name, start_location, price, currency_value, score, item_desc))
+            if type == 'PICK':
+                self.locations_dict[start_location].items_list.append(Item(name, start_location, price, currency_value, score, item_desc))
+            elif type == 'PUZZLE' and isinstance(self.locations_dict[start_location], SpecialLocation):
+                self.locations_dict[start_location].puzzle_prize.append(Item(name, start_location, price, currency_value, score, item_desc))
+            elif type == 'SHOP' and isinstance(self.locations_dict[start_location], ShopLocation):
+                self.locations_dict[start_location].shop_list.append(Item(name, start_location, price, currency_value, score, item_desc))
 
             line = items_data.readline().strip()
 
@@ -456,7 +478,7 @@ class World:
          that position. Otherwise, return None. (Remember, locations represented by the number -1 on the map should
          return None.)
         """
-        if x < 0 or y < 0 or x > len(self.map[y]) - 1 or y > len(self.map) - 1 or self.map[y][x] == -1:
+        if x < 0 or y < 0 or x >= len(self.map[y]) or y >= len(self.map) or self.map[y][x] == -1:
             return None
         else:
             return self.locations_dict[self.map[y][x]]
