@@ -220,7 +220,7 @@ class SpecialLocation(Location):
         self.success = success
         self.puzzle = puzzle
         self.puzzle_complete = False
-        puzzle_prize = []
+        self.puzzle_prize = []
 
     def available_actions(self) -> list[str]:
         """
@@ -270,12 +270,13 @@ class ShopLocation(Location):
     Instance Attributes:
         - shop_list: A list of all items that can be bought at the shop.
     """
-    shop_list: list[Item] = []
+    shop_list: list[Item]
     
     def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str) -> None:
         """Initializes a new shop location. 
         """
         Location.__init__(self, location_num, name, score, brief_desc, long_desc)
+        self.shop_list = []
 
     def available_actions(self) -> list[str]:
         """Return the available actions in this location.
