@@ -37,6 +37,11 @@ The architechture and design is beautiful and historic. You look around and see 
 coming up, and some other students heading to a class. You glance over at caffiends, and see that they are having a \'2 for 1\' sale, 
 offering 2 drinks for the price of 1, and decide that you will buy yourself some nice drinks aftefr your exam. 
 There is Trinity College to the west, and Queen's park to the south.
+SPECIAL
+answer
+HINT: 
+Success
+There are 5 sisters. Anne is reading a book, margaret is cooking, kate is playing chess, and marie is doing laundry. What is the 5th sister doing?
 END
 
 4

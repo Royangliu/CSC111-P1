@@ -21,11 +21,23 @@ Upon the sun bleached grass, a sparkle catches your eyes. You found 1 $1 coin.
 11
 3
 0
-Magical pen ink eraser
+magical pen ink eraser
 You bought 
 
 11
 1
 0
-Cheap answer giving airpods
+cheap answer giving airpods
 The dark orifices have an ominous aura... Like a goblin tempting you.
+
+1
+0
+0
+t-card
+You picked up your t-card
+
+location_num
+price (default = 0)
+currency ammount
+name
+pick description
