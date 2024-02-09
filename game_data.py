@@ -264,26 +264,34 @@ class ShopLocation(Location):
         """
         actions = []
         if self.items_list:
-            actions.append("buy")
-            actions.append("shop list")
+            actions.append("shop")
 
         return actions
 
-    def do_buy(self, item_name: str, player: Player) -> None:
+    def do_buy(self, player: Player) -> None:
         """Handels the buying of an item.
         """
         bought_item = False
-        if item_name == '':
-            print("To buy, enter: \'buy [item name]\'")
-        else:
-            for i in range(len(self.items_list)):
-                if item_name == self.items_list[i].name and player.money >= self.items_list[i].price:
-                    player.money -= self.items_list[i].price
-                    player.inventory.append(self.items_list.pop(i))
-                    bought_item = True
-                    print("Thank you for your purchase!")
-                elif item_name == "buy " + self.items_list[i].name and player.money < self.items_list[i].price:
-                    print("Insufficient money; you are broke.")
+        while not bought_item:
+            print("To leave the shop menu, enter: \'leave\'")
+            print("To view the items available, enter: \'shop list\'")
+            choice = input("What would you like to buy?: ")
+            if choice == 'leave':
+                bought_item = True
+            elif choice == 'shop list':
+                print("Shop List:")
+                for item in self.items_list:
+                    print(f"{item.name}: ${item.price}")
+            else:
+                for i in range(len(self.items_list)):
+                    if choice == self.items_list[i].name and player.money >= self.items_list[i].price:
+                        player.money -= self.items_list[i].price
+                        player.inventory.append(self.items_list.pop(i))
+                        bought_item = True
+                        print("Thank you for your purchase!")
+                    elif choice == self.items_list[i].name and player.money < self.items_list[i].price:
+                        print("Insufficient money; you are broke.")  
+                        
             if not bought_item:
                 print("Item not found.")
 
