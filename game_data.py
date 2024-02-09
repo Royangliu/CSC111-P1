@@ -292,10 +292,11 @@ class ShopLocation(Location):
                 
                 for i in range(len(self.items_list)):
                     if choice == self.items_list[i].name and player.money >= self.items_list[i].price:
+                        print(self.items_list[i].item_desc)
                         player.money -= self.items_list[i].price
                         player.score += self.items_list[i].score
-                        print(self.items_list[i].item_desc)
                         player.inventory.append(self.items_list.pop(i))
+                        item_found = True
                     elif choice == self.items_list[i].name and player.money < self.items_list[i].price:
                         print("Insufficient money; you are broke.")  
                 if not item_found:
