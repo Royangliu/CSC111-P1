@@ -44,7 +44,7 @@ def do_menu_action(action: str, player: Player, curr_loc: Location, world: World
 
     elif action == "inventory":
         print("Inventory:")
-        print(player.inventory)
+        print([item.name for item in player.inventory])
 
     elif action == 'money':
         print("Money:")
