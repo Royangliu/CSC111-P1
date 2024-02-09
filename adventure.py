@@ -48,7 +48,7 @@ def do_menu_action(action: str, player: Player, curr_loc: Location, world: World
 
     elif action == 'money':
         print("Money:")
-        print(player.money)
+        print("$" + str(player.money))
 
     elif action == "score":
         print(f"Current score: {player.score}")
@@ -82,7 +82,7 @@ def do_location_action(action: str, player: Player, curr_loc: Location, world: W
         for item in curr_loc.items_list:
             print(f"{item.name}: ${item.price}")
 
-    elif action[:4] == "buy " and isinstance(curr_loc, ShopLocation):
+    elif action[:3] == "buy" and isinstance(curr_loc, ShopLocation):
         curr_loc.do_buy(action[4:], player)
 
 def secret_item_endings(player: Player, items: list[Item]):

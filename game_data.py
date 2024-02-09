@@ -264,25 +264,28 @@ class ShopLocation(Location):
         """
         actions = []
         if self.items_list:
-            actions.append("buy [item]")
+            actions.append("buy")
             actions.append("shop list")
 
         return actions
 
-    def do_buy(self, item_name: str, player: Player):
+    def do_buy(self, item_name: str, player: Player) -> None:
         """Handels the buying of an item.
         """
         bought_item = False
-        for i in range(len(self.items_list)):
-            if item_name == self.items_list[i].name and player.money >= self.items_list[i].price:
-                player.money -= self.items_list[i].price
-                player.inventory.append(self.items_list.pop(i))
-                bought_item = True
-                print("Thank you for your purchase!")
-            elif item_name == "buy " + self.items_list[i].name and player.money < self.items_list[i].price:
-                print("Insufficient money; you are broke.")
-        if not bought_item:
-            print("Item not found.")
+        if item_name == '':
+            print("To buy, enter: \'buy [item name]\'")
+        else:
+            for i in range(len(self.items_list)):
+                if item_name == self.items_list[i].name and player.money >= self.items_list[i].price:
+                    player.money -= self.items_list[i].price
+                    player.inventory.append(self.items_list.pop(i))
+                    bought_item = True
+                    print("Thank you for your purchase!")
+                elif item_name == "buy " + self.items_list[i].name and player.money < self.items_list[i].price:
+                    print("Insufficient money; you are broke.")
+            if not bought_item:
+                print("Item not found.")
 
 
 class World:

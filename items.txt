@@ -35,9 +35,3 @@ The dark orifices have an ominous aura... Like a goblin tempting you.
 0
 t-card
 You picked up your t-card
-
-location_num
-price (default = 0)
-currency ammount
-name
-pick description
