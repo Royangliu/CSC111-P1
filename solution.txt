@@ -12,7 +12,6 @@ puzzle
 inventory
 score
 go west
-score
 go south
 score
 go south

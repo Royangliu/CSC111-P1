@@ -40,7 +40,7 @@
  
 \item Alternative Endings
 	\begin{itemize}
-	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): In our game, we have alternative endings as per the extra items the player can acquire during gameplay. These include the 'lucky sharp pencil' and 'lucky eraser' for the good ending, and the 'cheap answer giving airpods' for the bad ending.
+	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): In our game, we have alternative endings as per the extra items the player can acquire during gameplay. These include the 'lucky sharp pencil' and 'lucky eraser' for the good ending, and the 'cheap answer giving airpods' for the bad ending. It should be noted that should a player have all three of the alternative ending items, ('cheap answer giving airpods', 'lucky sharp pencil' and 'lucky eraser' ), the bad ending will take place as a result of the cheating from the airpods as opposed to the good ending from the lucky pencil and eraser.
 	\item Complexity level (choose from low/medium/high): medium
 	\item  We rated this medium because it involved adding conditions after the main game play loop ended that checked if the player's inventory contained the items for the alternative endings. Part of the planning for the endings included implementing extra items, such as the 'milk tea' and puzzles, such as the shop and the fetch quest.
 	\end{itemize}
@@ -71,14 +71,24 @@ If you have any extra \texttt{gameplay\#.txt} files, describe them below.
 
 \begin{enumerate}
 
+\item solution.txt
+\begin{itemize}
+\item Adding this clarification to distiguish between this victory ending, and the other best victory ending(gameplay1). Shows gameplay required for the player to achieve the good ending where you win the game by getting all the required items before the steps run out, and get a B on the exam.
+\end{itemize}
+
+\item gameover.txt
+\begin{itemize}
+\item Adding this clarification to distiguish between this bad ending, and the other bad ending(gameplay2). Shows gameplay required for the player to achieve the bad ending where you fail to get the items required for the test before running out of steps, and miss the exam.
+\end{itemize}
+
 \item gameplay1.txt
 	\begin{itemize}
-	\item Shows gameplay required for the player to achieve the best ending. This includes getting the 'lucky eraser' and 'lucky sharp pencil' along with the items required to start the exam.
+	\item Shows gameplay required for the player to achieve the best ending. This includes getting the 'lucky eraser' and 'lucky sharp pencil' along with the items required to start the exam, resulting in the best exam score.
 	\end{itemize}
 
 \item gameplay2.txt
 	\begin{itemize}
-	\item Shows gameplay required for the player to achieve the bad exam ending. This is achieved if the player gets the 'cheap answer giving airpods' along with the other items to start the exam.
+	\item Shows gameplay required for the player to achieve the bad exam ending. This is achieved if the player gets the 'cheap answer giving airpods' along with the other items to start the exam, resulting in teh player getting caught for cheating. 
 	\end{itemize}
 
 \end{enumerate}

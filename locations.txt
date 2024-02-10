@@ -41,7 +41,7 @@ Victoria College 3
 5
 You are at Victoria College, more specifically, Old Vic. There is Trinity College to the west, and Queen's park to the south.
 The architechture and design is beautiful and historic. You look around and see some students setting up some poster for an event
-coming up, and some other students heading to a class. You glance over at caffiends, and see that they are having a \'2 for 1\' sale,
+coming up, and some other students heading to a class. You glance over at caffiends, and see that they are having a '2 for 1' sale,
 offering 2 drinks for the price of 1, and decide that you will buy yourself some nice drinks aftefr your exam.
 ---
 You might have left one of your items in a classroom here.
@@ -144,12 +144,12 @@ SPECIAL
 CANADA
 HINT: what STANDS OUT to you about this message?
 You entered the word, and in the safe you found your cheat sheet!
-You see a safe on a table with a note on top of it, and the words \'CHEAT SHEET\' written
+You see a safe on a table with a note on top of it, and the words 'CHEAT SHEET' written
 on the safe with a sharpie. Some bored engineering student has pulled a prank on you.
 The note reads as follows:
-\'we have a very interesting Challenge for you.
+'we have a very interesting Challenge for you.
 All you Need to do is give the Answer.
-Do so by figuring out the one-word answer And entering it below. \''
+Do so by figuring out the one-word answer And entering it below. '
 END
 
 11

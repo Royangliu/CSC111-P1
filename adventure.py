@@ -223,6 +223,7 @@ if __name__ == "__main__":
 
     # Gives the player different endings depending on certain items in their inventory
     elif p.victory:
+        # adds extra points depending on remaining steps and money
         p.score += p.steps * 2
         p.score += p.money * 5
 
