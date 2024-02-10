@@ -21,6 +21,7 @@ This file is Copyright (c) 2024 CSC111 Teaching Team
 # Note: You may add in other import statements here as needed
 from game_data import SpecialLocation, ShopLocation, World, Item, Location, Player
 
+
 # Note: You may add helper functions, classes, etc. here as needed
 
 
@@ -97,14 +98,15 @@ def secret_item_endings(player: Player, items: list[Item]):
     """
     for item in player.inventory:
         if item.name == "Phone":
-            pass # TODO
+            pass  # TODO
 
 
 if __name__ == "__main__":
     with open('map.txt') as map_file, open('locations.txt') as location_file, open('items.txt') as item_file:
         w = World(map_file, location_file, item_file)
 
-    p = Player(0, 0, 30)  # set starting location of player and steps amount; you may change the x, y coordinates here as appropriate
+    p = Player(0, 0,
+               30)  # set starting location of player and steps amount; you may change the x, y coordinates here as appropriate
     menu = ["look", "inventory", "money", "score", "map", "clock", "quit", "go [direction]"]
     directions = ["north", "east", "south", "west"]
     move_commands = {'go ' + d for d in directions}
@@ -121,69 +123,61 @@ if __name__ == "__main__":
     while not p.victory and p.steps > 0:
         location = w.get_location(p.x, p.y)
 
-        if location is None:
-            p.x = previous_x
-            p.y = previous_y
-            p.steps += 1
-            print("Invalid movement input. Try again.")
+        # Print location description
+        print(location.location_name)
+        if location.has_visited:
+            print(location.brief_desc)
         else:
-            print(location.location_name)
-            if location.has_visited:
-                print(location.brief_desc)
-            else:
-                print(location.long_desc)
-                location.has_visited = True
+            print(location.long_desc)
+            location.has_visited = True
 
-            loc_change = False
-            while not loc_change:
-                print("\nWhat to do? Type \'[menu]\' for the list of actions.")
-                choice = input("Enter action: ").lower()
-                print()
+        # Loops for player actions at a location until their location is changed
+        loc_change = False
+        while not loc_change:
 
-                if choice == "[menu]":
-                    print("Menu Options: ")
-                    for option in menu:
+            print("\nWhat to do? Type \'[menu]\' for the list of actions.")
+            choice = input("Enter action: ").lower()
+            print()
+
+            # Prints all available actions
+            if choice == "[menu]":
+                print("Menu Options: ")
+                for option in menu:
+                    print('\t' + option)
+                print("Movement Directions: ")
+                for option in directions:
+                    print('\t' + option)
+                print("Location Actions: ")
+                location_actions = location.available_actions()
+                if location_actions:
+                    for option in location_actions:
                         print('\t' + option)
-                    print("Movement Directions: ")
-                    for option in directions:
-                        print('\t' + option)
-                    print("Location Actions: ")
-                    location_actions = location.available_actions()
-                    if location_actions:
-                        for option in location_actions:
-                            print('\t' + option)
-                    else:
-                        print("\tNone")
-
-                elif choice in menu:
-                    do_menu_action(choice, p, location, w)
-
-                elif choice in location.available_actions():
-                    do_location_action(choice, p, location)
-
-                elif choice in move_commands:
-                    if move_player(choice[3:], p, w):
-                        p.steps -= 1
-                        loc_change = True
-                    else:
-                        print("Invalid movement input. Try again.")
-
                 else:
-                    print("Invalid action. Try again.")
+                    print("\tNone")
+
+            # Handles all actions through helper functions above according to input
+            elif choice in menu:
+                do_menu_action(choice, p, location, w)
+            elif choice in location.available_actions():
+                do_location_action(choice, p, location)
+            elif choice in move_commands:
+                if move_player(choice[3:], p, w):
+                    p.steps -= 1
+                    loc_change = True
+                else:
+                    print("Invalid movement input. Try again.")
+            else:
+                print("Invalid action. Try again.")
 
     if p.victory:
 
-
         p.score += p.steps
-
 
         print("Congratulations! You have won the game!")
         print("Your final score is: " + str(p.score))
     else:
         print("You have run out of steps. Game over.")
         print(f"Score: {p.score}")
-
-
 
         # TODO: CALL A FUNCTION HERE TO HANDLE WHAT HAPPENS UPON THE PLAYER'S CHOICE
         #  REMEMBER: the location = w.get_location(p.x, p.y) at the top of this loop will update the location if
