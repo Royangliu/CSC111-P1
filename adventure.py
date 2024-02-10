@@ -36,6 +36,7 @@ def move_player(direction: str, player: Player) -> None:
     elif direction == "west":
         player.x -= 1
 
+
 def do_menu_action(action: str, player: Player, curr_loc: Location, world: World) -> None:
     """executes menu actions found within the menu
     """
@@ -60,7 +61,8 @@ def do_menu_action(action: str, player: Player, curr_loc: Location, world: World
         for row in world.map:
             print(row)
 
-def do_location_action(action: str, player: Player, curr_loc: Location, world: World) -> None:
+
+def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
     """executes location actions found within the menu
     """
     if action == 'puzzle' and isinstance(curr_loc, SpecialLocation):
@@ -80,6 +82,7 @@ def do_location_action(action: str, player: Player, curr_loc: Location, world: W
 
     elif action == "shop" and isinstance(curr_loc, ShopLocation):
         curr_loc.do_buy(player)
+
 
 def secret_item_endings(player: Player, items: list[Item]):
     """checks if the player has the items required for secret endings
@@ -103,11 +106,11 @@ if __name__ == "__main__":
 
     previous_x = p.x
     previous_y = p.y
-    
+
     intro = open('intro.txt')
     print(intro.read())
     intro.close()
-    
+
     print("To win, have all three items in your inventory and go to the exam hall (num 12 on the map)")
 
     while not p.victory and p.steps > 0:
@@ -119,7 +122,7 @@ if __name__ == "__main__":
             p.steps += 1
             print("Invalid movement input. Try again.")
         else:
-            print(location.location_name) #delete after testing
+            print(location.location_name)
             if location.has_visited:
                 print(location.brief_desc)
             else:
@@ -132,7 +135,7 @@ if __name__ == "__main__":
                 choice = input("Enter action: ").lower()
                 print()
 
-                if choice == "[menu]": #remove square brackets?
+                if choice == "[menu]":
                     print("Menu Options: ")
                     for option in menu:
                         print('\t' + option)
@@ -141,7 +144,7 @@ if __name__ == "__main__":
                         print('\t' + option)
                     print("Location Actions: ")
                     location_actions = location.available_actions()
-                    if location_actions != []:
+                    if location_actions:
                         for option in location_actions:
                             print('\t' + option)
                     else:
@@ -151,7 +154,7 @@ if __name__ == "__main__":
                     do_menu_action(choice, p, location, w)
 
                 elif choice in location.available_actions():
-                    do_location_action(choice, p, location, w)
+                    do_location_action(choice, p, location)
 
                 elif choice in move_commands:
                     previous_x = p.x
