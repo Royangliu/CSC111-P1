@@ -119,6 +119,8 @@ class Location:
         - items_list: A list of all items located at this location
 
     Representation Invariants:
+        - self.location_num >= 0
+        - self.score >= 0
         - # TODO
     """
     location_num: int
@@ -200,7 +202,6 @@ class SpecialLocation(Location):
         - puzzle_prize: A list of all items that the player gets when the puzzle is solved
 
     """
-    # TODO THERE IS STUFF THAT NEEDS TO BE FINISHED HERE
     answer: str
     hint: str
     success: str
@@ -213,8 +214,6 @@ class SpecialLocation(Location):
         """Initializes a special location. The SpecialLocation contains all the attributes in a normal location,
         as well as attributes for a riddle puzzle.
         """
-
-        # TODO FINISH ADDING INITIALIZATION AND INHERITANCE CODE
         Location.__init__(self, location_num, name, score, brief_desc, long_desc)
         self.answer = answer
         self.hint = hint
@@ -271,6 +270,11 @@ class ShopLocation(Location):
 
     Instance Attributes:
         - shop_list: A list of all items that can be bought at the shop.
+
+    Representation Invariants:
+        - self.location_num >= 0
+        - self.score >= 0
+        # TODO
     """
     shop_list: list[Item]
 
