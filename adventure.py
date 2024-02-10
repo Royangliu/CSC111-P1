@@ -176,7 +176,7 @@ if __name__ == "__main__":
         while not loc_change:
 
             print("\nWhat to do? Type \'[menu]\' for the list of actions.")
-            choice = input("Enter action: ").lower()
+            choice = input("Enter action: ")
             print()
 
             location_actions = location.available_actions()
