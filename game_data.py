@@ -487,7 +487,7 @@ class World:
             item_desc = item_desc[:-1]  # removes last '\n' character.
 
             # instanciates the item object and adds it to the starting location's items list
-            if item_type == 'PICK':
+            if item_type == 'TAKE':
                 self.locations_dict[start_location].items_list.append(Item(name, start_location, price,
                                                                            currency_value, score, item_desc))
 

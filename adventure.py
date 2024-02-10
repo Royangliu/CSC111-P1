@@ -18,11 +18,7 @@ please consult our Course Syllabus.
 This file is Copyright (c) 2024 CSC111 Teaching Team
 """
 
-# Note: You may add in other import statements here as needed
 from game_data import SpecialLocation, ShopLocation, World, Item, Location, Player
-
-
-# Note: You may add helper functions, classes, etc. here as needed
 
 
 def move_player(direction: str, player: Player, world: World) -> bool:
@@ -30,7 +26,7 @@ def move_player(direction: str, player: Player, world: World) -> bool:
     Returns True or False depending on if the player was successfully moved.
 
     Preconditions:
-        - # TODO
+        - TODO
     """
     temp_y, temp_x = player.y, player.x
 
@@ -96,8 +92,22 @@ def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
     elif action == "shop" and isinstance(curr_loc, ShopLocation):
         curr_loc.do_buy(player)
 
+    elif action == "drop milk tea" and curr_loc.location_num == 4:
+        for item in player.inventory:
+            if item.name == "milk tea":
+                player.inventory.remove(item)
+        eraser = Item("lucky eraser", curr_loc.location_num, 0, 0, 15, "", "")
+        player.inventory.append(eraser)
+        print("Thank you so much for the caffeine boost! The line was so long!")
+        print("I know this isn't much but you can have my lucky eraser for your troubles.")
+        print("You got 1 lucky eraser.")
 
-def secret_item_endings(player: Player, items: list[Item]):
+    
+
+    elif action == "start exam":
+        
+
+def secret_item_endings(player: Player, good_items: list[str], bad_items: list[str]):
     """checks if the player has the items required for secret endings
     """
     for item in player.inventory:
@@ -118,7 +128,7 @@ if __name__ == "__main__":
 
     # print intro
     intro = open('intro.txt')
-    print(intro.read())
+    print(intro.read() + '\n')
     intro.close()
     print("To win, have all three items in your inventory and go to the exam hall (num 12 on the map)")
 

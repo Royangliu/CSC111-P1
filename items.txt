@@ -3,7 +3,7 @@ $1 coin
 0
 1
 5
-PICK
+TAKE
 Befitting of the location's stature, the old stone walls you touched gave way to a secret 
 compartment; though, you do not question the reason for its existence as you found a coin within the dustied box. 
 You picked up 1 $1 coin.
@@ -13,7 +13,7 @@ $1 coin
 0
 1
 5
-PICK
+TAKE
 You spot a squirrel holding a sparkling item. Throughing an acorn to its side, the squirrel drops the item 
 to pounce for the snack. 
 You picked up 1 $1 coin.
@@ -23,7 +23,7 @@ $1 coin
 0
 1
 5
-PICK
+TAKE
 Upon the sun bleached grass, a sparkle catches your eyes. 
 You picked up 1 $1 coin.
 
@@ -53,11 +53,27 @@ t-card
 PUZZLE
 You picked up your t-card.
 
+lucky pen
+3
+0
+0
+20
+PUZZLE
+You picked up your lucky pen
+
+cheat sheet
+10
+0
+0
+20
+PUZZLE
+You picked up your cheat sheet
+
 milk tea
 9
 0
 0
 10
-PICK
+TAKE
 You talked to one of the students and they provided you with 1 free milk tea.
 You got 1 milk tea.

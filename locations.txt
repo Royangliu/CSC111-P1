@@ -122,10 +122,13 @@ There is front campus to the north, and the Bahen Building to the west.
 SPECIAL
 CANADA
 HINT: what STANDS OUT to you about this message?
-You unlocked the door, and in the classroom you found your lucky pen!`
-we have a very interesting Challenge for you. 
+You entered the word, and in the safe you found your cheat sheet!
+You see a safe on a table with a note on top of it, and the words \' CHEAT SHEET\' written 
+on the safe with a sharpie. Some bored engineering student has pulled a prank on you.
+The note reads as follows:
+\'we have a very interesting Challenge for you. 
 All you Need to do is give the Answer. 
-Do so by figuring out the one-word answer And entering it below.
+Do so by figuring out the one-word answer And entering it below. \''
 END
 
 11
