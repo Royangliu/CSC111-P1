@@ -126,7 +126,8 @@ def check_exam_items(player: Player) -> None:
 
     items required: t-card, lucky pen, cheat sheet
     """
-    inven_name_list = {item.name for item in player.inventory}
+    inven_name_list = [item.name for item in player.inventory]
+
     if 't-card' in inven_name_list and 'lucky pen' in inven_name_list and 'cheat sheet' in inven_name_list:
         player.victory = True
     else:
@@ -134,24 +135,10 @@ def check_exam_items(player: Player) -> None:
 
 
 if __name__ == "__main__":
-    import doctest
-
-    doctest.testmod(verbose=True)
-
-    # When you are ready to check your work with python_ta, uncomment the following lines.
-    # (In PyCharm, select the lines below and press Ctrl/Cmd + / to toggle comments.)
-    # You can use "Run file in Python Console" to run PythonTA,
-    # and then also test your methods manually in the console.
-    import python_ta
-
-    python_ta.check_all(config={
-        'max-line-length': 120
-    })
-
     # instantiates world and player objects
     with open('map.txt') as map_file, open('locations.txt') as location_file, open('items.txt') as item_file:
         w = World(map_file, location_file, item_file)
-    p = Player(0, 0, 30)   # starting position and total movement opportunities allowed
+    p = Player(0, 0, 35)   # starting position and total movement opportunities allowed
 
     # initializes lists of main actions
     menu = ["look", "inventory", "money", "score", "map", "steps", "quit", "go [direction]"]
@@ -161,9 +148,9 @@ if __name__ == "__main__":
     # print intro
     with open('intro.txt') as intro:
         print(intro.read() + '\n')
-    print("To win, have the items 'lucky pen', 'cheat sheet', and 't-card' your inventory")
+    print("To win, have the items 'lucky pen', 'cheat sheet', and 't-card' in your inventory")
     print("and start the exam at the Exam hall (#12 on the map).")
-    print("However, certain special items may aid or ruin you during the exam!.\n")
+    print("Note that certain special items may aid or ruin you during the exam!.\n")
 
     # Main gameplay loop and breaks when player is victorious or has run out of steps
     while not p.victory and p.steps >= 0 and not p.has_quit:
@@ -223,6 +210,9 @@ if __name__ == "__main__":
             else:
                 print("Invalid action. Try again.")
 
+            if p.has_quit or p.victory:
+                loc_change = True
+
     # Gameover where the player ran out of steps
     if p.steps < 0:
         print("You ran out of time and the exam began without you.")
@@ -231,6 +221,8 @@ if __name__ == "__main__":
     # Gives the player different endings depending on certain items in their inventory
     elif p.victory:
         p.score += p.steps * 2
+        p.score += p.money * 5
+
         p_item_list = {item.name for item in p.inventory}
 
         # Bad ending: Has the 'cheap answer giving airpods' in their inventory
@@ -243,13 +235,13 @@ if __name__ == "__main__":
         elif "lucky eraser" in p_item_list and "lucky sharp pencil" in p_item_list:
             print("The exam was difficult; however, using your newly aquired utilities, you were able to")
             print("breeze through the exam using the lucky eraser and lucky sharp pencil to write your answers.")
-            print("You got an A+ on the exam! You ultra win!")
+            print("\nYou got an A+ on the exam! You ultra win!")
             p.score += 1000
         # Neutral good ending: Only has the 't-card', 'cheat sheet', and 'lucky pen' in their inventory
         else:
             print("With your t-card, cheat sheet, and lucky pen, you were ready for the exam.")
             print("Through the exam's trials, the companion ship of your pen and cheat sheet")
             print("allowed you to finish the exam.")
-            print("You Passed the Exam! You win!")
+            print("\nYou Passed the Exam with a B! You win!")
 
     print(f"\nScore: {p.score}")

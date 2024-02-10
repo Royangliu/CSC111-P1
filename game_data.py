@@ -300,7 +300,7 @@ class ShopLocation(Location):
                 # restores the item if the item exists, but the player doesn't have enough money
                 else:
                     print("Insufficient money; you are broke.")
-                    self.items_list.append(item)
+                    self.shop_list.append(item)
 
             else:
                 print("Item not found.")
@@ -515,7 +515,7 @@ class World:
          that position. Otherwise, return None. (Remember, locations represented by the number -1 on the map should
          return None.)
         """
-        if x < 0 or y < 0 or x >= len(self.map[y]) or y >= len(self.map) or self.map[y][x] == -1:
+        if x < 0 or y < 0 or y >= len(self.map) or x >= len(self.map[y]) or self.map[y][x] == -1:
             return None
         else:
             return self.locations_dict[self.map[y][x]]
