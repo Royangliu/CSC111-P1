@@ -29,6 +29,7 @@ class Item:
         - start_position: starting position of the item
         - price: the price of the item at a store location
         - currency_amount: the number of money the player gets for picking the item up
+        - score: The amount of score gained when receiving the item
         - item_desc: the string description of the item
 
     Representation Invariants:

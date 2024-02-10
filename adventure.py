@@ -68,9 +68,7 @@ def do_menu_action(action: str, player: Player, curr_loc: Location, world: World
 
     elif action == "map":
         for row in world.map:
-            line = ''
-            for loc in row:
-                line += f'\t{loc}'
+            line = '\t'.join([f'{loc}' for loc in row])
             print(line)
 
     elif action == 'quit':
@@ -120,25 +118,36 @@ def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
 
     # handles the action at the exam centre to start the exam/hand in items
     elif action == "start exam":
-        has_t_card = False
-        has_lucky_pen = False
-        has_cheat_sheet = False
+        check_exam_items(player)
 
-        for item in player.inventory:
-            if item.name == "t-card":
-                has_t_card = True
-            elif item.name == "lucky pen":
-                has_lucky_pen = True
-            elif item.name == "cheat sheet":
-                has_cheat_sheet = True
 
-        if has_t_card and has_lucky_pen and has_cheat_sheet:
-            player.victory = True
-        else:
-            print("You don't have all the items to start the exam.")
+def check_exam_items(player: Player) -> None:
+    """Helper method for do_location_action for checking if the player has all necessary items to start the exam.
+
+    items required: t-card, lucky pen, cheat sheet
+    """
+    inven_name_list = {item.name for item in player.inventory}
+    if 't-card' in inven_name_list and 'lucky pen' in inven_name_list and 'cheat sheet' in inven_name_list:
+        player.victory = True
+    else:
+        print("You don't have all the items to start the exam.")
 
 
 if __name__ == "__main__":
+    import doctest
+
+    doctest.testmod(verbose=True)
+
+    # When you are ready to check your work with python_ta, uncomment the following lines.
+    # (In PyCharm, select the lines below and press Ctrl/Cmd + / to toggle comments.)
+    # You can use "Run file in Python Console" to run PythonTA,
+    # and then also test your methods manually in the console.
+    import python_ta
+
+    python_ta.check_all(config={
+        'max-line-length': 120
+    })
+
     # instantiates world and player objects
     with open('map.txt') as map_file, open('locations.txt') as location_file, open('items.txt') as item_file:
         w = World(map_file, location_file, item_file)
@@ -150,9 +159,8 @@ if __name__ == "__main__":
     move_commands = {'go ' + d for d in directions}
 
     # print intro
-    intro = open('intro.txt')
-    print(intro.read() + '\n')
-    intro.close()
+    with open('intro.txt') as intro:
+        print(intro.read() + '\n')
     print("To win, have the items 'lucky pen', 'cheat sheet', and 't-card' your inventory")
     print("and start the exam at the Exam hall (#12 on the map).")
     print("However, certain special items may aid or ruin you during the exam!.\n")
@@ -223,16 +231,16 @@ if __name__ == "__main__":
     # Gives the player different endings depending on certain items in their inventory
     elif p.victory:
         p.score += p.steps * 2
+        p_item_list = {item.name for item in p.inventory}
 
         # Bad ending: Has the 'cheap answer giving airpods' in their inventory
-        if any(item.name == "cheap answer giving airpods" for item in p.inventory):
+        if "cheap answer giving airpods" in p_item_list:
             print("As you were writing the test, a TA caught you using the forsaken cheap airpods.")
             print("The exam was stripped away from you and you got were expelled from supposedly using dark magic.")
             print("\nGame over")
             p.score -= 100
         # Good ending: Has the 'lucky eraser' and 'lucky sharp pencil' in their inventory
-        elif (any(item.name == "lucky eraser" for item in p.inventory) and
-                any(item.name == "lucky sharp pencil" for item in p.inventory)):
+        elif "lucky eraser" in p_item_list and "lucky sharp pencil" in p_item_list:
             print("The exam was difficult; however, using your newly aquired utilities, you were able to")
             print("breeze through the exam using the lucky eraser and lucky sharp pencil to write your answers.")
             print("You got an A+ on the exam! You ultra win!")
