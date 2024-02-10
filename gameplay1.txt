@@ -62,6 +62,7 @@ lucky sharp pencil
 leave
 inventory
 score
+money
 go east
 score
 start exam

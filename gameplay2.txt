@@ -36,6 +36,7 @@ cheap answer giving airpods
 leave
 inventory
 score
+money
 go east
 score
 start exam
