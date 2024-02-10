@@ -34,7 +34,7 @@ class Item:
 
     Representation Invariants:
         - self.name != ''
-        - self.start_postion must be a location's number in 'locations.txt' # TODO
+        - self.start_postion must be a location's number in 'locations.txt'
         - self.price >= 0
         - self.currency_amount >= 0
         - self.score >= 0
@@ -87,7 +87,7 @@ class Player:
     has_quit: bool = False
 
     def __init__(self, x: int, y: int, steps: int) -> None:
-        """Initializes a new Player at position (x, y) with a limited amount of allowed steps.
+        """Initializes a new Player at position (x, y) with 'steps' amount of allowed steps and an empty inventory.
         """
         self.x = x
         self.y = y
@@ -124,7 +124,7 @@ class Location:
     def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str) -> None:
         """Initialize a new location.
 
-        # TODO Add more details here about the initialization if needed
+        Each location has a default empty self.items_list and self.has_visited set to false.
         """
         self.location_num = location_num
         self.location_name = name
@@ -175,6 +175,8 @@ class SpecialLocation(Location):
                  answer: str, hint: str, success: str, puzzle: str) -> None:
         """Initializes a special location with its superclass. The SpecialLocation contains
         all superclass Location's attributes, as well as attributes for a riddle puzzle.
+
+        On default, self.puzzle_complete is False and self.puzzle_prize is empty.
         """
         Location.__init__(self, location_num, name, score, brief_desc, long_desc)
         self.answer = answer
@@ -198,7 +200,7 @@ class SpecialLocation(Location):
 
     def do_puzzle(self) -> list[Item]:
         """A function allowing user to attempt a puzzle.
-        If they succeed, give them the appropriate item.
+        If their answer is the same as self.answer, give them the appropriate item.
         It also allows for hints to be given, or the appropriate reponse to be given if they fail.
         """
         puzzle_items = []
@@ -240,6 +242,8 @@ class ShopLocation(Location):
     def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str) -> None:
         """Initializes a new shop location with its superclass. The ShopLocation contains
         all superclass Location's attributes, as well as shop_list.
+
+        On default, self.shop_list is empty
         """
         Location.__init__(self, location_num, name, score, brief_desc, long_desc)
         self.shop_list = []
@@ -292,7 +296,7 @@ class ShopLocation(Location):
                     print(f"\nYou got {item.score} points for getting (a) {item.name}!")
                     player.inventory.append(item)
 
-                # restores the item if the item exists, but the player doesn't have enough money
+                # restores the item to self.shop_list if the item exists, but the player doesn't have enough money
                 else:
                     print("Insufficient money; you are broke.")
                     self.shop_list.append(item)

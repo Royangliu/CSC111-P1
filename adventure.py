@@ -47,7 +47,8 @@ def move_player(direction: str, player: Player, world: World) -> bool:
 
 
 def do_menu_action(action: str, player: Player, curr_loc: Location, world: World) -> None:
-    """executes menu actions found within the menu
+    """executes menu actions found within the menu. These include displaying the stats of the player and map, and
+    handling the 'look' and 'quit' actions
     """
     if action == "look":
         print(curr_loc.long_desc)
@@ -77,7 +78,8 @@ def do_menu_action(action: str, player: Player, curr_loc: Location, world: World
 
 
 def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
-    """executes location actions found within the menu
+    """executes location actions found within the menu. These include searching for items, entering puzzles and shop
+    menus, dropping milk tea for one quest, and starting the exam.
     """
     # adds any items found within the location's items_list to the player's inventory with their score
     if action == 'search':
@@ -123,6 +125,7 @@ def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
 
 def check_exam_items(player: Player) -> None:
     """Helper method for do_location_action for checking if the player has all necessary items to start the exam.
+    Makes player.victory into True if so.
 
     items required: t-card, lucky pen, cheat sheet
     """
