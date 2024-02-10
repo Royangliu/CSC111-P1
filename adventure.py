@@ -74,11 +74,8 @@ def do_menu_action(action: str, player: Player, curr_loc: Location, world: World
 def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
     """executes location actions found within the menu
     """
-    if action == 'puzzle' and isinstance(curr_loc, SpecialLocation):
-        addition = curr_loc.do_puzzle()
-        player.inventory += addition
-
-    elif action == 'search':
+    # adds any items found within the location's items_list to the player's inventory with their score
+    if action == 'search':
         for item in curr_loc.items_list:
             if item.currency_amount > 0:
                 player.money += item.currency_amount
@@ -89,23 +86,46 @@ def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
 
             print(item.item_desc)
 
+    # runs the methods corresponding to the function found within the special location subclasses
+    elif action == 'puzzle' and isinstance(curr_loc, SpecialLocation):
+        addition = curr_loc.do_puzzle()
+        player.inventory += addition
+        for item in addition:
+            player.score += item.score
+    
     elif action == "shop" and isinstance(curr_loc, ShopLocation):
         curr_loc.do_buy(player)
 
-    elif action == "drop milk tea" and curr_loc.location_num == 4:
+    # handles one quest for giving a student milk tea to receive an item for a 'good ending'
+    elif action == "drop milk tea":
         for item in player.inventory:
             if item.name == "milk tea":
                 player.inventory.remove(item)
-        eraser = Item("lucky eraser", curr_loc.location_num, 0, 0, 15, "", "")
+        eraser = Item("lucky eraser", curr_loc.location_num, 0, 0, 15, "")
         player.inventory.append(eraser)
+        player.score += eraser.score
         print("Thank you so much for the caffeine boost! The line was so long!")
         print("I know this isn't much but you can have my lucky eraser for your troubles.")
         print("You got 1 lucky eraser.")
 
-    
-
+    # handles the action at the exam centre to start the exam/hand in items
     elif action == "start exam":
+        has_t_card = False
+        has_lucky_pen = False
+        has_cheat_sheet = False
         
+        for item in player.inventory:
+            if item.name == "t-card":
+                has_t_card = True
+            elif item.name == "lucky pen":
+                has_lucky_pen = True
+            elif item.name == "cheat sheet":
+                has_cheat_sheet = True
+    
+        if has_t_card and has_lucky_pen and has_cheat_sheet:
+            player.victory = True
+        else:
+            print("You don't have all the items to start the exam.")
 
 def secret_item_endings(player: Player, good_items: list[str], bad_items: list[str]):
     """checks if the player has the items required for secret endings
@@ -152,7 +172,14 @@ if __name__ == "__main__":
             choice = input("Enter action: ").lower()
             print()
 
-            # Prints all available actions
+            location_actions = location.available_actions()
+            # adds additional location actions for exam centre and milk tea quest
+            if location.location_num == 12:
+                location_actions.append("start exam")
+            if location.location_num == 4 and any(item.name == 'milk tea' for item in p.inventory):
+                location_actions.append("drop milk tea")
+            
+            # Prints all available actions if '[menu]' was picked
             if choice == "[menu]":
                 print("Menu Options: ")
                 for option in menu:
@@ -161,7 +188,6 @@ if __name__ == "__main__":
                 for option in directions:
                     print('\t' + option)
                 print("Location Actions: ")
-                location_actions = location.available_actions()
                 if location_actions:
                     for option in location_actions:
                         print('\t' + option)
