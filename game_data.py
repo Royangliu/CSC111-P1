@@ -76,6 +76,7 @@ class Player:
         - score: The score of the player
         - money: The player's money in dollars
         - victory: A bool indicating if the player has won
+        - has_quit: A bool indicating if the player has quit
         - # TODO
 
     Representation Invariants:
@@ -90,6 +91,7 @@ class Player:
     score: int = 0
     money: int = 0
     victory: bool = False
+    has_quit: bool = False
 
     def __init__(self, x: int, y: int, steps: int) -> None:
         """

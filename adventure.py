@@ -73,6 +73,10 @@ def do_menu_action(action: str, player: Player, curr_loc: Location, world: World
                 line += f'\t{loc}'
             print(line)
 
+    elif action == 'quit':
+        print("Thanks for playing!")
+        player.has_quit = True
+
 def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
     """executes location actions found within the menu
     """
@@ -158,7 +162,7 @@ if __name__ == "__main__":
     print("To win, have all three items in your inventory and go to the exam hall (num 12 on the map)")
 
     # Main gameplay loop and breaks when player is victorious or has run out of steps
-    while not p.victory and p.steps > 0:
+    while not p.victory and p.steps >= 0 and p.has_quit == False:
         location = w.get_location(p.x, p.y)
 
         # Print location description
@@ -215,7 +219,9 @@ if __name__ == "__main__":
             else:
                 print("Invalid action. Try again.")
 
-    if p.victory:
+    if p.steps < 0:
+        print("You ran out of time and the exam began without you. Game over.") 
+    elif p.victory:
 
         p.score += p.steps
 
@@ -223,7 +229,8 @@ if __name__ == "__main__":
         print("Your final score is: " + str(p.score))
     else:
         print("You have run out of steps. Game over.")
-        print(f"Score: {p.score}")
+
+    print(f"Score: {p.score}")
 
         # TODO: CALL A FUNCTION HERE TO HANDLE WHAT HAPPENS UPON THE PLAYER'S CHOICE
         #  REMEMBER: the location = w.get_location(p.x, p.y) at the top of this loop will update the location if
