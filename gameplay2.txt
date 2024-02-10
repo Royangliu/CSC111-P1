@@ -1,6 +1,7 @@
 score
 puzzle
 playing chess
+inventory
 score
 go east
 score
@@ -11,6 +12,7 @@ go east
 score
 puzzle
 241
+inventory
 score
 go west
 score
@@ -24,6 +26,7 @@ go south
 score
 puzzle
 CANADA
+inventory
 score
 go west
 score
@@ -32,6 +35,8 @@ score
 shop
 cheap answer giving airpods
 leave
+inventory
+score
 go east
 score
 start exam

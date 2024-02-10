@@ -1,20 +1,24 @@
 score
 puzzle
 playing chess
+inventory
 score
 go east
 score
 search
 score
+money
 go east
 score
 puzzle
 241
+inventory
 score
 go south
 score
 search
 score
+money
 go west
 score
 go south
@@ -23,6 +27,7 @@ go south
 score
 search
 score
+money
 go south
 score
 puzzle
@@ -31,6 +36,7 @@ score
 go west
 score
 search
+inventory
 score
 go east
 go north
@@ -39,4 +45,20 @@ go north
 go west
 score
 drop milk tea
+inventory
 score
+go east
+go south
+go south
+go south
+go east
+go south
+score
+shop
+lucky sharp pencil
+leave
+inventory
+score
+go east
+score
+start exam
