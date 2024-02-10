@@ -11,7 +11,9 @@ Robarts Library 1
 You are on the first floor of the Robarts Library. There is Sidney smith to the south and trinity college to the east.
 It's usually crowded at this time of the day, but today it's eerily quiet.
 Only a few students are studying inside one of the study rooms. You better not disturb them. 
+---
 A librarian stands near the service desk, somehow looking bored and alert at the same time. 
+---
 You are on the first floor of the Robarts Library. There is Sidney smith to the south and trinity college to the east.
 SPECIAL
 playing chess
@@ -40,6 +42,9 @@ You are at Victoria College, more specifically, Old Vic. There is Trinity Colleg
 The architechture and design is beautiful and historic. You look around and see some students setting up some poster for an event 
 coming up, and some other students heading to a class. You glance over at caffiends, and see that they are having a \'2 for 1\' sale, 
 offering 2 drinks for the price of 1, and decide that you will buy yourself some nice drinks aftefr your exam. 
+---
+You might have left one of your items in a classroom here.
+---
 There is Trinity College to the west, and Queen's park to the south.
 SPECIAL
 241
@@ -130,6 +135,9 @@ You are inside the Sandford Flemings building - more specifically in the enginee
 You look around to see the usual Skule\u2122 asthetic, and general eng student department vibe. 
 There is a mural of Godiva on one wall, and various other engineering mascots.
 You see hardhat cafe, and consider buying some snacks at a later time. 
+---
+There seems to be a note on one of the tables.
+---
 There is front campus to the north, and the Bahen Building to the west.
 SPECIAL
 CANADA
