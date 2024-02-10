@@ -63,13 +63,15 @@ def do_menu_action(action: str, player: Player, curr_loc: Location, world: World
     elif action == "score":
         print(f"Current score: {player.score}")
 
-    elif action == "clock":
+    elif action == "steps":
         print(f"Remaining movements: {player.steps}")
 
     elif action == "map":
         for row in world.map:
-            print(row)
-
+            line = ''
+            for loc in row:
+                line += f'\t{loc}'
+            print(line)
 
 def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
     """executes location actions found within the menu
@@ -82,6 +84,7 @@ def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
             else:
                 player.inventory.append(item)
             player.score += item.score
+            print(f"You gained {item.score} points for getting (a) {item.name}!")
             curr_loc.items_list.remove(item)
 
             print(item.item_desc)
@@ -144,7 +147,7 @@ if __name__ == "__main__":
     p = Player(0, 0, 30)   # starting position and total movement opportunities allowed
 
     # initializes lists of main actions
-    menu = ["look", "inventory", "money", "score", "map", "clock", "quit", "go [direction]"]
+    menu = ["look", "inventory", "money", "score", "map", "steps", "quit", "go [direction]"]
     directions = ["north", "east", "south", "west"]
     move_commands = {'go ' + d for d in directions}
 

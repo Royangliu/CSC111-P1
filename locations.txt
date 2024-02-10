@@ -100,14 +100,14 @@ END
 8
 Front Campus 8
 5
-You are at front campus. There is University College to the noth, and Sandford Flemings to the south.
+You are at front campus. There is University College to the north, and Sandford Flemings to the south.
 You are at front campus. Remembering the under construction pit of dirt the place used to be, you feel 
 a sense of happiness looking at how much nicer it is today with the field of green grass.
 There are students eating on the grass, some throwing frizbees, and some sketching the scene in front of them.
 ---
 Among the grass, a sparkling reflection catches your eyes.
 ---
-There is University College to the noth, and Sandford Flemings to the south.
+There is University College to the north, and Sandford Flemings to the south.
 END
 
 9
@@ -127,7 +127,7 @@ Sandford Flemings 10
 5
 You are inside the Sandford Flemings building. There is front campus to the north, the Bahen Building to the west, and the Exam Centre is to the south.
 You are inside the Sandford Flemings building - more specifically in the engineering pit. 
-You look around to see the usual Skule™ asthetic, and general eng student department vibe. 
+You look around to see the usual Skule\u2122 asthetic, and general eng student department vibe. 
 There is a mural of Godiva on one wall, and various other engineering mascots.
 You see hardhat cafe, and consider buying some snacks at a later time. 
 There is front campus to the north, and the Bahen Building to the west.
@@ -135,7 +135,7 @@ SPECIAL
 CANADA
 HINT: what STANDS OUT to you about this message?
 You entered the word, and in the safe you found your cheat sheet!
-You see a safe on a table with a note on top of it, and the words \' CHEAT SHEET\' written 
+You see a safe on a table with a note on top of it, and the words \'CHEAT SHEET\' written 
 on the safe with a sharpie. Some bored engineering student has pulled a prank on you.
 The note reads as follows:
 \'we have a very interesting Challenge for you. 
@@ -154,13 +154,14 @@ Being a place full of utilities, it may be best to check the wares in the store.
 ---
 The Exam Centre is to the east, and Bahen is to the north.
 SHOP
-END
 
 12
 Exam Centre 12
 5
 You are at the Exam Centre. The UofT Bookstore is to the west, and Sandford Flemings is to the north.
 You are at the Exam Centre, a place where seemingly dreams are both born and destroyed depending on the results.
+---
 Of course, you must have your t-card, lucky pen, and cheat sheet in order to prevent the latter case from happening!
+---
 The UofT Bookstore is to the west, and Sandford Flemings is to the north.
 END
