@@ -26,7 +26,11 @@ from game_data import SpecialLocation, ShopLocation, World, Item, Location, Play
 
 
 def move_player(direction: str, player: Player, world: World) -> bool:
-    """moves the player by changing the player's x and y coordinates
+    """Moves the player by changing the player's x and y coordinates if the chosen direction is valid.
+    Returns True or False depending on if the player was successfully moved.
+
+    Preconditions:
+        - # TODO
     """
     temp_y, temp_x = player.y, player.x
 
@@ -102,10 +106,12 @@ def secret_item_endings(player: Player, items: list[Item]):
 
 
 if __name__ == "__main__":
+    # instantiates world and player objects
     with open('map.txt') as map_file, open('locations.txt') as location_file, open('items.txt') as item_file:
         w = World(map_file, location_file, item_file)
-
     p = Player(0, 0, 30)   # starting position and total movement opportunities allowed
+
+    # initializes lists of main actions
     menu = ["look", "inventory", "money", "score", "map", "clock", "quit", "go [direction]"]
     directions = ["north", "east", "south", "west"]
     move_commands = {'go ' + d for d in directions}
@@ -116,6 +122,7 @@ if __name__ == "__main__":
     intro.close()
     print("To win, have all three items in your inventory and go to the exam hall (num 12 on the map)")
 
+    # Main gameplay loop and breaks when player is victorious or has run out of steps
     while not p.victory and p.steps > 0:
         location = w.get_location(p.x, p.y)
 
