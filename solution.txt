@@ -1,6 +1,7 @@
 score
 puzzle
 playing chess
+inventory
 score
 go east
 score
@@ -8,6 +9,7 @@ go east
 score
 puzzle
 241
+inventory
 score
 go west
 score
@@ -21,6 +23,7 @@ go south
 score
 puzzle
 CANADA
+inventory
 score
 go south
 score
