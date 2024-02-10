@@ -154,7 +154,8 @@ if __name__ == "__main__":
     print(intro.read() + '\n')
     intro.close()
     print("To win, have the items 'lucky pen', 'cheat sheet', and 't-card' your inventory")
-    print("and start the exam at the Exam hall (#12 on the map).\n")
+    print("and start the exam at the Exam hall (#12 on the map).")
+    print("However, certain special items may aid or ruin you during the exam!.\n")
 
     # Main gameplay loop and breaks when player is victorious or has run out of steps
     while not p.victory and p.steps >= 0 and not p.has_quit:
