@@ -77,6 +77,7 @@ def do_menu_action(action: str, player: Player, curr_loc: Location, world: World
         print("Thanks for playing!")
         player.has_quit = True
 
+
 def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
     """executes location actions found within the menu
     """
@@ -90,7 +91,7 @@ def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
             player.score += item.score
             print(item.item_desc)
             print(f"\nYou gained {item.score} points for getting (a) {item.name}!")
-            
+
             curr_loc.items_list.remove(item)
 
     # runs the methods corresponding to the function found within the location subclasses
@@ -100,7 +101,7 @@ def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
         for item in addition:
             player.score += item.score
             print(f"\nYou gained {item.score} points for getting (a) {item.name}!")
-    
+
     elif action == "shop" and isinstance(curr_loc, ShopLocation):
         curr_loc.do_buy(player)
 
@@ -122,7 +123,7 @@ def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
         has_t_card = False
         has_lucky_pen = False
         has_cheat_sheet = False
-        
+
         for item in player.inventory:
             if item.name == "t-card":
                 has_t_card = True
@@ -130,12 +131,12 @@ def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
                 has_lucky_pen = True
             elif item.name == "cheat sheet":
                 has_cheat_sheet = True
-    
+
         if has_t_card and has_lucky_pen and has_cheat_sheet:
             player.victory = True
         else:
             print("You don't have all the items to start the exam.")
-            
+
 
 if __name__ == "__main__":
     # instantiates world and player objects
@@ -183,7 +184,7 @@ if __name__ == "__main__":
                 location_actions.append("start exam")
             if location.location_num == 4 and any(item.name == 'milk tea' for item in p.inventory):
                 location_actions.append("drop milk tea")
-            
+
             # Prints all available actions if '[menu]' was picked
             if choice == "[menu]":
                 print("Menu Options: ")
@@ -215,16 +216,16 @@ if __name__ == "__main__":
 
     # Gameover where the player ran out of steps
     if p.steps < 0:
-        print("You ran out of time and the exam began without you.") 
+        print("You ran out of time and the exam began without you.")
         print("\nGame over")
 
     # Gives the player different endings depending on certain items in their inventory
     elif p.victory:
         p.score += p.steps * 2
-        
+
         # Bad ending: Has the 'cheap answer giving airpods' in their inventory
         if any(item.name == "cheap answer giving airpods" for item in p.inventory):
-            print("As you were writing the test, a TA caught you using the forsaken cheap airpods.") 
+            print("As you were writing the test, a TA caught you using the forsaken cheap airpods.")
             print("The exam was stripped away from you and you got were expelled from supposedly using dark magic.")
             print("\nGame over")
             p.score -= 100
@@ -243,4 +244,3 @@ if __name__ == "__main__":
             print("You Passed the Exam! You win!")
 
     print(f"\nScore: {p.score}")
-    

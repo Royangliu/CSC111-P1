@@ -133,7 +133,6 @@ class Location:
         self.has_visited = False
         self.items_list = []
 
-
     def available_actions(self) -> list[str]:
         """Return the available actions in this location in a list.
         """
@@ -146,8 +145,8 @@ class Location:
 
 class SpecialLocation(Location):
     """A Location subclass that contains a riddle puzzle.
-    
-    Instance Attributes:        
+
+    Instance Attributes:
         - contains all attributes found in the Location Class
         - answer: The string representing the answer to the puzzle
         - hint: A string representing a hint to the puzzle
@@ -172,7 +171,7 @@ class SpecialLocation(Location):
 
     def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str,
                  answer: str, hint: str, success: str,  puzzle: str) -> None:
-        """Initializes a special location with its superclass. The SpecialLocation contains 
+        """Initializes a special location with its superclass. The SpecialLocation contains
         all superclass Location's attributes, as well as attributes for a riddle puzzle.
         """
         Location.__init__(self, location_num, name, score, brief_desc, long_desc)
@@ -227,9 +226,9 @@ class SpecialLocation(Location):
 
 
 class ShopLocation(Location):
-    """A Location subclass that represents a shop and contains methods for the player to exchange money for items. 
+    """A Location subclass that represents a shop and contains methods for the player to exchange money for items.
     Items stored in shop_list indicate the items that can be bought.
-    
+
     Instance Attributes:
         - contains all attributes found in the Location Class
         - shop_list: A list of all items that can be bought at the shop.
@@ -240,7 +239,7 @@ class ShopLocation(Location):
     shop_list: list[Item]
 
     def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str) -> None:
-        """Initializes a new shop location with its superclass. The ShopLocation contains 
+        """Initializes a new shop location with its superclass. The ShopLocation contains
         all superclass Location's attributes, as well as shop_list.
         """
         Location.__init__(self, location_num, name, score, brief_desc, long_desc)
@@ -302,7 +301,7 @@ class ShopLocation(Location):
                     elif choice == self.shop_list[i].name and player.money < self.shop_list[i].price:
                         print("Insufficient money; you are broke.")
                         item_found = True
-                        
+
                 if not item_found:
                     print("Item not found.")
 
@@ -332,7 +331,6 @@ class World:
         self.locations_dict = self.load_locations(location_data)
         self.load_items(items_data)
 
-    
     # NOTE: The method below is REQUIRED. Complete it exactly as specified.
     def load_map(self, map_data: TextIO) -> list[list[int]]:
         """
@@ -352,7 +350,6 @@ class World:
             curr_map.append([int(x) for x in row])
 
         return curr_map
-
 
     def load_locations(self, location_data: TextIO) -> dict[int, Location]:
         """Returns a dictionary of locations from the given open file location_data. A key in the dictionary is
@@ -426,7 +423,7 @@ class World:
                                                  code, hint, success, puzzle_desc)
             elif line == 'SHOP':
                 curr_dict[num] = ShopLocation(num, name, score, brief_desc, long_desc)
-                
+
             else:
                 curr_dict[num] = Location(num, name, score, brief_desc, long_desc)
 
