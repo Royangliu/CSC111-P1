@@ -1,0 +1,42 @@
+score
+puzzle
+playing chess
+score
+go east
+score
+search
+score
+go east
+score
+puzzle
+241
+score
+go south
+score
+search
+score
+go west
+score
+go south
+score
+go south
+score
+search
+score
+go south
+score
+puzzle
+CANADA
+score
+go west
+score
+search
+score
+go east
+go north
+go north
+go north
+go west
+score
+drop milk tea
+score

@@ -17,39 +17,39 @@
 
 \begin{enumerate}
 
-\item Describe your enhancement \#1 here
+\item Riddle Puzzle Locations
 	\begin{itemize}
 	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): each of the three main items(t-card, lucky pen, and cheat sheet) are put in a location that has a puzzle that must be solved to get the item. The puzzle is presented in the form of a text description, and a simple and short answer is taken as input. There is the option to ask for a hint as well if the user is having difficulty, and to leave the puzzle to try again later. The puzzles include a riddle, one message with the answer encoded in the text, and one safe that simply asks for a 3-digit number. The first 2 puzzles are text-based puzzles to read, think about, and answer, but the last comes more from observing surroundings.
 	\item Complexity level (choose from low/medium/high): high
-	\item We think this enhancement has this complexity level because it involves inheritance and creating a special location subclass to contain the methods and attributes required to conduct puzzles. We had to adjust how locations were initiated to differentiate between regular and special locations and had to adjust the locations and add puzzles accordingly. We had to coordinate this with the items as well, and eventually faced some difficulties when comparing how to handle them alongside the shop and coin related activities. 
+	\item We think this enhancement has this complexity level because it involves inheritance and creating a special location subclass to contain the methods and attributes required to conduct puzzles. We had to adjust how locations were initiated in load\_locations() to differentiate between regular and special locations and had to adjust the locations and add puzzles accordingly. This was done through specific formatting of the locations.txt file. We had to coordinate this with the items as well, and eventually faced some difficulties when comparing how to handle them alongside the shop and coin related activities. 
 	\end{itemize}
  
-\item Describe your enhancement \#2 here
+\item Display Map Action
 	\begin{itemize}
 	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): There is a map command provided to the player at all times so that the program prints out the map for the player to view.
 	\item Complexity level (choose from low/medium/high): low
-	\item  We rated this low because it was a very simple implementation since we already had the map, and we just needed to add the menu option of the map, and some print statements.
+	\item  We rated this low because it was a very simple implementation since we already had the map, and we just needed to add the menu option of the map, and some print statements through a for loop.
 	\end{itemize}
  
-\item Describe your enhancement \#3 here
+\item ShopLocation, currency system, and shop menu
 	\begin{itemize}
-	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): We created an extra feature where many locations had coins that could be discovered and could be used to purchase items at the shop/bookstore. The items could be used at the end of the game to decide the ending. The coins are not added to the inventory, but rather to the player's money attribute. ...
+	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): We created an extra feature where many locations had coins that could be discovered and could be used to purchase items at the shop/bookstore. The items with currency value are not added to the inventory when picked up, but rather to the player's money attribute depending on the item's currency value in items.txt. This money can then be used to buy items that are initiated in the shop location as specified in the items.txt file
 	\item Complexity level (choose from low/medium/high): high
-	\item  We rated this high because it involved implementation of a lot of coding features. From the implementation of a subclass ShopLocation and further implementation that extended to both the locations initialization and items initialization. Within the shop, there were various procedures that took place to purchase items. 
+	\item  We rated this high because it involved implementation of a lot of coding features. From the implementation of a subclass ShopLocation and further implementation that extended to both the locations initialization and items initialization. Within the shop, there were class functions that put the playing inside a shop input menu where they can view and buy all available items.
 	\end{itemize}
  
-\item Describe your enhancement \#4 here
+\item Alternative Endings
 	\begin{itemize}
-	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): In our game, we have alternative endings as per the extra items we aquire in the shop. These can be special in good and bad ways. 
+	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): In our game, we have alternative endings as per the extra items the player can acquire during gameplay. These include the 'lucky sharp pencil' and 'lucky eraser' for the good ending, and the 'cheap answer giving airpods' for the bad ending.
 	\item Complexity level (choose from low/medium/high): medium
-	\item  We rated this medium because it involved adding and dropping items to and from the inventory ...
+	\item  We rated this medium because it involved adding conditions after the main game play loop ended that checked if the player's inventory contained the items for the alternative endings. Part of the planning for the endings included implementing extra items, such as the 'milk tea' and puzzles, such as the shop and the fetch quest.
 	\end{itemize}
  
-\item Describe your enhancement \#5 here
+\item Fetch Quest
 	\begin{itemize}
-	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): Aside from the main puzzles, and general discovery of the coins, we have a mini bubble tea drop quest. We aquire the bubble tea from the Bahen center, and give it to a person at Sidney Smith, who in return gives us a lucky eraser.
-	\item Complexity level (choose from low/medium/high): medium
-	\item  We rated this medium because it involved examing the inventory and separating the possibel outcomes based on what the player's inventory contained...
+	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): Aside from the main puzzles, and general discovery of the coins, we have a mini bubble tea drop quest. We acquire the bubble tea from the Bahen center, and give it to a person at Sidney Smith, who in return gives us a lucky eraser used for an alternative ending.
+	\item Complexity level (choose from low/medium/high): low
+	\item  We rated this low because it just involved examining the player inventory and implementing an action in do\_menu\_actions() to add the lucky eraser to the player's inventory.
 	\end{itemize}
  
 
@@ -69,4 +69,17 @@
 
 If you have any extra \texttt{gameplay\#.txt} files, describe them below.
 
+\begin{enumerate}
+
+\item gameplay1.txt
+	\begin{itemize}
+	\item Shows gameplay required for the player to achieve the best ending. This includes getting the 'lucky eraser' and 'lucky sharp pencil' along with the items required to start the exam.
+	\end{itemize}
+
+\item gameplay2.txt
+	\begin{itemize}
+	\item Shows gameplay required for the player to achieve the bad exam ending. This is achieved if the player gets the 'cheap answer giving airpods' along with the other items to start the exam.
+	\end{itemize}
+
+\end{enumerate}
 \end{document}
