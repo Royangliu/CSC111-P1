@@ -208,7 +208,7 @@ if __name__ == "__main__":
             # Handles all actions through helper functions above according to input
             elif choice in menu:
                 do_menu_action(choice, p, location, w)
-            elif choice in location.available_actions():
+            elif choice in location_actions:
                 do_location_action(choice, p, location)
             elif choice in move_commands:
                 if move_player(choice[3:], p, w):
