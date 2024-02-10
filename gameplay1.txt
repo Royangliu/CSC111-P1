@@ -51,9 +51,12 @@ go east
 go south
 go south
 go south
-go east
+go west
 go south
 score
+search
+score
+money
 shop
 lucky sharp pencil
 leave
