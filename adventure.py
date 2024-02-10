@@ -24,17 +24,25 @@ from game_data import SpecialLocation, ShopLocation, World, Item, Location, Play
 # Note: You may add helper functions, classes, etc. here as needed
 
 
-def move_player(direction: str, player: Player) -> None:
+def move_player(direction: str, player: Player, world: World) -> bool:
     """moves the player by changing the player's x and y coordinates
     """
+    temp_y, temp_x = player.y, player.x
+
     if direction == "east":
-        player.x += 1
+        temp_x += 1
     elif direction == "south":
-        player.y += 1
+        temp_y += 1
     elif direction == "north":
-        player.y -= 1
+        temp_y -= 1
     elif direction == "west":
-        player.x -= 1
+        temp_x -= 1
+
+    if world.get_location(temp_x, temp_y) is None:
+        return False
+    else:
+        player.x, player.y = temp_x, temp_y
+        return True
 
 
 def do_menu_action(action: str, player: Player, curr_loc: Location, world: World) -> None:
@@ -92,9 +100,6 @@ def secret_item_endings(player: Player, items: list[Item]):
             pass # TODO
 
 
-    #TODO: add anything else that needs adding, including other functions
-
-# Note: You may modify the code below as needed; the following starter template are just suggestions
 if __name__ == "__main__":
     with open('map.txt') as map_file, open('locations.txt') as location_file, open('items.txt') as item_file:
         w = World(map_file, location_file, item_file)
@@ -157,11 +162,11 @@ if __name__ == "__main__":
                     do_location_action(choice, p, location)
 
                 elif choice in move_commands:
-                    previous_x = p.x
-                    previous_y = p.y
-                    move_player(choice[3:], p)
-                    p.steps -= 1
-                    loc_change = True
+                    if move_player(choice[3:], p, w):
+                        p.steps -= 1
+                        loc_change = True
+                    else:
+                        print("Invalid movement input. Try again.")
 
                 else:
                     print("Invalid action. Try again.")
@@ -178,31 +183,6 @@ if __name__ == "__main__":
         print("You have run out of steps. Game over.")
         print(f"Score: {p.score}")
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        # TODO: ENTER CODE HERE TO PRINT LOCATION DESCRIPTION
-
-        # Depending on whether or not it's been visited before,
-        # print either full description (first time visit) or brief description (every subsequent visit)
 
 
         # TODO: CALL A FUNCTION HERE TO HANDLE WHAT HAPPENS UPON THE PLAYER'S CHOICE
