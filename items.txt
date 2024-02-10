@@ -52,3 +52,11 @@ t-card
 20
 PUZZLE
 You picked up your t-card
+
+milk tea
+9
+0
+0
+10
+PICK
+You talked to one of the students and they provided you with 1 free milk tea.

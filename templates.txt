@@ -5,7 +5,8 @@ location_num
 price (default = 0)
 currency ammount
 score amount
-pick description
+type 
+description
 
 
 
