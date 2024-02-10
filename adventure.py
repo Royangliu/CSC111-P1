@@ -92,7 +92,7 @@ def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
         player.inventory += addition
         for item in addition:
             player.score += item.score
-            print(f"You gained {item.score} points for getting {item.name}!")
+            print(f"You gained {item.score} points for getting (a) {item.name}!")
     
     elif action == "shop" and isinstance(curr_loc, ShopLocation):
         curr_loc.do_buy(player)
@@ -108,7 +108,7 @@ def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
         print("Thank you so much for the caffeine boost! The line was so long!")
         print("I know this isn't much but you can have my lucky eraser for your troubles.")
         print("You got 1 lucky eraser.")
-        print(f"\nYou gained {eraser.score} points for getting {eraser.name}!")
+        print(f"\nYou gained {eraser.score} points for getting (a) {eraser.name}!")
 
     # handles the action at the exam centre to start the exam/hand in items
     elif action == "start exam":

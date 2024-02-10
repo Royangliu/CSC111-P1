@@ -77,3 +77,13 @@ milk tea
 TAKE
 You talked to one of the students and they provided you with 1 free milk tea.
 You got 1 milk tea.
+
+$2 coin
+11
+0
+2
+5
+TAKE
+Under some shelves, you found a toonie lying in dust. Quite unfortunate for the one who lost it, 
+but great for you!
+You picked up 1 $2 coin.

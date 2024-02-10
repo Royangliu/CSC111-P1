@@ -331,7 +331,7 @@ class ShopLocation(Location):
                         print(self.shop_list[i].item_desc)
                         player.money -= self.shop_list[i].price
                         player.score += self.shop_list[i].score
-                        print(f"\nYou gained {self.shop_list[i].score} points for getting {self.shop_list[i].name}!")
+                        print(f"\nYou gained {self.shop_list[i].score} points for getting (a) {self.shop_list[i].name}!")
                         player.inventory.append(self.shop_list.pop(i))
                         item_found = True
                     elif choice == self.shop_list[i].name and player.money < self.shop_list[i].price:
