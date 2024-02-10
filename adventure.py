@@ -105,19 +105,15 @@ if __name__ == "__main__":
     with open('map.txt') as map_file, open('locations.txt') as location_file, open('items.txt') as item_file:
         w = World(map_file, location_file, item_file)
 
-    p = Player(0, 0,
-               30)  # set starting location of player and steps amount; you may change the x, y coordinates here as appropriate
+    p = Player(0, 0, 30)   # starting position and total movement opportunities allowed
     menu = ["look", "inventory", "money", "score", "map", "clock", "quit", "go [direction]"]
     directions = ["north", "east", "south", "west"]
     move_commands = {'go ' + d for d in directions}
 
-    previous_x = p.x
-    previous_y = p.y
-
+    # print intro
     intro = open('intro.txt')
     print(intro.read())
     intro.close()
-
     print("To win, have all three items in your inventory and go to the exam hall (num 12 on the map)")
 
     while not p.victory and p.steps > 0:
