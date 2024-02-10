@@ -227,7 +227,7 @@ if __name__ == "__main__":
             print("As you were writing the test, a TA caught you using the forsaken cheap airpods.") 
             print("The exam was stripped away from you and you got were expelled from supposedly using dark magic.")
             print("\nGame over")
-            p.score -= 1000
+            p.score -= 100
         # Good ending: Has the 'lucky eraser' and 'lucky sharp pencil' in their inventory
         elif (any(item.name == "lucky eraser" for item in p.inventory) and
             any(item.name == "lucky sharp pencil" for item in p.inventory)):
@@ -237,13 +237,9 @@ if __name__ == "__main__":
             p.score += 1000
         # Neutral good ending: Only has the 't-card', 'cheat sheet', and 'lucky pen' in their inventory
         else:
-            print("With your ")
-        
-
-        print("Congratulations! You have won the game!")
-        print("Your final score is: " + str(p.score))
-    else:
-        print("You have run out of steps. Game over.")
+            print("With your t-card, cheat sheet, and lucky pen, you were ready for the exam.")
+            print("Through the exam's trials, the companion ship of your pen and cheat sheet allowed you to finish the exam.")
+            print("You Passed the Exam! You win!")
 
     print(f"\nScore: {p.score}")
 
