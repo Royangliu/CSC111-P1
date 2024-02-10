@@ -111,7 +111,7 @@ class Location:
         - self.location_num >= 0
         - self.score >= 0
         - self.brief_desc != ''
-        - len(self.long_dec) > len(self.brief_desc))
+        - len(self.long_dec) >= len(self.brief_desc))
     """
     location_num: int
     location_name: str
@@ -136,6 +136,7 @@ class Location:
 
     def available_actions(self) -> list[str]:
         """Return the available actions in this location in a list.
+        Adds search to actions if this Location's items_list is not empty.
         """
         actions = []
         if self.items_list:
@@ -233,9 +234,6 @@ class ShopLocation(Location):
     Instance Attributes:
         - contains all attributes found in the Location Class
         - shop_list: A list of all items that can be bought at the shop.
-
-    Representation Invariants:
-        - # TODO
     """
     shop_list: list[Item]
 
@@ -250,9 +248,6 @@ class ShopLocation(Location):
         """Return the available actions in this location in a list.
         Adds all possible actions from the superclass Location and
         adds the option of "shop" if this ShopLocation's shop_list is not empty
-
-        Preconditions:
-            - # TODO
         """
         actions = []
         actions += Location.available_actions(self)
@@ -268,7 +263,7 @@ class ShopLocation(Location):
         item is deleted from this shop's shop_list, and the player's money is deduced according to the item's price.
 
         Precondtions:
-            - # TODO
+            - self.shop_list != []
         """
         print("To leave the shop menu, enter: \'leave\'")
         print("To view the items available, enter: \'shop list\'")
@@ -306,10 +301,7 @@ class ShopLocation(Location):
                 print("Item not found.")
 
     def item_in_shop_list(self, item_name: str) -> bool:
-        """Returns whether the item with the specified name exists in this object's shop_list
-
-        Preconditions:
-            - item_name != ''
+        """Returns whether the item with the specified name exists in this object's shop_list.
         """
         for i in range(len(self.shop_list)):
             if self.shop_list[i].name == item_name:
@@ -320,9 +312,6 @@ class ShopLocation(Location):
     def remove_item_in_shop(self, item_name: str) -> Optional[Item]:
         """Removes the item with the specified item_name from this object's shop_list and return's it.
         If it's not in shop_list, return None.
-
-        Preconditions:
-            - item_name != ''
         """
         for i in range(len(self.shop_list)):
             if self.shop_list[i].name == item_name:
@@ -340,7 +329,8 @@ class World:
             its item is the corresponding location object
 
     Representation Invariants:
-        - # TODO
+        - self.map != []
+        - self.locations_dict != {}
     """
     map: list[list[int]]
     locations_dict: dict[int, Location | SpecialLocation | ShopLocation]

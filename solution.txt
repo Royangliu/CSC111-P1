@@ -1,15 +1,27 @@
+score
 puzzle
 playing chess
+score
 go east
+score
 go east
+score
 puzzle
 241
+score
 go west
+score
 go south
+score
 go south
+score
 go south
+score
 go south
+score
 puzzle
 CANADA
+score
 go south
+score
 start exam
