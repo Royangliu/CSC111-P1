@@ -27,14 +27,15 @@ TAKE
 Upon the sun bleached grass, a sparkle catches your eyes. 
 You picked up 1 $1 coin.
 
-magical pen ink eraser
+lucky sharp pencil
 11
 3
 0
 15
 SHOP
-Sparkling with , this little gadget will allow you do erase all problems in your life!
-You got a magical pen ink eraser.
+A shine reflects off of the pencil's tip as it grazes your hand. You raise it in joy, for you have attained
+the ultimate writing utensil (well, at least before it becomes dull).
+You got a lucky sharp pencil.
 
 cheap answer giving airpods
 11
@@ -42,7 +43,8 @@ cheap answer giving airpods
 0
 1
 SHOP
-The dark orifices have an ominous aura... Like a goblin tempting you.
+From a hooded figure hidden in the corner of the store, they hand you the airpods in exchange for one dollar.
+The dark orifices of the airpods have an ominous aura... Like a goblin tempting you.
 You got cheap answer giving airpods.
 
 t-card

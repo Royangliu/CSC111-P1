@@ -6,7 +6,7 @@
 \usepackage[margin=0.75in]{geometry}
 
 \title{CSC111 Winter 2024 Project 1}
-\author{TODO: FILL IN YOUR NAME(S) HERE}
+\author{Shanaya Goel and Roy Liu}
 \date{\today}
 
 \begin{document}
@@ -19,11 +19,47 @@
 
 \item Describe your enhancement \#1 here
 	\begin{itemize}
-	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): each of the three main items(t-card, lucky pen, and cheat sheet) are put in a location that has a puzzle that must be solved to get the item. The puzzle is presented in the form of a text description, and a simple and short answer is taken as input. There is the option to ask for a hint as well if the uder is having difficulty, and to leave the puzzle to try again later. The puzzles include one word puzzle, one message with the answer encoded in the text, and one safe that simply asks for a 3 digit number. The first 2 puzzles are text pased puzzles to read, think about, and answer, but the last comes more from observing surroundings.
-	\item Complexity level (choose from low/medium/high): *We must choose between medium and high on this one
-	\item 
-	% Feel free to add more subheadings if you need
+	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): each of the three main items(t-card, lucky pen, and cheat sheet) are put in a location that has a puzzle that must be solved to get the item. The puzzle is presented in the form of a text description, and a simple and short answer is taken as input. There is the option to ask for a hint as well if the user is having difficulty, and to leave the puzzle to try again later. The puzzles include a riddle, one message with the answer encoded in the text, and one safe that simply asks for a 3-digit number. The first 2 puzzles are text-based puzzles to read, think about, and answer, but the last comes more from observing surroundings.
+	\item Complexity level (choose from low/medium/high): high
+	\item We think this enhancement has this complexity level because it involves inheritance and creating a special location subclass to contain the methods and attributes required to conduct puzzles. We had to adjust how locations were initiated to differentiate between regular and special locations and had to adjust the locations and add puzzles accordingly. We had to coordinate this with the items as well, and eventually faced some difficulties when comparing how to handle them alongside the shop and coin related activities. 
 	\end{itemize}
+ 
+\item Describe your enhancement \#2 here
+	\begin{itemize}
+	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): There is a map command provided to the player at all times so that the program prints out the map for the player to view.
+	\item Complexity level (choose from low/medium/high): low
+	\item  We rated this low because it was a very simple implementation since we already had the map, and we just needed to add the menu option of the map, and some print statements.
+	\end{itemize}
+ 
+\item Describe your enhancement \#3 here
+	\begin{itemize}
+	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): We created an extra feature where many locations had coins that could be discovered and could be used to purchase items at the shop/bookstore. The items could be used at the end of the game to decide the ending. The coins are not added to the inventory, but rather to the player's money attribute. 
+	\item Complexity level (choose from low/medium/high): high
+	\item  We rated this high because it involved implementation of a lot of coding features. From the implementation of a subclass ShopLocation and further implementation that extended to both the locations initialization and items initialization. Within the shop, there were various procedures that took place to purchase items. 
+	\end{itemize}
+ 
+\item Describe your enhancement \#4 here
+	\begin{itemize}
+	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): In our game, we have alternative endings as per the extra items we aquire in the shop. These can be special in good and bad ways. 
+	\item Complexity level (choose from low/medium/high): medium
+	\item  We rated this medium because it involved a ....
+	\end{itemize}
+ 
+\item Describe your enhancement \#5 here
+	\begin{itemize}
+	\item Brief description of what the enhancement is (if it's a puzzle, also describe what steps the player must take to solve it): Aside from the main puzzles, and general discovery of the coins, we have a mini bubble tea drop quest. We aquire the bubble tea from the Bahen center, and give it to a person at Sidney Smith
+	\item Complexity level (choose from low/medium/high): medium
+	\item  We rated this medium because it involved ...
+	\end{itemize}
+ 
+
+%\item Describe your enhancement here
+%	\begin{itemize}
+%	\item Basic description of what the enhancement is:
+%	\item Complexity level (low/medium/high):
+%	\item Reasons you believe this is the complexity level (e.g. mention implementation details. Reasons you believe this is the complexity level (e.g. mention implementation details, how much code did you have to add/change from the baseline, what challenges did you face, etc.) 
+%	% Feel free to add more subheadings if you feel the need
+%	\end{itemize}
 
 % Uncomment below section if you have more enhancements; copy-paste as many times as needed
 %\item Describe your enhancement here

@@ -26,7 +26,7 @@ def move_player(direction: str, player: Player, world: World) -> bool:
     Returns True or False depending on if the player was successfully moved.
 
     Preconditions:
-        - TODO
+        - direction in {'north', 'south', 'east', 'west'}
     """
     temp_y, temp_x = player.y, player.x
 
@@ -88,18 +88,18 @@ def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
             else:
                 player.inventory.append(item)
             player.score += item.score
-            print(f"You gained {item.score} points for getting (a) {item.name}!")
+            print(item.item_desc)
+            print(f"\nYou gained {item.score} points for getting (a) {item.name}!")
+            
             curr_loc.items_list.remove(item)
 
-            print(item.item_desc)
-
-    # runs the methods corresponding to the function found within the special location subclasses
+    # runs the methods corresponding to the function found within the location subclasses
     elif action == 'puzzle' and isinstance(curr_loc, SpecialLocation):
         addition = curr_loc.do_puzzle()
         player.inventory += addition
         for item in addition:
             player.score += item.score
-            print(f"You gained {item.score} points for getting (a) {item.name}!")
+            print(f"\nYou gained {item.score} points for getting (a) {item.name}!")
     
     elif action == "shop" and isinstance(curr_loc, ShopLocation):
         curr_loc.do_buy(player)
@@ -135,14 +135,7 @@ def do_location_action(action: str, player: Player, curr_loc: Location) -> None:
             player.victory = True
         else:
             print("You don't have all the items to start the exam.")
-
-def secret_item_endings(player: Player, good_items: list[str], bad_items: list[str]):
-    """checks if the player has the items required for secret endings
-    """
-    for item in player.inventory:
-        if item.name == "Phone":
-            pass  # TODO
-
+            
 
 if __name__ == "__main__":
     # instantiates world and player objects
@@ -159,7 +152,8 @@ if __name__ == "__main__":
     intro = open('intro.txt')
     print(intro.read() + '\n')
     intro.close()
-    print("To win, have all three items in your inventory and go to the exam hall (num 12 on the map)")
+    print("To win, have the items 'lucky pen', 'cheat sheet', and 't-card' your inventory")
+    print("and start the exam at the Exam hall (#12 on the map).\n")
 
     # Main gameplay loop and breaks when player is victorious or has run out of steps
     while not p.victory and p.steps >= 0 and p.has_quit == False:
@@ -219,18 +213,39 @@ if __name__ == "__main__":
             else:
                 print("Invalid action. Try again.")
 
+    # Gameover where the player ran out of steps
     if p.steps < 0:
-        print("You ran out of time and the exam began without you. Game over.") 
-    elif p.victory:
+        print("You ran out of time and the exam began without you.") 
+        print("\nGame over")
 
-        p.score += p.steps
+    # Gives the player different endings depending on certain items in their inventory
+    elif p.victory:
+        p.score += p.steps * 2
+        
+        # Bad ending: Has the 'cheap answer giving airpods' in their inventory
+        if any(item.name == "cheap answer giving airpods" for item in p.inventory):
+            print("As you were writing the test, a TA caught you using the forsaken cheap airpods.") 
+            print("The exam was stripped away from you and you got were expelled from supposedly using dark magic.")
+            print("\nGame over")
+            p.score -= 1000
+        # Good ending: Has the 'lucky eraser' and 'lucky sharp pencil' in their inventory
+        elif (any(item.name == "lucky eraser" for item in p.inventory) and
+            any(item.name == "lucky sharp pencil" for item in p.inventory)):
+            print("The exam was difficult; however, using your newly aquired utilities, you were able to breeze through the exam")
+            print("using the lucky eraser and lucky sharp pencil to write your answers.")
+            print("You got an A+ on the exam! You ultra win!")
+            p.score += 1000
+        # Neutral good ending: Only has the 't-card', 'cheat sheet', and 'lucky pen' in their inventory
+        else:
+            print("With your ")
+        
 
         print("Congratulations! You have won the game!")
         print("Your final score is: " + str(p.score))
     else:
         print("You have run out of steps. Game over.")
 
-    print(f"Score: {p.score}")
+    print(f"\nScore: {p.score}")
 
         # TODO: CALL A FUNCTION HERE TO HANDLE WHAT HAPPENS UPON THE PLAYER'S CHOICE
         #  REMEMBER: the location = w.get_location(p.x, p.y) at the top of this loop will update the location if

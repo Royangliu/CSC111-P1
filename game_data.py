@@ -46,16 +46,6 @@ class Item:
                  currency_amount: int, score: int, description: str) -> None:
         """Initialize a new item.
         """
-
-        # NOTES:
-        # This is just a suggested starter class for Item.
-        # You may change these parameters and the data available for each Item object as you see fit.
-        # (The current parameters correspond to the example in the handout).
-        # Consider every method in this Item class as a "suggested method".
-        #
-        # The only thing you must NOT change is the name of this class: Item.
-        # All item objects in your game MUST be represented as an instance of this class.
-
         self.name = name
         self.start_position = start
         self.price = price
@@ -97,11 +87,6 @@ class Player:
         """
         Initializes a new Player at position (x, y).
         """
-
-        # NOTES:
-        # This is a suggested starter class for Player.
-        # You may change these parameters and the data available for the Player object as you see fit.
-
         self.x = x
         self.y = y
         self.steps = steps
@@ -145,9 +130,6 @@ class Location:
         self.long_desc = long_desc
         self.has_visited = False
         self.items_list = []
-        # self.x = x
-        # self.y = y
-        # self.map = map
 
         # NOTES:
         # Data that could be associated with each Location object:
@@ -188,13 +170,8 @@ class Location:
 
 class SpecialLocation(Location):
     """A Location subclass that contains a riddle puzzle.
-    Instance Attributes:
-        - location_num: The designated integer number for the location in the locations.txt file
-        - location_name: The name of the location
-        - score: The score the player gets upon entering the location for the first time
-        - brief_description: A short description of the location provided every time a player vists
-        - long_description: A longer description of the location (stated only on the first visit to the location)
-        - has_visited: A boolean value that indicates whether the player has visited this location before
+    
+    Instance Attributes:        
         - items_list: A list of all items located at this location
         - answer: The string representing the answer to the puzzle
         - hint: A string representing a hint to the puzzle
@@ -202,6 +179,9 @@ class SpecialLocation(Location):
         - puzzle: A string representing the actual puzzle
         - puzzle_complete: A boolean value indicating
         - puzzle_prize: A list of all items that the player gets when the puzzle is solved
+
+    Representation Invariants:
+        - # TODO
 
     """
     answer: str
@@ -274,9 +254,7 @@ class ShopLocation(Location):
         - shop_list: A list of all items that can be bought at the shop.
 
     Representation Invariants:
-        - self.location_num >= 0
-        - self.score >= 0
-        # TODO
+        - # TODO
     """
     shop_list: list[Item]
 

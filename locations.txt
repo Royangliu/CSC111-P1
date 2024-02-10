@@ -9,6 +9,7 @@ END
 Robarts Library 1
 5
 You are on the first floor of the Robarts Library. There is Sidney smith to the south and trinity college to the east.
+You are on the first floor of the Robarts Library. There is Sidney smith to the south and trinity college to the east.
 It's usually crowded at this time of the day, but today it's eerily quiet.
 Only a few students are studying inside one of the study rooms. You better not disturb them. 
 ---
@@ -132,7 +133,7 @@ Sandford Flemings 10
 5
 You are inside the Sandford Flemings building. There is front campus to the north, the Bahen Building to the west, and the Exam Centre is to the south.
 You are inside the Sandford Flemings building - more specifically in the engineering pit. 
-You look around to see the usual Skule\u2122 asthetic, and general eng student department vibe. 
+You look around to see the usual Skule(TM) asthetic, and general eng student department vibe. 
 There is a mural of Godiva on one wall, and various other engineering mascots.
 You see hardhat cafe, and consider buying some snacks at a later time. 
 ---
