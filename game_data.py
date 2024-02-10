@@ -32,7 +32,8 @@ class Item:
         - item_desc: the string description of the item
 
     Representation Invariants:
-        - self.start_postion >= 0 # TODO is a valid position in the world map(turn this into code)
+        - self.name != ''
+        - self.start_postion must be a location's number in 'locations.txt' # TODO
         - self.price >= 0
         - self.currency_amount >= 0
         - self.score >= 0
@@ -68,7 +69,6 @@ class Player:
         - money: The player's money in dollars
         - victory: A bool indicating if the player has won
         - has_quit: A bool indicating if the player has quit
-        - # TODO
 
     Representation Invariants:
         - self.x >= 0
@@ -170,7 +170,7 @@ class SpecialLocation(Location):
     puzzle_prize: list[Item]
 
     def __init__(self, location_num: int, name: str, score: int, brief_desc: str, long_desc: str,
-                 answer: str, hint: str, success: str,  puzzle: str) -> None:
+                 answer: str, hint: str, success: str, puzzle: str) -> None:
         """Initializes a special location with its superclass. The SpecialLocation contains
         all superclass Location's attributes, as well as attributes for a riddle puzzle.
         """
@@ -272,38 +272,62 @@ class ShopLocation(Location):
         print("To leave the shop menu, enter: \'leave\'")
         print("To view the items available, enter: \'shop list\'")
 
-        bought_item = False
-        while not bought_item:
+        in_shop = True
+        while in_shop:
             choice = input("\nWhat would you like to buy?: ")
             print()
 
             # Handles other shop menu options
             if choice == 'leave':
-                bought_item = True
+                in_shop = False
             elif choice == 'shop list':
                 print("Shop List:")
                 for item in self.shop_list:
                     print(f"{item.name}: ${item.price}")
 
-            # Loops through this shop's shop_list for the inputted item name
-            else:
-                item_found = False
-                for i in range(len(self.shop_list)):
-                    # buys the item if the player has enough money and it's within the shop
-                    if choice == self.shop_list[i].name and player.money >= self.shop_list[i].price:
-                        print(self.shop_list[i].item_desc)
-                        player.money -= self.shop_list[i].price
-                        player.score += self.shop_list[i].score
-                        print(f"\nYou got {self.shop_list[i].score} points for getting (a) {self.shop_list[i].name}!")
-                        player.inventory.append(self.shop_list.pop(i))
-                        item_found = True
-                    # if the item exists, but the player doesn't have money
-                    elif choice == self.shop_list[i].name and player.money < self.shop_list[i].price:
-                        print("Insufficient money; you are broke.")
-                        item_found = True
+            elif self.item_in_shop_list(choice):
+                item = self.remove_item_in_shop(choice)
 
-                if not item_found:
-                    print("Item not found.")
+                # buys the item if the player has enough money
+                if player.money >= item.price:
+                    print(item.item_desc)
+                    player.money -= item.price
+                    player.score += item.score
+                    print(f"\nYou got {item.score} points for getting (a) {item.name}!")
+                    player.inventory.append(item)
+
+                # restores the item if the item exists, but the player doesn't have enough money
+                else:
+                    print("Insufficient money; you are broke.")
+                    self.items_list.append(item)
+
+            else:
+                print("Item not found.")
+
+    def item_in_shop_list(self, item_name: str) -> bool:
+        """Returns whether the item with the specified name exists in this object's shop_list
+
+        Preconditions:
+            - item_name != ''
+        """
+        for i in range(len(self.shop_list)):
+            if self.shop_list[i].name == item_name:
+                return True
+
+        return False
+
+    def remove_item_in_shop(self, item_name: str) -> Optional[Item]:
+        """Removes the item with the specified item_name from this object's shop_list and return's it.
+        If it's not in shop_list, return None.
+
+        Preconditions:
+            - item_name != ''
+        """
+        for i in range(len(self.shop_list)):
+            if self.shop_list[i].name == item_name:
+                return self.shop_list.pop(i)
+
+        return None
 
 
 class World:
@@ -398,7 +422,7 @@ class World:
             # initializes the long description of the location
             line = location_data.readline().strip()
             long_desc = ''
-            while line != 'END' and line != 'SPECIAL' and line != 'SHOP':
+            while line not in {'END', 'SPECIAL', 'SHOP'}:
                 long_desc += line + '\n'
                 line = location_data.readline().strip()
 
@@ -432,7 +456,7 @@ class World:
 
         return curr_dict
 
-    def load_items(self, items_data: TextIO):
+    def load_items(self, items_data: TextIO) -> None:
         """Loads the items found within items.txt to their respective locations in this object's location_dict
 
         Where the item is stored in the Location object depends on its specified type in the items.txt file.
@@ -494,3 +518,19 @@ class World:
             return None
         else:
             return self.locations_dict[self.map[y][x]]
+
+
+if __name__ == '__main__':
+    import doctest
+
+    doctest.testmod(verbose=True)
+
+    # When you are ready to check your work with python_ta, uncomment the following lines.
+    # (In PyCharm, select the lines below and press Ctrl/Cmd + / to toggle comments.)
+    # You can use "Run file in Python Console" to run PythonTA,
+    # and then also test your methods manually in the console.
+    import python_ta
+
+    python_ta.check_all(config={
+        'max-line-length': 120
+    })
