@@ -282,8 +282,14 @@ class ShopLocation(Location):
 
     def available_actions(self) -> list[str]:
         """Return the available actions in this location.
+        Adds all possible actions from the superclass Location and
+        adds the option of "shop" if this ShopLocation's shop_list is not empty
+
+        Preconditions:
+            - # TODO
         """
         actions = []
+        actions += Location.available_actions(self)
         if self.shop_list:
             actions.append("shop")
 
@@ -291,24 +297,31 @@ class ShopLocation(Location):
 
     def do_buy(self, player: Player) -> None:
         """Handels the buying of an item.
-        """
-        bought_item = False
+        If an item is successfully bought from the shop, the item is appended into the player's inventory, and the
+        item is deleted from this shop's shop_list.
 
+        Precondtions:
+            - # TODO
+        """
         print("To leave the shop menu, enter: \'leave\'")
         print("To view the items available, enter: \'shop list\'")
+
+        bought_item = False
         while not bought_item:
             choice = input("\nWhat would you like to buy?: ")
             print()
 
+            # Handles other shop menu options
             if choice == 'leave':
                 bought_item = True
             elif choice == 'shop list':
                 print("Shop List:")
                 for item in self.shop_list:
                     print(f"{item.name}: ${item.price}")
+
+            # Loops through this shop's shop_list for the inputted item name
             else:
                 item_found = False
-
                 for i in range(len(self.shop_list)):
                     if choice == self.shop_list[i].name and player.money >= self.shop_list[i].price:
                         print(self.shop_list[i].item_desc)
@@ -388,13 +401,12 @@ class World:
 
         # TODO: Complete this method as specified. Do not modify any of this function's specifications.
 
-    # TODO: Add methods for loading location data and item data (see note above).
     def load_locations(self, location_data: TextIO) -> dict[int, Location]:
         """Returns a dictionary of locations from the given open file location_data. A key in the dictionary is
         the location's number, and the key's item is the corresponding location object.
 
         Preconditions:
-            -
+            - # TODO
         """
         curr_dict = {}
 
@@ -445,7 +457,10 @@ class World:
         return curr_dict
 
     def load_items(self, items_data: TextIO):
-        """Loads the items found within items.txt to their respective locations
+        """Loads the items found within items.txt to their respective locations in this object's location_dict
+
+        Preconditions:
+            - # TODO
         """
         line = items_data.readline().strip()
 
